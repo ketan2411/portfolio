@@ -22,13 +22,25 @@ class _LayoutState extends State<Layout> {
   var pages = const [Home(), Projects(), Showcase(), Contact()];
   var headers = const [
     'HOME',
-    'SHOWCASE',
     'PROJECTS',
+    'SHOWCASE',
     'CONTACT',
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            itemScrollController.scrollTo(
+                // alignment: 0.05,
+                index: 0,
+                duration: const Duration(milliseconds: 900),
+                curve: Curves.easeInOutCubic);
+          },
+          backgroundColor: darkBackground,
+          foregroundColor: darkPrimary,
+          child: const Icon(Icons.arrow_upward_rounded),
+        ),
         extendBodyBehindAppBar: true,
         appBar: AppBar(
             backgroundColor: darkBackground,

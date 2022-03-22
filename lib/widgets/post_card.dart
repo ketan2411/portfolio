@@ -20,6 +20,7 @@ class PostCard extends StatelessWidget {
       elevation: 8,
       color: dark ? darkBackground : lightBackground,
       child: InkWell(
+        onTap: () {},
         child: Container(
           padding: const EdgeInsets.all(defaultPadding),
           //? Edit height
@@ -42,8 +43,10 @@ class PostCard extends StatelessWidget {
                 padding: const EdgeInsets.all(defaultPadding / 2),
                 child: Row(children: [
                   Text('Element',
-                      style: Theme.of(context).textTheme.headline6!.copyWith(
-                          color: dark ? darkPrimary : lightPrimary)),
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline6!
+                          .copyWith(color: dark ? darkPrimary : lightPrimary)),
                   const Spacer(),
                   Icon(
                     Icons.chevron_right_rounded,
