@@ -3,8 +3,6 @@ import 'dart:developer';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:portfolio_flutter/constats.dart';
 
 class About extends StatefulWidget {
   const About({Key? key}) : super(key: key);
@@ -35,7 +33,7 @@ class _About2State extends State<About> {
           color: Colors.black,
           child: Row(
             children: [
-             const Align(
+              const Align(
                 alignment: Alignment.centerRight,
                 child: FlutterLogo(
                   style: FlutterLogoStyle.markOnly,
@@ -80,192 +78,12 @@ class _About2State extends State<About> {
             ],
           ),
         ),
-        SizedBox(
-          height: MediaQuery.of(context).size.height,
-          child: Column(
-            // mainAxisSize: MainAxisSize.min,
-            children: [
-              Expanded(
-                child: LayoutBuilder(builder: (context, constraints) {
-                  return constraints.maxWidth > 800
-                      ? Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            infoBox(context),
-                            Container(
-                              width: 2,
-                              color: Colors.black,
-                              height: MediaQuery.of(context).size.height * 0.5,
-                            ),
-                            contactBox(context),
-                          ],
-                        )
-                      : Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            infoBox(context),
-                            const Divider(
-                              height: 40,
-                              thickness: 2,
-                              indent: 16,
-                              endIndent: 16,
-                              color: Colors.black,
-                            ),
-                            contactBox(context),
-                          ],
-                        );
-                }),
-              ),
-              Container(
-                height: 50,
-                color: Colors.black,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text('Made with '),
-                    AnimatedSwitcher(
-                      duration: const Duration(milliseconds: 700),
-                      child: _switch
-                          ? const Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 24),
-                              child: FaIcon(
-                                FontAwesomeIcons.solidHeart,
-                                color: Colors.redAccent,
-                              ),
-                            )
-                          : const FlutterLogo(
-                              size: 72,
-                              style: FlutterLogoStyle.horizontal,
-                            ),
-                    )
-                  ],
-                ),
-              )
-            ],
-          ),
-        )
       ],
-    );
-  }
-
-  Column contactBox(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        TextButton.icon(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.phone,
-              color: Colors.black,
-            ),
-            label: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const SizedBox(
-                  width: 16,
-                ),
-                Text(
-                  '+91 7014265301',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText1!
-                      .copyWith(color: Colors.black),
-                ),
-              ],
-            )),
-        const SizedBox(
-          height: 8,
-        ),
-        TextButton.icon(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.mail_outline,
-              color: Colors.black,
-            ),
-            label: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const SizedBox(
-                  width: 16,
-                ),
-                Text(
-                  'ketansharma587@gmail.com',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText1!
-                      .copyWith(color: Colors.black),
-                ),
-              ],
-            )),
-        const SizedBox(
-          height: 8,
-        ),
-        TextButton.icon(
-            onPressed: () {},
-            icon: const FaIcon(
-              FontAwesomeIcons.github,
-              color: Colors.black,
-            ),
-            label: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const SizedBox(
-                  width: 16,
-                ),
-                Text(
-                  '@ketan2411',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText1!
-                      .copyWith(color: Colors.black),
-                ),
-              ],
-            )),
-        const SizedBox(
-          height: 8,
-        ),
-        TextButton.icon(
-            onPressed: () {},
-            icon: const FaIcon(
-              FontAwesomeIcons.linkedin,
-              color: Colors.black,
-            ),
-            label: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const SizedBox(
-                  width: 16,
-                ),
-                Text(
-                  '/ketansharma587',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText1!
-                      .copyWith(color: Colors.black),
-                ),
-              ],
-            )),
-      ],
-    );
-  }
-
-  SizedBox infoBox(BuildContext context) {
-    return SizedBox(
-      width: 300,
-      // height: 400,
-      child: Text(
-        info,
-        style: Theme.of(context)
-            .textTheme
-            .bodyText1!
-            .copyWith(color: Colors.black),
-      ),
     );
   }
 }
 
+// ignore: unused_element
 class _AboutState extends State<About> {
   PointerHoverEvent _pointerHoverEvent = const PointerHoverEvent();
   double x = 0;

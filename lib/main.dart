@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio_flutter/screens/home.dart';
+import 'package:portfolio_flutter/screens/layout.dart';
 import 'package:portfolio_flutter/theme.dart';
 
 void main() {
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.dark,
       title: 'Flutter Demo',
       theme: darkThemeData,
-      home: const Home(),
+      home: const Layout(),
     );
   }
 }
