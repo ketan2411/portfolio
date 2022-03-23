@@ -32,7 +32,6 @@ class _LayoutState extends State<Layout> {
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             itemScrollController.scrollTo(
-                // alignment: 0.05,
                 index: 0,
                 duration: const Duration(milliseconds: 900),
                 curve: Curves.easeInOutCubic);
@@ -43,33 +42,35 @@ class _LayoutState extends State<Layout> {
         ),
         extendBodyBehindAppBar: true,
         appBar: AppBar(
-            backgroundColor: darkBackground,
             title: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ...List<Widget>.generate(
-                  headers.length,
-                  ((index) => Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: defaultPadding),
-                        child: TextButton(
-                          onPressed: () {
-                            itemScrollController.scrollTo(
-                                alignment: 0.05,
-                                index: index,
-                                duration: const Duration(milliseconds: 1000),
-                                curve: Curves.easeInOutCubic);
-                          },
-                          child: Text(
-                            headers[index],
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
-                        ),
-                      )),
-                )
-              ],
-            )),
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ...List<Widget>.generate(
+              headers.length,
+              ((index) => Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: defaultPadding),
+                    child: TextButton(
+                      onPressed: () {
+                        itemScrollController.scrollTo(
+                            alignment: 0.05,
+                            index: index,
+                            duration: const Duration(milliseconds: 1000),
+                            curve: Curves.easeInOutCubic);
+                      },
+                      child: Text(headers[index],
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(color: darkPrimary)),
+                    ),
+                  )),
+            )
+          ],
+        )),
         body: ScrollablePositionedList.builder(
+          physics: const BouncingScrollPhysics(),
+          minCacheExtent: 1000,
           itemCount: pages.length,
           itemBuilder: (context, index) => pages[index],
           itemScrollController: itemScrollController,

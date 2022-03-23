@@ -35,10 +35,8 @@ class Home extends StatelessWidget {
                 ),
                 Text(
                   'Ketan Sharma',
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline4!
-                      .copyWith(fontWeight: FontWeight.bold),
+                  style: Theme.of(context).textTheme.headline4!.copyWith(
+                      fontWeight: FontWeight.bold, color: darkPrimary),
                 ),
                 Text(
                   'Flutter Developer',

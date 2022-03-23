@@ -18,9 +18,11 @@ class _ContactState extends State<Contact> {
   @override
   void initState() {
     Timer.periodic(const Duration(seconds: 2), (timer) {
-      setState(() {
-        _switch = !_switch;
-      });
+      if (mounted) {
+        setState(() {
+          _switch = !_switch;
+        });
+      }
     });
     super.initState();
   }
@@ -70,7 +72,10 @@ class _ContactState extends State<Contact> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text('Made with '),
+                Text(
+                  'Made with ',
+                  style: TextStyle(color: darkPrimary),
+                ),
                 AnimatedSwitcher(
                   duration: const Duration(milliseconds: 700),
                   child: _switch

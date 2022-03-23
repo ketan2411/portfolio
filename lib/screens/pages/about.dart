@@ -83,7 +83,7 @@ class _About2State extends State<About> {
   }
 }
 
-// ignore: unused_element
+
 class _AboutState extends State<About> {
   PointerHoverEvent _pointerHoverEvent = const PointerHoverEvent();
   double x = 0;
