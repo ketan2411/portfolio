@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:portfolio_flutter/constants.dart';
 import 'package:portfolio_flutter/theme.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Contact extends StatefulWidget {
   const Contact({Key? key}) : super(key: key);
@@ -120,7 +121,9 @@ class _ContactState extends State<Contact> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextButton.icon(
-            onPressed: () {},
+            onPressed: () async {
+              await launch('tel:+917014265301');
+            },
             icon: const Icon(
               Icons.phone,
               color: Colors.black,
@@ -131,7 +134,7 @@ class _ContactState extends State<Contact> {
                 const SizedBox(
                   width: 16,
                 ),
-                Text(
+                SelectableText(
                   '+91 7014265301',
                   style: Theme.of(context)
                       .textTheme
@@ -144,7 +147,9 @@ class _ContactState extends State<Contact> {
           height: 8,
         ),
         TextButton.icon(
-            onPressed: () {},
+            onPressed: () async {
+              await launch('mailto:ketansharma587@gmail.com');
+            },
             icon: const Icon(
               Icons.mail_outline,
               color: Colors.black,
@@ -155,7 +160,7 @@ class _ContactState extends State<Contact> {
                 const SizedBox(
                   width: 16,
                 ),
-                Text(
+                SelectableText(
                   'ketansharma587@gmail.com',
                   style: Theme.of(context)
                       .textTheme
@@ -168,7 +173,9 @@ class _ContactState extends State<Contact> {
           height: 8,
         ),
         TextButton.icon(
-            onPressed: () {},
+            onPressed: () async {
+              await launch('https://github.com/ketan2411');
+            },
             icon: const FaIcon(
               FontAwesomeIcons.github,
               color: Colors.black,
@@ -180,7 +187,7 @@ class _ContactState extends State<Contact> {
                   width: 16,
                 ),
                 Text(
-                  '@ketan2411',
+                  'ketan2411',
                   style: Theme.of(context)
                       .textTheme
                       .bodyText1!
@@ -192,7 +199,10 @@ class _ContactState extends State<Contact> {
           height: 8,
         ),
         TextButton.icon(
-            onPressed: () {},
+            onPressed: () async {
+              await launch(
+                  'https://www.linkedin.com/in/ketan-sharma-602134170/');
+            },
             icon: const FaIcon(
               FontAwesomeIcons.linkedin,
               color: Colors.black,
@@ -204,7 +214,7 @@ class _ContactState extends State<Contact> {
                   width: 16,
                 ),
                 Text(
-                  '/ketansharma587',
+                  'ketansharma587',
                   style: Theme.of(context)
                       .textTheme
                       .bodyText1!

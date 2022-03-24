@@ -97,6 +97,14 @@ class ProjectDescription extends StatelessWidget {
                             onError: (error, stacktrace) {
                               // Logger().e(error);
                             })),
+                    child: InkWell(
+                        onTap: () => showDialog(
+                            context: context,
+                            builder: (context) => Dialog(
+                                  child: Image.asset(
+                                    image,
+                                  ),
+                                ))),
                   );
                 },
               );
