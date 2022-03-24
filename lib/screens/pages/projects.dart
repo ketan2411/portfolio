@@ -6,8 +6,10 @@ import 'package:logger/logger.dart';
 
 import 'package:portfolio_flutter/constants.dart';
 import 'package:portfolio_flutter/model/project_model.dart';
+import 'package:portfolio_flutter/screens/layout.dart';
 import 'package:portfolio_flutter/screens/project_description.dart';
 import 'package:portfolio_flutter/theme.dart';
+import 'package:portfolio_flutter/widgets/post_card.dart';
 
 class Projects extends StatefulWidget {
   const Projects({
@@ -19,7 +21,6 @@ class Projects extends StatefulWidget {
 }
 
 class _ProjectsState extends State<Projects> {
-  
   var logger = Logger(
     printer: PrettyPrinter(
       methodCount: 2, // number of method calls to be displayed
@@ -60,11 +61,9 @@ class _ProjectsState extends State<Projects> {
 
   @override
   Widget build(BuildContext context) {
-    logger.d('projects build');
     return Container(
       color: scaffoldBackground,
-      child: SingleChildScrollView(
-          child: Column(children: [
+      child: Column(children: [
         const SizedBox(
           height: defaultPadding * 2,
         ),
@@ -97,13 +96,17 @@ class _ProjectsState extends State<Projects> {
                 (index) => Padding(
                       padding: const EdgeInsets.all(defaultPadding * 2),
                       child: ProjectDescription(
-                        reverse: index % 2 == 1 ? true : false,
+                        reverse: MediaQuery.of(context).size.width < 800
+                            ? false
+                            : index % 2 == 1
+                                ? true
+                                : false,
                         project: projects[index],
                       ),
                     )),
           ],
         )
-      ])),
+      ]),
     );
   }
 }

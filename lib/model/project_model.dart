@@ -9,7 +9,6 @@ class ProjectModel {
   final String description;
   final String year;
   final List<String> screenshots;
-  final String routeName;
   ProjectModel({
     required this.title,
     this.subtitle,
@@ -17,7 +16,6 @@ class ProjectModel {
     required this.description,
     required this.year,
     required this.screenshots,
-    required this.routeName,
   });
 
   ProjectModel copyWith({
@@ -36,7 +34,6 @@ class ProjectModel {
       description: description ?? this.description,
       year: year ?? this.year,
       screenshots: screenshots ?? this.screenshots,
-      routeName: routeName ?? this.routeName,
     );
   }
 
@@ -48,7 +45,6 @@ class ProjectModel {
       'description': description,
       'year': year,
       'screenshots': screenshots,
-      'routeName': routeName,
     };
   }
 
@@ -60,7 +56,6 @@ class ProjectModel {
       description: map['description'] ?? '',
       year: map['year'] ?? '',
       screenshots: List<String>.from(map['screenshots']),
-      routeName: map['routeName'] ?? '',
     );
   }
 
@@ -71,31 +66,29 @@ class ProjectModel {
 
   @override
   String toString() {
-    return 'ProjectModel(title: $title, subtitle: $subtitle, link: $link, description: $description, year: $year, screenshots: $screenshots, routeName: $routeName)';
+    return 'ProjectModel(title: $title, subtitle: $subtitle, link: $link, description: $description, year: $year, screenshots: $screenshots)';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
+
     return other is ProjectModel &&
-      other.title == title &&
-      other.subtitle == subtitle &&
-      other.link == link &&
-      other.description == description &&
-      other.year == year &&
-      listEquals(other.screenshots, screenshots) &&
-      other.routeName == routeName;
+        other.title == title &&
+        other.subtitle == subtitle &&
+        other.link == link &&
+        other.description == description &&
+        other.year == year &&
+        listEquals(other.screenshots, screenshots);
   }
 
   @override
   int get hashCode {
     return title.hashCode ^
-      subtitle.hashCode ^
-      link.hashCode ^
-      description.hashCode ^
-      year.hashCode ^
-      screenshots.hashCode ^
-      routeName.hashCode;
+        subtitle.hashCode ^
+        link.hashCode ^
+        description.hashCode ^
+        year.hashCode ^
+        screenshots.hashCode;
   }
 }

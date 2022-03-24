@@ -12,7 +12,7 @@ ThemeData darkThemeData = ThemeData(
     appBarTheme: AppBarTheme(backgroundColor: darkBackground),
     dividerTheme: const DividerThemeData(
         endIndent: defaultPadding * 4,
-        thickness: 3,
+        thickness: 2,
         space: defaultPadding,
         indent: defaultPadding * 4),
     textTheme: GoogleFonts.poppinsTextTheme()

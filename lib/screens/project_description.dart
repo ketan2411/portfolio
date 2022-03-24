@@ -18,7 +18,7 @@ class ProjectDescription extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 500,
+      // height: 500,
       width: MediaQuery.of(context).size.width - 100,
       child: Wrap(
           runAlignment: WrapAlignment.spaceEvenly,
@@ -76,11 +76,14 @@ class ProjectDescription extends StatelessWidget {
             ),
             Text(project.description,
                 style: Theme.of(context).textTheme.titleMedium!),
+            const SizedBox(
+              height: defaultPadding * 4,
+            ),
           ],
         ),
       ),
       ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 500),
+        constraints: const BoxConstraints(maxWidth: 400),
         child: CarouselSlider(
             items: project.screenshots.map((image) {
               return Builder(
@@ -99,7 +102,7 @@ class ProjectDescription extends StatelessWidget {
               );
             }).toList(),
             options: CarouselOptions(
-              height: 500,
+              height: 600,
               aspectRatio: 0.2,
               viewportFraction: 0.6,
               initialPage: project.screenshots.length ~/ 2,

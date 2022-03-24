@@ -29,8 +29,9 @@ class _ContactState extends State<Contact> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return SizedBox(
-      height: MediaQuery.of(context).size.height - 50,
+      height: size.height - 50,
       child: Column(
         // mainAxisSize: MainAxisSize.min,
         children: [
@@ -57,8 +58,8 @@ class _ContactState extends State<Contact> {
                         Divider(
                           height: 40,
                           thickness: 2,
-                          indent: 16,
-                          endIndent: 16,
+                          indent: size.width * 0.1,
+                          endIndent: size.width * 0.1,
                           color: darkBackground,
                         ),
                         contactBox(context),

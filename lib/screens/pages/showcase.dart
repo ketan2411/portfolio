@@ -6,6 +6,7 @@ import 'package:logger/logger.dart';
 import 'package:portfolio_flutter/constants.dart';
 import 'package:portfolio_flutter/model/project_model.dart';
 import 'package:portfolio_flutter/model/showcase_model.dart';
+import 'package:portfolio_flutter/screens/layout.dart';
 import 'package:portfolio_flutter/theme.dart';
 import 'package:portfolio_flutter/widgets/post_card.dart';
 
@@ -89,42 +90,50 @@ class _ShowcaseState extends State<Showcase> {
         const SizedBox(
           height: defaultPadding,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Column(
-              children: [
-                ...List.generate(
-                    leftColumn.length,
-                    (index) => Padding(
-                          padding: const EdgeInsets.all(defaultPadding * 2),
-                          child: PostCard(
-                            dark: index % 2 == 1 ? true : false,
-                            showcase: leftColumn[index],
-                          ),
-                        )),
-              ],
-            ),
-            Column(
-              children: [
-                const SizedBox(
-                  height: defaultPadding * 5,
-                ),
-                ...List.generate(
-                    showcase.length,
-                    (index) => Padding(
-                          padding: const EdgeInsets.all(defaultPadding * 2),
-                          child: PostCard(
-                            dark: index % 2 == 0 ? true : false,
-                            showcase: showcase[index],
-                          ),
-                        )),
-              ],
-            )
-          ],
-        )
+        Layout.ismobile
+            ? Column(
+                children: data(),
+              )
+            : Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: data(),
+              )
       ])),
     );
+  }
+
+  List<Widget> data() {
+    return [
+      Column(
+        children: [
+          ...List.generate(
+              leftColumn.length,
+              (index) => Padding(
+                    padding: const EdgeInsets.all(defaultPadding * 2),
+                    child: PostCard(
+                      dark: index % 2 == 1 ? true : false,
+                      showcase: leftColumn[index],
+                    ),
+                  )),
+        ],
+      ),
+      Column(
+        children: [
+          const SizedBox(
+            height: defaultPadding * 5,
+          ),
+          ...List.generate(
+              showcase.length,
+              (index) => Padding(
+                    padding: const EdgeInsets.all(defaultPadding * 2),
+                    child: PostCard(
+                      dark: index % 2 == 0 ? true : false,
+                      showcase: showcase[index],
+                    ),
+                  )),
+        ],
+      )
+    ];
   }
 }
