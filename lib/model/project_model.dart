@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
@@ -8,6 +9,7 @@ class ProjectModel {
   final String? link;
   final String description;
   final String year;
+  final List<String> tags;
   final List<String> screenshots;
   ProjectModel({
     required this.title,
@@ -15,6 +17,7 @@ class ProjectModel {
     this.link,
     required this.description,
     required this.year,
+    required this.tags,
     required this.screenshots,
   });
 
@@ -24,8 +27,8 @@ class ProjectModel {
     String? link,
     String? description,
     String? year,
+    List<String>? tags,
     List<String>? screenshots,
-    String? routeName,
   }) {
     return ProjectModel(
       title: title ?? this.title,
@@ -33,40 +36,42 @@ class ProjectModel {
       link: link ?? this.link,
       description: description ?? this.description,
       year: year ?? this.year,
+      tags: tags ?? this.tags,
       screenshots: screenshots ?? this.screenshots,
     );
   }
 
   Map<String, dynamic> toMap() {
-    return {
+    return <String, dynamic>{
       'title': title,
       'subtitle': subtitle,
       'link': link,
       'description': description,
       'year': year,
+      'tags': tags,
       'screenshots': screenshots,
     };
   }
 
   factory ProjectModel.fromMap(Map<String, dynamic> map) {
     return ProjectModel(
-      title: map['title'] ?? '',
-      subtitle: map['subtitle'],
-      link: map['link'],
-      description: map['description'] ?? '',
-      year: map['year'] ?? '',
-      screenshots: List<String>.from(map['screenshots']),
-    );
+        title: map['title'] as String,
+        subtitle: map['subtitle'] != null ? map['subtitle'] as String : null,
+        link: map['link'] != null ? map['link'] as String : null,
+        description: map['description'] as String,
+        year: map['year'] as String,
+        tags: List<String>.from((map['tags'] as List<dynamic>)),
+        screenshots: List<String>.from((map['screenshots'] as List<dynamic>)));
   }
 
   String toJson() => json.encode(toMap());
 
   factory ProjectModel.fromJson(String source) =>
-      ProjectModel.fromMap(json.decode(source));
+      ProjectModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
-    return 'ProjectModel(title: $title, subtitle: $subtitle, link: $link, description: $description, year: $year, screenshots: $screenshots)';
+    return 'ProjectModel(title: $title, subtitle: $subtitle, link: $link, description: $description, year: $year, tags: $tags, screenshots: $screenshots)';
   }
 
   @override
@@ -79,6 +84,7 @@ class ProjectModel {
         other.link == link &&
         other.description == description &&
         other.year == year &&
+        listEquals(other.tags, tags) &&
         listEquals(other.screenshots, screenshots);
   }
 
@@ -89,6 +95,7 @@ class ProjectModel {
         link.hashCode ^
         description.hashCode ^
         year.hashCode ^
+        tags.hashCode ^
         screenshots.hashCode;
   }
 }

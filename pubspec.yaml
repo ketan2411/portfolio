@@ -35,7 +35,7 @@ dependencies:
   logger: ^1.1.0
   carousel_slider: ^4.0.0
   url_launcher: ^6.0.20
-
+  markdown_widget: ^1.2.7
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
@@ -66,6 +66,9 @@ flutter:
   assets:
     - assets/json/
     - assets/images/qlan/
+    - assets/images/infoflight/
+    - assets/images/armenu/
+    - assets/images/TRP/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -134,7 +134,7 @@ class _ContactState extends State<Contact> {
                 const SizedBox(
                   width: 16,
                 ),
-                SelectableText(
+                Text(
                   '+91 7014265301',
                   style: Theme.of(context)
                       .textTheme
@@ -160,7 +160,7 @@ class _ContactState extends State<Contact> {
                 const SizedBox(
                   width: 16,
                 ),
-                SelectableText(
+                Text(
                   'ketansharma587@gmail.com',
                   style: Theme.of(context)
                       .textTheme

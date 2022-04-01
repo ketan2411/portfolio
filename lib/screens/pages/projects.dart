@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -6,10 +7,8 @@ import 'package:logger/logger.dart';
 
 import 'package:portfolio_flutter/constants.dart';
 import 'package:portfolio_flutter/model/project_model.dart';
-import 'package:portfolio_flutter/screens/layout.dart';
 import 'package:portfolio_flutter/screens/project_description.dart';
 import 'package:portfolio_flutter/theme.dart';
-import 'package:portfolio_flutter/widgets/post_card.dart';
 
 class Projects extends StatefulWidget {
   const Projects({
@@ -44,13 +43,18 @@ class _ProjectsState extends State<Projects> {
   }
 
   void loadData() async {
-    String data = await rootBundle.loadString('json/projects.json');
-    List jsonResult = json.decode(data);
-    for (var element in jsonResult) {
-      projects.add(ProjectModel.fromMap(element));
+    try {
+      String data = await rootBundle.loadString('json/projects.json');
+      List jsonResult = json.decode(data);
+      for (var element in jsonResult) {
+        projects.add(ProjectModel.fromMap(element));
+      }
+      setState(() {});
+      logger.i(jsonResult);
+    } catch (e, s) {
+      log(e.toString());
+      log(s.toString());
     }
-    setState(() {});
-    logger.i(jsonResult);
   }
 
   @override
@@ -94,7 +98,7 @@ class _ProjectsState extends State<Projects> {
             ...List.generate(
                 projects.length,
                 (index) => Padding(
-                      padding: const EdgeInsets.all(defaultPadding * 2),
+                      padding: const EdgeInsets.all(defaultPadding / 2),
                       child: ProjectDescription(
                         reverse: MediaQuery.of(context).size.width < 800
                             ? false

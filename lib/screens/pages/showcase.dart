@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:logger/logger.dart';
 import 'package:portfolio_flutter/constants.dart';
-import 'package:portfolio_flutter/model/project_model.dart';
 import 'package:portfolio_flutter/model/showcase_model.dart';
 import 'package:portfolio_flutter/screens/layout.dart';
 import 'package:portfolio_flutter/theme.dart';
@@ -49,7 +48,9 @@ class _ShowcaseState extends State<Showcase> {
     }
     leftColumn.addAll(showcase.getRange(0, showcase.length ~/ 2));
     showcase.removeRange(0, showcase.length ~/ 2);
-    setState(() {});
+    if (mounted) {
+      setState(() {});
+    }
     logger.i(jsonResult);
   }
 

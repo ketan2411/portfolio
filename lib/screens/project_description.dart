@@ -1,6 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
+import 'package:markdown_widget/markdown_widget.dart';
 import 'package:portfolio_flutter/constants.dart';
 import 'package:portfolio_flutter/model/project_model.dart';
 import 'package:portfolio_flutter/theme.dart';
@@ -33,9 +33,6 @@ class ProjectDescription extends StatelessWidget {
         constraints: const BoxConstraints(maxWidth: 700),
         child: Column(
           children: [
-            const SizedBox(
-              height: defaultPadding,
-            ),
             Text(
               project.title,
               style: Theme.of(context).textTheme.headline6,
@@ -46,7 +43,7 @@ class ProjectDescription extends StatelessWidget {
             Text(project.subtitle ?? "",
                 style: Theme.of(context).textTheme.caption),
             const SizedBox(
-              height: defaultPadding * 2,
+              height: defaultPadding,
             ),
             Row(
               children: [
@@ -71,13 +68,29 @@ class ProjectDescription extends StatelessWidget {
                     ))
               ],
             ),
+            const SizedBox(height: defaultPadding / 2),
+            Wrap(
+              children: project.tags
+                  .map((e) => Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: defaultPadding / 2),
+                        child: Chip(
+                            label: Text(e,
+                                style: Theme.of(context).textTheme.caption)),
+                      ))
+                  .toList(),
+            ),
+            const SizedBox(height: defaultPadding / 2),
+            SizedBox(
+              height: 300,
+              child: MarkdownWidget(
+                  padding: EdgeInsets.zero,
+                  data: project.description,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics()),
+            ),
             const SizedBox(
               height: defaultPadding,
-            ),
-            Text(project.description,
-                style: Theme.of(context).textTheme.titleMedium!),
-            const SizedBox(
-              height: defaultPadding * 4,
             ),
           ],
         ),
@@ -110,9 +123,9 @@ class ProjectDescription extends StatelessWidget {
               );
             }).toList(),
             options: CarouselOptions(
-              height: 600,
+              height: 300,
               aspectRatio: 0.2,
-              viewportFraction: 0.6,
+              viewportFraction: 0.4,
               initialPage: project.screenshots.length ~/ 2,
               enableInfiniteScroll: true,
               reverse: false,

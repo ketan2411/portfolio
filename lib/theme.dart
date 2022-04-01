@@ -18,12 +18,4 @@ ThemeData darkThemeData = ThemeData(
     textTheme: GoogleFonts.poppinsTextTheme()
         .copyWith(headline5: const TextStyle(letterSpacing: defaultPadding))
         .apply(bodyColor: lightPrimary, displayColor: lightPrimary)
-    // .copyWith(
-    //   subtitle2: TextStyle(
-    //     color: textDarkColor.withOpacity(0.60),
-    //   ),
-    //   caption: TextStyle(
-    //     color: textDarkColor.withOpacity(0.60),
-    //   ),
-    // );
     );
