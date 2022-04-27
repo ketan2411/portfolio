@@ -51,7 +51,7 @@ class _ShowcaseState extends State<Showcase> {
     if (mounted) {
       setState(() {});
     }
-    logger.i(jsonResult);
+    // logger.i(jsonResult);
   }
 
   @override
