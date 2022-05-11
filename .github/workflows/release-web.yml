@@ -9,7 +9,7 @@ jobs:
     name: Build Web
     steps:
       - name: Checkout Repo. with fetch depth
-        uses: actions/checkout@v2
+        uses: actions/checkout@a81bbbf8298c0fa03ea29cdc473d45769f953675
         with:
           fetch-depth: 0
       - name: Cache Flutter dependencies
