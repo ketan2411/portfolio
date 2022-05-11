@@ -1,0 +1,38 @@
+name: Web Builds Custom
+on: [workflow_dispatch]
+  push:
+    branches:
+      - master
+jobs:
+  deploy_web:
+    runs-on: ubuntu-latest
+    name: Build Web
+    steps:
+      - name: Checkout Repo. with fetch depth
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Cache Flutter dependencies
+        uses: actions/cache@v2
+        with:
+          path: /opt/hostedtoolcache/flutter
+          key: ${{ runner.OS }}-flutter
+      - name: Setup Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: '12.x'
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: 'stable'
+      - run: flutter config --enable-web
+      - run: flutter pub get
+      - run: flutter build web --release
+      # Set Base Ref from "/" to "./"
+      - run: sed -i -e "s/\(<base href=\"\/\">\)/<base href=\"\.\/\">/g" build/web/index.html
+      - name: Github Pages Deploy
+        uses: JamesIves/github-pages-deploy-action@4.1.5
+        with:
+          branch: gh-pages
+          token: ${{ secrets.GH_TOKEN }}
+          folder: build/web
+          clean: true
