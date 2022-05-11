@@ -226,6 +226,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.7.0"
+  parallax:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: "08231a5e8e8c8c67d0fbec00ec6eaa9276ae0b3b"
+      resolved-ref: "08231a5e8e8c8c67d0fbec00ec6eaa9276ae0b3b"
+      url: "https://github.com/ketan2411/parallax.git"
+    source: git
+    version: "0.0.1"
   path:
     dependency: transitive
     description:
@@ -477,5 +486,5 @@ packages:
     source: hosted
     version: "0.2.0+1"
 sdks:
-  dart: ">=2.15.1 <3.0.0"
+  dart: ">=2.16.1 <3.0.0"
   flutter: ">=2.10.0"

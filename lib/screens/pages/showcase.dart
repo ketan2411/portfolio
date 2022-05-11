@@ -1,23 +1,15 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:logger/logger.dart';
 import 'package:portfolio_flutter/constants.dart';
-import 'package:portfolio_flutter/model/showcase_model.dart';
+import 'package:portfolio_flutter/data.dart';
 import 'package:portfolio_flutter/screens/layout.dart';
 import 'package:portfolio_flutter/theme.dart';
 import 'package:portfolio_flutter/widgets/post_card.dart';
 
-class Showcase extends StatefulWidget {
-  const Showcase({Key? key}) : super(key: key);
+class Showcase extends StatelessWidget {
+   Showcase({Key? key}) : super(key: key);
 
-  @override
-  State<Showcase> createState() => _ShowcaseState();
-}
-
-class _ShowcaseState extends State<Showcase> {
-  var logger = Logger(
+  final logger = Logger(
     printer: PrettyPrinter(
       methodCount: 2, // number of method calls to be displayed
       errorMethodCount: 8, // number of method calls if stacktrace is provided
@@ -28,38 +20,6 @@ class _ShowcaseState extends State<Showcase> {
       // noBoxingByDefault: true
     ),
   );
-
-  final List<ShowcaseModel> showcase = [];
-  final List<ShowcaseModel> leftColumn = [];
-
-  @override
-  void initState() {
-    // WidgetsBinding.instance!.addPostFrameCallback((_) async {
-    loadData();
-    // });
-    super.initState();
-  }
-
-  void loadData() async {
-    String data = await rootBundle.loadString('json/showcase.json');
-    List jsonResult = json.decode(data);
-    for (var element in jsonResult) {
-      showcase.add(ShowcaseModel.fromMap(element));
-    }
-    leftColumn.addAll(showcase.getRange(0, showcase.length ~/ 2));
-    showcase.removeRange(0, showcase.length ~/ 2);
-    if (mounted) {
-      setState(() {});
-    }
-    // logger.i(jsonResult);
-  }
-
-  @override
-  void dispose() {
-    logger.v('disposed');
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -109,12 +69,12 @@ class _ShowcaseState extends State<Showcase> {
       Column(
         children: [
           ...List.generate(
-              leftColumn.length,
+              showcaseLeftDATA.length,
               (index) => Padding(
                     padding: const EdgeInsets.all(defaultPadding * 2),
                     child: PostCard(
                       dark: index % 2 == 1 ? true : false,
-                      showcase: leftColumn[index],
+                      showcase: showcaseLeftDATA[index],
                     ),
                   )),
         ],
@@ -125,12 +85,12 @@ class _ShowcaseState extends State<Showcase> {
             height: defaultPadding * 5,
           ),
           ...List.generate(
-              showcase.length,
+              showcaseRightDATA.length,
               (index) => Padding(
                     padding: const EdgeInsets.all(defaultPadding * 2),
                     child: PostCard(
                       dark: index % 2 == 0 ? true : false,
-                      showcase: showcase[index],
+                      showcase: showcaseRightDATA[index],
                     ),
                   )),
         ],

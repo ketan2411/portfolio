@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:portfolio_flutter/constants.dart';
-import 'package:portfolio_flutter/model/showcase_model.dart';
 import 'package:portfolio_flutter/theme.dart';
 
 class PostCard extends StatelessWidget {
-  final ShowcaseModel showcase;
+  final Map showcase;
   final bool dark;
   const PostCard({
     Key? key,
@@ -26,7 +25,7 @@ class PostCard extends StatelessWidget {
           : lightBackground,
       child: InkWell(
         onTap: () {
-          Navigator.pushNamed(context, showcase.routeName);
+          Navigator.pushNamed(context, showcase['routeName']);
         },
         child: Container(
           padding: const EdgeInsets.all(defaultPadding),
@@ -42,13 +41,13 @@ class PostCard extends StatelessWidget {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(defaultBorderRadius),
                     image: DecorationImage(
-                        image: NetworkImage(showcase.image),
+                        image: NetworkImage(showcase['image']),
                         fit: BoxFit.cover)),
               ),
               Padding(
                 padding: const EdgeInsets.all(defaultPadding / 2),
                 child: Row(children: [
-                  Text(showcase.title,
+                  Text(showcase['title'],
                       style: Theme.of(context)
                           .textTheme
                           .headline6!
@@ -63,7 +62,7 @@ class PostCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(defaultPadding / 3),
                 child: Text(
-                  showcase.subtitle,
+                  showcase['subtitle'],
                   style: Theme.of(context).textTheme.caption!.copyWith(
                       color: dark
                           ? darkPrimary.withOpacity(0.6)

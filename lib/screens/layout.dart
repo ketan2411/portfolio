@@ -20,7 +20,7 @@ class _LayoutState extends State<Layout> {
   final ItemScrollController itemScrollController = ItemScrollController();
   final ItemPositionsListener itemPositionsListener =
       ItemPositionsListener.create();
-  var pages = [const Home(),  Projects(), const Showcase(), const Contact()];
+  var pages = [const Home(),  Projects(),  Showcase(), const Contact()];
 
   @override
   Widget build(BuildContext context) {

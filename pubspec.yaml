@@ -39,6 +39,12 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  
+  parallax:
+    git:
+      url: https://github.com/ketan2411/parallax.git
+      ref: 08231a5e8e8c8c67d0fbec00ec6eaa9276ae0b3b # commit hash
+
 
 dev_dependencies:
   flutter_test:
@@ -64,11 +70,15 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/json/
     - assets/images/qlan/
+    - assets/images/qlan/thumbnail/
     - assets/images/infoflight/
+    - assets/images/infoflight/thumbnail/
     - assets/images/armenu/
+    - assets/images/armenu/thumbnail/
     - assets/images/TRP/
+    - assets/images/TRP/thumbnail/
+    - assets/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

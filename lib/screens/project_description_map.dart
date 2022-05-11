@@ -90,7 +90,7 @@ class ProjectDescriptionMAP extends StatelessWidget {
               ),
               const SizedBox(height: defaultPadding / 2),
               SizedBox(
-                height: 300,
+                // height: 300,
                 child: MarkdownWidget(
                     padding: EdgeInsets.zero,
                     data: project['description'],
@@ -106,35 +106,90 @@ class ProjectDescriptionMAP extends StatelessWidget {
         ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 400),
           child: CarouselSlider(
-              items: project['screenshots'].map<Widget>((image) {
+              items: List.generate(project['thumbnail'].length, (index) {
+                log(project['thumbnail'][index].toString(), name: 'thumbnail');
                 return Container(
-                      width: 200,
-                      margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage(image),
-                              scale: 0.5,
-                              onError: (error, stacktrace) {
-                                // Logger().e(error);
-                              })),
-                      child: InkWell(
-                          onTap: () => showDialog(
-                              context: context,
-                              builder: (context) => Dialog(
-                                    child: Image.asset(
-                                      image,
+                  //         width: 200,
+                  margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage(project['thumbnail'][index]),
+                          scale: 0.5,
+                          onError: (error, stacktrace) {
+                            // Logger().e(error);
+                          })),
+                  child: InkWell(
+                      onTap: () => showDialog(
+                          context: context,
+                          builder: (context) {
+                            log(project['screenshots'][index].toString(),
+                                name: 'image');
+                            int localIndex = index;
+
+                            return Dialog(
+                              backgroundColor: Colors.transparent,
+                              elevation: 0,
+                              child:
+                                  StatefulBuilder(builder: (context, setState) {
+                                log('kua updage hora hx--$localIndex : $index');
+                                return Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    IconButton(
+                                        onPressed: () => setState(() {
+                                              if (localIndex <= 0) {
+                                                localIndex =
+                                                    project['screenshots']
+                                                            .length -
+                                                        1;
+                                              } else {
+                                                localIndex = localIndex - 1;
+                                              }
+                                            }),
+                                        icon: const Icon(
+                                          Icons.chevron_left,
+                                          color: Colors.white,
+                                        )),
+                                    const SizedBox(
+                                      width: defaultPadding,
+                                    ),
+                                    Image.asset(
+                                      project['screenshots'][localIndex],
                                       // scale: 0.1,
                                       // cacheHeight: 1,
                                       // cacheWidth: 1,
                                     ),
-                                  ))),
-                    );
-              }).toList(),
+                                    const SizedBox(
+                                      width: defaultPadding,
+                                    ),
+                                    IconButton(
+                                        onPressed: () => setState(() {
+                                              if (localIndex >=
+                                                  project['screenshots']
+                                                          .length -
+                                                      1) {
+                                                localIndex = 0;
+                                              } else {
+                                                localIndex = localIndex + 1;
+                                              }
+                                            }),
+                                        icon: const Icon(
+                                          Icons.chevron_right,
+                                          color: Colors.white,
+                                        )),
+                                  ],
+                                );
+                              }),
+                            );
+                          })),
+                );
+              }),
               options: CarouselOptions(
                 height: 300,
                 aspectRatio: 0.2,
                 viewportFraction: 0.4,
-                initialPage: project['screenshots'].length ~/ 2,
+                initialPage: project['thumbnail'].length ~/ 2,
                 enableInfiniteScroll: true,
                 reverse: false,
                 autoPlay: true,
