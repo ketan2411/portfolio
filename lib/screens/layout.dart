@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio_flutter/constants.dart';
 import 'package:portfolio_flutter/screens/pages/home.dart';
-import 'package:portfolio_flutter/screens/pages/contact.dart';
 import 'package:portfolio_flutter/screens/pages/projects.dart';
 import 'package:portfolio_flutter/screens/pages/showcase.dart';
 import 'package:portfolio_flutter/theme.dart';
@@ -20,7 +19,7 @@ class _LayoutState extends State<Layout> {
   final ItemScrollController itemScrollController = ItemScrollController();
   final ItemPositionsListener itemPositionsListener =
       ItemPositionsListener.create();
-  var pages = [const Home(),  Projects(),  Showcase(), const Contact()];
+  var pages = [const Home(),  Projects(),  Showcase(),];
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +79,6 @@ class _LayoutState extends State<Layout> {
       'HOME',
       'PROJECTS',
       'SHOWCASE',
-      'CONTACT',
     ];
     return [
       ...List<Widget>.generate(

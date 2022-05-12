@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio_flutter/screens/layout.dart';
+import 'package:portfolio_flutter/screens/pages/home.dart';
 import 'package:portfolio_flutter/screens/routes/parallax.dart';
 import 'package:portfolio_flutter/screens/routes/slot_machine.dart';
 import 'package:portfolio_flutter/theme.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.dark,
       title: 'Flutter Demo',
       theme: darkThemeData,
-      home: const Layout(),
+      home: const Home(),
     );
   }
 }

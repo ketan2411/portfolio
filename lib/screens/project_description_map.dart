@@ -18,6 +18,13 @@ class ProjectDescriptionMAP extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    for (String element in project['screenshots']) {
+      precacheImage(
+        AssetImage(element),
+        context,
+        onError: (exception, stackTrace) => log('chache failed'),
+      ).then((value) => log('cached $element'));
+    }
     return SizedBox(
       // height: 500,
       width: MediaQuery.of(context).size.width - 100,
@@ -131,7 +138,6 @@ class ProjectDescriptionMAP extends StatelessWidget {
                               elevation: 0,
                               child:
                                   StatefulBuilder(builder: (context, setState) {
-                                log('kua updage hora hx--$localIndex : $index');
                                 return Row(
                                   mainAxisSize: MainAxisSize.min,
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -156,9 +162,9 @@ class ProjectDescriptionMAP extends StatelessWidget {
                                     ),
                                     Image.asset(
                                       project['screenshots'][localIndex],
-                                      // scale: 0.1,
-                                      // cacheHeight: 1,
-                                      // cacheWidth: 1,
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.8,
                                     ),
                                     const SizedBox(
                                       width: defaultPadding,

@@ -36,7 +36,7 @@ class _ContactState extends State<Contact> {
       child: Column(
         // mainAxisSize: MainAxisSize.min,
         children: [
-          Expanded(
+Expanded(
             child: LayoutBuilder(builder: (context, constraints) {
               return constraints.maxWidth > 800
                   ? Row(

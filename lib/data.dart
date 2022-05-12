@@ -99,13 +99,6 @@ final List<Map> showcaseLeftDATA = [
 ];
 final List<Map> showcaseRightDATA = [
   {
-    "title": "Parallax",
-    "subtitle": "The Parallax effect",
-    "routeName": "/parallax",
-    "image":
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRV-slOOToysF2Un8HP97Ga50AZ-NMhFiCbFQ&usqp=CAU"
-  },
-  {
     "title": "Slot Machine",
     "subtitle": "The Parallax effect",
     "routeName": "/slotMachine",
