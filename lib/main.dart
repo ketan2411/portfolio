@@ -4,6 +4,7 @@ import 'package:portfolio_flutter/screens/pages/home.dart';
 import 'package:portfolio_flutter/screens/routes/parallax.dart';
 import 'package:portfolio_flutter/screens/routes/slot_machine.dart';
 import 'package:portfolio_flutter/theme.dart';
+import 'package:parallax_example/main.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: {
-        Parallax2.routeName: (context) => const Parallax2(),
+        Parallax.routeName: (context) => const Parallax(),
         SlotMachine.routeName: (context) => const SlotMachine()
       },
       // showPerformanceOverlay: true,

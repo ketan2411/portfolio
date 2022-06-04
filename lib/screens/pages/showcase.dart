@@ -7,7 +7,7 @@ import 'package:portfolio_flutter/theme.dart';
 import 'package:portfolio_flutter/widgets/post_card.dart';
 
 class Showcase extends StatelessWidget {
-   Showcase({Key? key}) : super(key: key);
+  Showcase({Key? key}) : super(key: key);
 
   final logger = Logger(
     printer: PrettyPrinter(
@@ -22,35 +22,33 @@ class Showcase extends StatelessWidget {
   );
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: darkBackground,
-      child: SingleChildScrollView(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Showcase'),
+      ),
+      backgroundColor: lightBackground,
+      body: SingleChildScrollView(
           child: Column(children: [
-        const SizedBox(
-          height: defaultPadding * 2,
-        ),
-        Padding(
-          padding: const EdgeInsets.all(defaultPadding * 2),
-          child: SizedBox(
-            width: defaultPadding * 40,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text('SHOWCASE',
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline5!
-                        .copyWith(color: darkPrimary)),
-                Divider(
-                  color: darkPrimary.withOpacity(0.2),
-                ),
-              ],
-            ),
-          ),
-        ),
-        const SizedBox(
-          height: defaultPadding,
-        ),
+        // const SizedBox(
+        //   height: defaultPadding * 2,
+        // ),
+        // Padding(
+        //   padding: const EdgeInsets.all(defaultPadding * 2),
+        //   child: Column(
+        //     mainAxisSize: MainAxisSize.min,
+        //     children: [
+        //       Text('SHOWCASE',
+        //           style: Theme.of(context)
+        //               .textTheme
+        //               .headline5!
+        //               .copyWith(color: lightPrimary)),
+        //       const Divider(),
+        //     ],
+        //   ),
+        // ),
+        // const SizedBox(
+        //   height: defaultPadding,
+        // ),
         Layout.ismobile
             ? Column(
                 children: data(),
@@ -66,35 +64,18 @@ class Showcase extends StatelessWidget {
 
   List<Widget> data() {
     return [
-      Column(
+      Wrap(
         children: [
           ...List.generate(
               showcaseLeftDATA.length,
               (index) => Padding(
                     padding: const EdgeInsets.all(defaultPadding * 2),
                     child: PostCard(
-                      dark: index % 2 == 1 ? true : false,
                       showcase: showcaseLeftDATA[index],
                     ),
                   )),
         ],
       ),
-      Column(
-        children: [
-          const SizedBox(
-            height: defaultPadding * 5,
-          ),
-          ...List.generate(
-              showcaseRightDATA.length,
-              (index) => Padding(
-                    padding: const EdgeInsets.all(defaultPadding * 2),
-                    child: PostCard(
-                      dark: index % 2 == 0 ? true : false,
-                      showcase: showcaseRightDATA[index],
-                    ),
-                  )),
-        ],
-      )
     ];
   }
 }

@@ -1,11 +1,19 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'package:parallax/parallax.dart';
-class Parallax2 extends StatelessWidget {
+import 'package:parallax_example/main.dart';
+
+class Parallax extends StatelessWidget {
   static const routeName = '/parallax';
-  const Parallax2({Key? key}) : super(key: key);
+  const Parallax({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return  const Parallax();
+    return Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: true,
+          title: const Text('Landscape Parallax'),
+        ),
+        body: const ParallaxExample());
   }
 }

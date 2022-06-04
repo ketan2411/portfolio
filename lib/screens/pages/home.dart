@@ -1,9 +1,15 @@
 // ignore_for_file: file_names
 
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:parallax_example/main.dart';
+import 'package:portfolio_flutter/constants.dart';
+import 'package:portfolio_flutter/screens/pages/projects.dart';
+import 'package:portfolio_flutter/screens/pages/showcase.dart';
 import 'package:portfolio_flutter/theme.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -33,31 +39,34 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: Container(
-        height: 50,
+        height: 40,
         color: darkBackground,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Made with ',
-              style: TextStyle(color: darkPrimary),
-            ),
-            AnimatedSwitcher(
-              duration: const Duration(milliseconds: 700),
-              child: _switch
-                  ? const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 24),
-                      child: FaIcon(
-                        FontAwesomeIcons.solidHeart,
-                        color: Colors.redAccent,
+        child: SizedBox(
+          // height: 50,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Made with ',
+                style: TextStyle(color: darkPrimary),
+              ),
+              AnimatedSwitcher(
+                duration: const Duration(milliseconds: 700),
+                child: _switch
+                    ? const Padding(
+                        padding: EdgeInsets.only(right: 42, left: 6),
+                        child: FaIcon(
+                          FontAwesomeIcons.solidHeart,
+                          color: Colors.redAccent,
+                        ),
+                      )
+                    : const FlutterLogo(
+                        size: 72,
+                        style: FlutterLogoStyle.horizontal,
                       ),
-                    )
-                  : const FlutterLogo(
-                      size: 72,
-                      style: FlutterLogoStyle.horizontal,
-                    ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
       body: Container(
@@ -123,14 +132,19 @@ class _HomeState extends State<Home> {
                 height: 100,
               ),
               Wrap(
-                runAlignment: WrapAlignment.center,
+                runAlignment: WrapAlignment.spaceEvenly,
                 alignment: WrapAlignment.spaceEvenly,
+                crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
-                  panel(const Text('Project')),
-                  panel(
-                    contactPanel(context),
-                  ),
-                  panel(const Text('Showreel')),
+                  panel('Projects', () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Projects()));
+                  }),
+                  contactPanel(context),
+                  panel('Showcase', () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Showcase()));
+                  }),
                 ],
               ),
               SizedBox(
@@ -144,74 +158,92 @@ class _HomeState extends State<Home> {
   }
 
   Widget contactPanel(BuildContext context) {
-    return Row(
-        // mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          IconButton(
-            onPressed: () async {
-              await launch('mailto:ketansharma587@gmail.com');
-            },
-            icon: Icon(
-              FontAwesomeIcons.envelope,
-              size: 30,
-              color: Theme.of(context).primaryColor,
+    return Container(
+      height: 100,
+      width: 300,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+          color: Colors.white10, borderRadius: BorderRadius.circular(5)),
+      child: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            IconButton(
+              onPressed: () async {
+                await launch('mailto:ketansharma587@gmail.com');
+              },
+              icon: Icon(
+                FontAwesomeIcons.envelope,
+                size: 30,
+                color: Theme.of(context).primaryColor,
+              ),
             ),
-          ),
-          const SizedBox(
-            width: 30,
-          ),
-          IconButton(
-            onPressed: () async {
-              await launch('https://github.com/ketan2411');
-            },
-            icon: FaIcon(
-              FontAwesomeIcons.github,
-              size: 30,
-              color: Theme.of(context).primaryColor,
+            const SizedBox(
+              width: 30,
             ),
-          ),
-          const SizedBox(
-            width: 30,
-          ),
-          IconButton(
-            onPressed: () async {
-              await launch(
-                  'https://www.linkedin.com/in/ketan-sharma-602134170/');
-            },
-            icon: FaIcon(
-              FontAwesomeIcons.linkedin,
-              size: 30,
-              color: Theme.of(context).primaryColor,
+            IconButton(
+              onPressed: () async {
+                await launch('https://github.com/ketan2411');
+              },
+              icon: FaIcon(
+                FontAwesomeIcons.github,
+                size: 30,
+                color: Theme.of(context).primaryColor,
+              ),
             ),
-          ),
-          const SizedBox(
-            width: 30,
-          ),
-          IconButton(
-            onPressed: () async {
-              await launch(
-                  'https://www.linkedin.com/in/ketan-sharma-602134170/');
-            },
-            icon: FaIcon(
-              FontAwesomeIcons.codepen,
-              size: 30,
-              color: Theme.of(context).primaryColor,
+            const SizedBox(
+              width: 30,
             ),
-          ),
-        ]);
+            IconButton(
+              onPressed: () async {
+                await launch(
+                    'https://www.linkedin.com/in/ketan-sharma-602134170/');
+              },
+              icon: FaIcon(
+                FontAwesomeIcons.linkedin,
+                size: 30,
+                color: Theme.of(context).primaryColor,
+              ),
+            ),
+            const SizedBox(
+              width: 30,
+            ),
+            IconButton(
+              onPressed: () async {
+                await launch(
+                    'https://www.linkedin.com/in/ketan-sharma-602134170/');
+              },
+              icon: FaIcon(
+                FontAwesomeIcons.codepen,
+                size: 30,
+                color: Theme.of(context).primaryColor,
+              ),
+            ),
+          ]),
+    );
   }
 
-  Container panel(Widget child) {
-    return Container(
-        constraints: const BoxConstraints(minWidth: 200, maxWidth: 300),
-        margin: const EdgeInsets.all(20),
-        padding: const EdgeInsets.all(20),
-        height: 100,
-        // width: 200,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-            color: Colors.white10, borderRadius: BorderRadius.circular(10)),
-        child: child);
+  Widget panel(String text, void Function() onPressed) {
+    return Padding(
+      padding: const EdgeInsets.all(defaultPadding),
+      child: InkWell(
+        onTap: () => onPressed(),
+        child: Container(
+          height: 100,
+          width: 200,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+              color: Colors.white10, borderRadius: BorderRadius.circular(5)),
+          child: Text(
+            text,
+            style: Theme.of(context)
+                .textTheme
+                .headline6!
+                .copyWith(color: darkPrimary),
+          ),
+        ),
+      ),
+    );
   }
 }

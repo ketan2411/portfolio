@@ -5,24 +5,22 @@ import 'package:portfolio_flutter/theme.dart';
 
 class PostCard extends StatelessWidget {
   final Map showcase;
-  final bool dark;
+  // final bool dark;
   const PostCard({
     Key? key,
     required this.showcase,
-    this.dark = false,
+    // this.dark = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height * 0.6;
+    var height = 400.0;
     return Card(
       margin: const EdgeInsets.all(defaultPadding),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(defaultBorderRadius)),
-      elevation: 8,
-      color: dark
-          ? darkBackground.withGreen(50).withBlue(50).withRed(50)
-          : lightBackground,
+      elevation: 4,
+      color: lightBackground,
       child: InkWell(
         onTap: () {
           Navigator.pushNamed(context, showcase['routeName']);
@@ -51,11 +49,11 @@ class PostCard extends StatelessWidget {
                       style: Theme.of(context)
                           .textTheme
                           .headline6!
-                          .copyWith(color: dark ? darkPrimary : lightPrimary)),
+                          .copyWith(color: lightPrimary)),
                   const Spacer(),
                   Icon(
                     Icons.chevron_right_rounded,
-                    color: dark ? darkPrimary : lightPrimary,
+                    color: lightPrimary,
                   )
                 ]),
               ),
@@ -63,10 +61,10 @@ class PostCard extends StatelessWidget {
                 padding: const EdgeInsets.all(defaultPadding / 3),
                 child: Text(
                   showcase['subtitle'],
-                  style: Theme.of(context).textTheme.caption!.copyWith(
-                      color: dark
-                          ? darkPrimary.withOpacity(0.6)
-                          : lightPrimary.withOpacity(0.6)),
+                  style: Theme.of(context)
+                      .textTheme
+                      .caption!
+                      .copyWith(color: lightPrimary.withOpacity(0.6)),
                 ),
               ),
             ],
