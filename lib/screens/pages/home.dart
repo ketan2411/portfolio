@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'dart:async';
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -31,6 +32,27 @@ class _HomeState extends State<Home> {
       }
     });
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    for (var e in [
+      '/1.png',
+      '/2.png',
+      '/3.png',
+      '/4.png',
+      '/attribute.png',
+      '/parallax_logo.png',
+      '/glow.png',
+    ]) {
+      log('sdfgh');
+      precacheImage(
+        AssetImage(e),
+        context,
+        onError: (exception, stackTrace) => log('chache failed'),
+      ).then((value) => log('cached in parallax $e'));
+    }
+    super.didChangeDependencies();
   }
 
   @override
