@@ -57,7 +57,7 @@ class Projects extends StatelessWidget {
                   projectsDATA.length,
                   (index) => Padding(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: defaultPadding / 2, vertical: 50),
+                            horizontal: defaultPadding, vertical: 50),
                         child: ProjectDescriptionMAP(
                           reverse: MediaQuery.of(context).size.width < 800
                               ? false

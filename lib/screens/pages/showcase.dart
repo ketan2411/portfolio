@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:portfolio_flutter/constants.dart';
 import 'package:portfolio_flutter/data.dart';
-import 'package:portfolio_flutter/screens/layout.dart';
 import 'package:portfolio_flutter/theme.dart';
 import 'package:portfolio_flutter/widgets/post_card.dart';
 
@@ -49,33 +48,23 @@ class Showcase extends StatelessWidget {
         // const SizedBox(
         //   height: defaultPadding,
         // ),
-        Layout.ismobile
-            ? Column(
-                children: data(),
-              )
-            : Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: data(),
-              )
+        data(),
       ])),
     );
   }
 
-  List<Widget> data() {
-    return [
-      Wrap(
-        children: [
-          ...List.generate(
-              showcaseLeftDATA.length,
-              (index) => Padding(
-                    padding: const EdgeInsets.all(defaultPadding * 2),
-                    child: PostCard(
-                      showcase: showcaseLeftDATA[index],
-                    ),
-                  )),
-        ],
-      ),
-    ];
+  Widget data() {
+    return Wrap(
+      children: [
+        ...List.generate(
+            showcaseLeftDATA.length,
+            (index) => Padding(
+                  padding: const EdgeInsets.all(defaultPadding * 2),
+                  child: PostCard(
+                    showcase: showcaseLeftDATA[index],
+                  ),
+                )),
+      ],
+    );
   }
 }

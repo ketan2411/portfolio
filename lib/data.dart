@@ -90,11 +90,10 @@ final List<Map> projectsDATA = [
 
 final List<Map> showcaseLeftDATA = [
   {
-    "title": "Parallax",
-    "subtitle": "The Parallax effect",
+    "title": "Landscape Parallax",
+    "subtitle": "The Parallax effect from package: parallax",
     "routeName": "/parallax",
-    "image":
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRV-slOOToysF2Un8HP97Ga50AZ-NMhFiCbFQ&usqp=CAU"
+    "image": "/parallax_logo.png"
   },
 ];
 final List<Map> showcaseRightDATA = [
@@ -102,7 +101,6 @@ final List<Map> showcaseRightDATA = [
     "title": "Slot Machine",
     "subtitle": "The Parallax effect",
     "routeName": "/slotMachine",
-    "image":
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRV-slOOToysF2Un8HP97Ga50AZ-NMhFiCbFQ&usqp=CAU"
+    "image": null
   },
 ];

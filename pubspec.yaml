@@ -48,7 +48,7 @@ dependencies:
   parallax_example:
     git:
       url: https://github.com/ketan2411/parallax_example.git
-      ref: a4f94eba3cd7eca5d3eb66aa80c74a175c554261 # commit hash
+      ref: 29c92874a8cbc1cc7b873abd2eb4d49e5227dd9f # commit hash
 
 
 dev_dependencies:

@@ -237,8 +237,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: a4f94eba3cd7eca5d3eb66aa80c74a175c554261
-      resolved-ref: a4f94eba3cd7eca5d3eb66aa80c74a175c554261
+      ref: "29c92874a8cbc1cc7b873abd2eb4d49e5227dd9f"
+      resolved-ref: "29c92874a8cbc1cc7b873abd2eb4d49e5227dd9f"
       url: "https://github.com/ketan2411/parallax_example.git"
     source: git
     version: "1.0.0+1"

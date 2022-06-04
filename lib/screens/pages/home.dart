@@ -1,12 +1,9 @@
 // ignore_for_file: file_names
 
 import 'dart:async';
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:parallax_example/main.dart';
 import 'package:portfolio_flutter/constants.dart';
 import 'package:portfolio_flutter/screens/pages/projects.dart';
 import 'package:portfolio_flutter/screens/pages/showcase.dart';
@@ -14,6 +11,7 @@ import 'package:portfolio_flutter/theme.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Home extends StatefulWidget {
+  static bool ismobile = false;
   const Home({Key? key}) : super(key: key);
 
   @override
@@ -128,7 +126,7 @@ class _HomeState extends State<Home> {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 100,
               ),
               Wrap(

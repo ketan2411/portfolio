@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio_flutter/screens/layout.dart';
 import 'package:portfolio_flutter/screens/pages/home.dart';
 import 'package:portfolio_flutter/screens/routes/parallax.dart';
 import 'package:portfolio_flutter/screens/routes/slot_machine.dart';
 import 'package:portfolio_flutter/theme.dart';
-import 'package:parallax_example/main.dart';
 
 void main() {
   runApp(const MyApp());

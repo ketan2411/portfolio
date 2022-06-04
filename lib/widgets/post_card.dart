@@ -38,9 +38,11 @@ class PostCard extends StatelessWidget {
                 ),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(defaultBorderRadius),
-                    image: DecorationImage(
-                        image: NetworkImage(showcase['image']),
-                        fit: BoxFit.cover)),
+                    image: showcase['image'] != null
+                        ? DecorationImage(
+                            image: AssetImage(showcase['image']),
+                            fit: BoxFit.cover)
+                        : null),
               ),
               Padding(
                 padding: const EdgeInsets.all(defaultPadding / 2),
