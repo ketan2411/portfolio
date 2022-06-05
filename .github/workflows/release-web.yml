@@ -29,11 +29,6 @@ jobs:
       - run: flutter build web --release
       # Set Base Ref from "/" to "./"
       - run:   sed -i -e '101a<script src="main.dart.js?version=1" type="application/javascript"></script>' build/web/index.html
-      - name: Checkout sources
-        uses: actions/checkout@v2
-        with:
-          # fetch-depth 0 will check out all the commits and tags needed for the bumper
-          fetch-depth: 0
       - name: Run bumper
         id: bumper
         uses: tomerfi/version-bumper-action@1.1.3
