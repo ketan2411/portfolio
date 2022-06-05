@@ -42,7 +42,7 @@ jobs:
           echo "Tag: ${{ steps.version_by_tag.outputs.tag }}"
           echo "Semver: ${{ steps.version_by_tag.outputs.semver }}"
           echo "Version code: ${{ steps.version_by_tag.outputs.versionCode }}"
-          #end
+  
       - name: Github Pages Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
