@@ -34,11 +34,13 @@ jobs:
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # store version
-      - run: value=$(<./VERSION) 
-      - run: echo "$value"     
+      - name: set up env var
+         run:  echo "VER=$(value=$(<./VERSION))" >> $GITHUB_ENV
+      - name: use env var
+         run: echo ${{ env.VER }}   
       # change version
       # Set Base Ref from "/" to "./"
-      - run:   sed -i -e '101a<script src="main.dart.js?version=$value" type="application/javascript"></script>' build/web/index.html
+      - run:   sed -i -e '101a<script src="main.dart.js?version=${{ env.VER }}" type="application/javascript"></script>' build/web/index.html
       - name: Github Pages Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
