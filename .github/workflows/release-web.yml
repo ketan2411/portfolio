@@ -33,7 +33,7 @@ jobs:
         id: bumper
         uses: tomerfi/version-bumper-action@1.1.3
         with:
-          label: .dev
+          label: .prod
           changelog: true
           preset: conventionalcommits
           folder: ./
