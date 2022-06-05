@@ -29,14 +29,19 @@ jobs:
       - run: flutter build web --release
       # Set Base Ref from "/" to "./"
       - run:   sed -i -e '101a<script src="main.dart.js?version=1" type="application/javascript"></script>' build/web/index.html
-      - name: Run bumper
-        id: bumper
-        uses: tomerfi/version-bumper-action@1.1.3
+      - name: Get version and version code
+        uses: xom9ikk/version-by-tag@v1
+        id: version_by_tag
         with:
-          label: .prod
-          changelog: true
-          preset: conventionalcommits
-          folder: ./
+          path: custom_path_to_repo
+          isUseGithubRunNumber: false
+          # offset: 77
+
+      - name: Log version
+        run: |
+          echo "Tag: ${{ steps.version_by_tag.outputs.tag }}"
+          echo "Semver: ${{ steps.version_by_tag.outputs.semver }}"
+          echo "Version code: ${{ steps.version_by_tag.outputs.versionCode }}"
           #end
       - name: Github Pages Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.5
