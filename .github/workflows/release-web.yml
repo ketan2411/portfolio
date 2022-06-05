@@ -34,7 +34,7 @@ jobs:
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # store version
-      - run: sudo value=`./VERSION`
+      - run: value=$(<./VERSION) 
       - run: echo "$value"     
       # change version
       # Set Base Ref from "/" to "./"
