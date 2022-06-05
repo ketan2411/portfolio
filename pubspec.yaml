@@ -36,7 +36,7 @@ dependencies:
   carousel_slider: ^4.0.0
   url_launcher: ^6.0.20
   markdown_widget: ^1.2.7
-  flutter_neumorphic: ^3.2.0
+  parallax_rain: ^1.1.0
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
@@ -48,7 +48,7 @@ dependencies:
   parallax_example:
     git:
       url: https://github.com/ketan2411/parallax_example.git
-      ref: 29c92874a8cbc1cc7b873abd2eb4d49e5227dd9f # commit hash
+      ref: 4d321dcbc3d86e0db23ade046f19b8d37abcbe29 # commit hash
 
 
 dev_dependencies:

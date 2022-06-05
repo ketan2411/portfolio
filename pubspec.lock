@@ -118,13 +118,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.4"
-  flutter_neumorphic:
-    dependency: "direct main"
-    description:
-      name: flutter_neumorphic
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.2.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -237,11 +230,18 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "29c92874a8cbc1cc7b873abd2eb4d49e5227dd9f"
-      resolved-ref: "29c92874a8cbc1cc7b873abd2eb4d49e5227dd9f"
+      ref: "4d321dcbc3d86e0db23ade046f19b8d37abcbe29"
+      resolved-ref: "4d321dcbc3d86e0db23ade046f19b8d37abcbe29"
       url: "https://github.com/ketan2411/parallax_example.git"
     source: git
     version: "1.0.0+1"
+  parallax_rain:
+    dependency: "direct main"
+    description:
+      name: parallax_rain
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.0"
   path:
     dependency: transitive
     description:

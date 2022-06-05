@@ -3,8 +3,8 @@
 import 'dart:async';
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:parallax_rain/parallax_rain.dart';
 import 'package:portfolio_flutter/constants.dart';
 import 'package:portfolio_flutter/screens/pages/projects.dart';
 import 'package:portfolio_flutter/screens/pages/showcase.dart';
@@ -45,7 +45,6 @@ class _HomeState extends State<Home> {
       '/parallax_logo.png',
       '/glow.png',
     ]) {
-      log('sdfgh');
       precacheImage(
         AssetImage(e),
         context,
@@ -94,84 +93,119 @@ class _HomeState extends State<Home> {
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         color: darkBackground,
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // Spacer(),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.2,
-              ),
-              Wrap(
-                runAlignment: WrapAlignment.center,
-                alignment: WrapAlignment.spaceEvenly,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            ParallaxRain(
+              trail: true,
+              dropFallSpeed: MediaQuery.of(context).size.width < 800 ? 2 : 3,
+              dropColors: const [
+                // Colors.red,
+                Colors.green,
+                Colors.blue,
+                // Colors.yellow,
+                // Colors.brown,
+                Colors.blueGrey
+              ],
+            ),
+            // Positioned(
+            //     bottom: 0,
+            //     child: Container(
+            //       height: MediaQuery.of(context).size.height,
+            //       width: MediaQuery.of(context).size.width,
+            //       decoration: BoxDecoration(
+            //           gradient: LinearGradient(
+            //               // stops: [0, 0.8],
+            //               begin: Alignment.topCenter,
+            //               end: Alignment.bottomCenter,
+            //               colors: [Colors.transparent, darkBackground])),
+            //     )),
+            SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const FlutterLogo(
-                    style: FlutterLogoStyle.markOnly,
-                    size: 200,
+                  // Spacer(),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.2,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Hi I\'m',
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline6!
-                              .copyWith(color: Colors.white),
-                        ),
-                        Text(
-                          'Ketan Sharma',
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline4!
-                              .copyWith(
-                                  fontWeight: FontWeight.bold,
-                                  color: darkPrimary),
-                        ),
-                        Text(
-                          'Flutter Developer',
-                          style:
-                              Theme.of(context).textTheme.headline3!.copyWith(
+                  Wrap(
+                    runAlignment: WrapAlignment.center,
+                    alignment: WrapAlignment.center,
+                    children: [
+                      const FlutterLogo(
+                        style: FlutterLogoStyle.markOnly,
+                        size: 200,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Hi I\'m',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline6!
+                                  .copyWith(color: Colors.white),
+                            ),
+                            Text(
+                              'Ketan Sharma',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline4!
+                                  .copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      color: darkPrimary),
+                            ),
+                            Text(
+                              'Flutter Developer',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline3!
+                                  .copyWith(
                                     foreground: Paint()
                                       ..style = PaintingStyle.stroke
                                       ..strokeWidth = 1
                                       ..color = Colors.white,
                                   ),
-                        )
-                      ],
-                    ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 100,
+                  ),
+                  Wrap(
+                    runAlignment: WrapAlignment.spaceEvenly,
+                    alignment: WrapAlignment.spaceEvenly,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    children: [
+                      panel('Projects', () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Projects()));
+                      }),
+                      contactPanel(context),
+                      panel('Showcase', () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Showcase()));
+                      }),
+                    ],
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.1,
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 100,
-              ),
-              Wrap(
-                runAlignment: WrapAlignment.spaceEvenly,
-                alignment: WrapAlignment.spaceEvenly,
-                crossAxisAlignment: WrapCrossAlignment.center,
-                children: [
-                  panel('Projects', () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Projects()));
-                  }),
-                  contactPanel(context),
-                  panel('Showcase', () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Showcase()));
-                  }),
-                ],
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.1,
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -251,7 +285,7 @@ class _HomeState extends State<Home> {
         onTap: () => onPressed(),
         child: Container(
           height: 100,
-          width: 200,
+          width: MediaQuery.of(context).size.width < 800 ? 300 : 200,
           alignment: Alignment.center,
           decoration: BoxDecoration(
               color: Colors.white10, borderRadius: BorderRadius.circular(5)),
