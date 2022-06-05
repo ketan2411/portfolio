@@ -9,7 +9,7 @@ jobs:
     name: Build Web
     steps:
       - name: Checkout Repo. with fetch depth
-        uses: actions/checkout@v2
+        uses: actions/checkout@a81bbbf8298c0fa03ea29cdc473d45769f953675
         with:
           fetch-depth: 0
       - name: Cache Flutter dependencies
@@ -27,21 +27,12 @@ jobs:
       - run: flutter config --enable-web
       - run: flutter pub get
       - run: flutter build web --release
-      - name: Fetch latest release version
-        id: fetch-latest-release
-        uses: reloc8/action-latest-release-version@1.0.0
-
-      - name: Test
-        run: echo ${{ steps.fetch-latest-release.outputs.latest-release }}
-
       # Set Base Ref from "/" to "./"
-      # - run: sed -i -e "s/\(<base href=\"\/\">\)/<base href=\"\.\/\">/g" build/web/index.html
-      - run: sed -i -e '101a<script src="main.dart.js?version=1" type="application/javascript"></script>' build/web/index.html
-
+      - run:   sed -i -e '101a<script src="main.dart.js?version=1" type="application/javascript"></script>' build/web/index.html
       - name: Github Pages Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
           branch: gh-pages
-          token: ${{ secrets.GH_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           folder: build/web
           clean: true
