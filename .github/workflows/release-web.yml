@@ -34,10 +34,10 @@ jobs:
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # store version
-      - name: set up env var
-         run:  echo "VER=$(value=$(<./VERSION))" >> $GITHUB_ENV
-      - name: use env var
-         run: echo ${{ env.VER }}   
+      # - name: set up env var
+      - run:  echo "VER=$(value=$(<./VERSION))" >> $GITHUB_ENV
+      # - name: use env var
+      - run: echo ${{ env.VER }}   
       # change version
       # Set Base Ref from "/" to "./"
       - run:   sed -i -e '101a<script src="main.dart.js?version=${{ env.VER }}" type="application/javascript"></script>' build/web/index.html
