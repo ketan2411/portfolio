@@ -27,15 +27,18 @@ jobs:
       - run: flutter config --enable-web
       - run: flutter pub get
       - run: flutter build web --release
-      # Set Base Ref from "/" to "./"
-      - run:   sed -i -e '101a<script src="main.dart.js?version=1" type="application/javascript"></script>' build/web/index.html
       - name: Bump version
         uses: remorses/bump-version@js
         with:
             version_file: ./VERSION
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  
+      # store version
+      - run: value=`./VERSION`
+      - run: echo "$value"     
+      # change version
+      # Set Base Ref from "/" to "./"
+      - run:   sed -i -e '101a<script src="main.dart.js?version=$value" type="application/javascript"></script>' build/web/index.html
       - name: Github Pages Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
