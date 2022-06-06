@@ -125,70 +125,7 @@ class ProjectDescriptionMAP extends StatelessWidget {
                           onError: (error, stacktrace) {
                             // Logger().e(error);
                           })),
-                  child: InkWell(
-                      onTap: () => showDialog(
-                          context: context,
-                          builder: (context) {
-                            log(project['screenshots'][index].toString(),
-                                name: 'image');
-                            int localIndex = index;
-
-                            return Dialog(
-                              backgroundColor: Colors.transparent,
-                              elevation: 0,
-                              child:
-                                  StatefulBuilder(builder: (context, setState) {
-                                return Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    IconButton(
-                                        onPressed: () => setState(() {
-                                              if (localIndex <= 0) {
-                                                localIndex =
-                                                    project['screenshots']
-                                                            .length -
-                                                        1;
-                                              } else {
-                                                localIndex = localIndex - 1;
-                                              }
-                                            }),
-                                        icon: const Icon(
-                                          Icons.chevron_left,
-                                          color: Colors.white,
-                                        )),
-                                    const SizedBox(
-                                      width: defaultPadding,
-                                    ),
-                                    Image.asset(
-                                      project['screenshots'][localIndex],
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.8,
-                                    ),
-                                    const SizedBox(
-                                      width: defaultPadding,
-                                    ),
-                                    IconButton(
-                                        onPressed: () => setState(() {
-                                              if (localIndex >=
-                                                  project['screenshots']
-                                                          .length -
-                                                      1) {
-                                                localIndex = 0;
-                                              } else {
-                                                localIndex = localIndex + 1;
-                                              }
-                                            }),
-                                        icon: const Icon(
-                                          Icons.chevron_right,
-                                          color: Colors.white,
-                                        )),
-                                  ],
-                                );
-                              }),
-                            );
-                          })),
+                  child: InkWell(onTap: () => openImage(context, index)),
                 );
               }),
               options: CarouselOptions(
@@ -217,6 +154,87 @@ class ProjectDescriptionMAP extends StatelessWidget {
       log(e.toString(), stackTrace: s);
       log(s.toString(), stackTrace: s);
       return [];
+    }
+  }
+
+  Future<dynamic> openImage(context, int index) {
+    if (MediaQuery.of(context).size.width > 800) {
+      return showDialog(
+          context: context,
+          builder: (context) {
+            log(project['screenshots'][index].toString(), name: 'image');
+            int localIndex = index;
+
+            return Dialog(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              child: StatefulBuilder(builder: (context, setState) {
+                return Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    IconButton(
+                        onPressed: () => setState(() {
+                              if (localIndex <= 0) {
+                                localIndex = project['screenshots'].length - 1;
+                              } else {
+                                localIndex = localIndex - 1;
+                              }
+                            }),
+                        icon: const Icon(
+                          Icons.chevron_left,
+                          color: Colors.white,
+                        )),
+                    const SizedBox(
+                      width: defaultPadding,
+                    ),
+                    ConstrainedBox(
+                      constraints: BoxConstraints(
+                        maxWidth: MediaQuery.of(context).size.width * 0.8,
+                      ),
+                      child: Image.asset(
+                        project['screenshots'][localIndex],
+                      ),
+                    ),
+                    const SizedBox(
+                      width: defaultPadding,
+                    ),
+                    IconButton(
+                        onPressed: () => setState(() {
+                              if (localIndex >=
+                                  project['screenshots'].length - 1) {
+                                localIndex = 0;
+                              } else {
+                                localIndex = localIndex + 1;
+                              }
+                            }),
+                        icon: const Icon(
+                          Icons.chevron_right,
+                          color: Colors.white,
+                        )),
+                  ],
+                );
+              }),
+            );
+          });
+    } else {
+      PageController _controller = PageController(initialPage: index);
+      return Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => Scaffold(
+                  backgroundColor: darkBackground,
+                  appBar: AppBar(),
+                  body: Center(
+                    child: PageView.builder(
+                        controller: _controller,
+                        itemCount: project['screenshots'].length,
+                        itemBuilder: (context, localIndex) => InteractiveViewer(
+                              child: Image.asset(
+                                project['screenshots'][localIndex],
+                              ),
+                            )),
+                  ))));
     }
   }
 }
