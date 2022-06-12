@@ -27,3 +27,8 @@ A personal guide to do Flutter better.
 2. Split into smaller widgets.
 3. Use Isolates
 4. Use effects onyl when necessary.
+
+
+##Links
+1. [markdown cheat sheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#links)
+1. [deep linking](https://docs.flutter.dev/development/ui/navigation/deep-linking)
