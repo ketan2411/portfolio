@@ -99,7 +99,7 @@ class _HomeState extends State<Home> {
             ParallaxRain(
               trail: true,
               numberOfLayers: MediaQuery.of(context).size.width < 800 ? 1 : 2,
-              numberOfDrops: MediaQuery.of(context).size.width < 800 ? 5 : 20,
+              numberOfDrops: MediaQuery.of(context).size.width < 800 ? 20 : 30,
               dropFallSpeed: MediaQuery.of(context).size.width < 800 ? 2 : 3,
               dropColors: const [
                 // Colors.red,
