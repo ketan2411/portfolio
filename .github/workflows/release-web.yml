@@ -29,7 +29,7 @@ jobs:
       - run: flutter build web --release
       # change version
       # Set Base Ref from "/" to "./"
-      - run:   sed -i -e '101a<script src="main.dart.js?version=${{ github.run_attempt }}" type="application/javascript"></script>' build/web/index.html
+      - run:   sed -i -e '101a<script src="main.dart.js?version=${{ github.run_number }}" type="application/javascript"></script>' build/web/index.html
       - name: Github Pages Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
