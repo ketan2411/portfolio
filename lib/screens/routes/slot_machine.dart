@@ -1,9 +1,19 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:async';
+import 'dart:html';
 import 'dart:math';
 
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/animation.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
+import 'package:just_audio/just_audio.dart';
+import 'package:lottie/lottie.dart';
+import 'package:portfolio_flutter/constants.dart';
+import 'package:portfolio_flutter/screens/routes/components/bulb_widget.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 // import 'package:lottie/lottie.dart';
 
 final GlobalKey<ScaffoldState> _slotScaffoldKey = GlobalKey<ScaffoldState>();
@@ -18,15 +28,26 @@ class SlotMachine extends StatefulWidget {
   State<SlotMachine> createState() => _SlotMachineState();
 }
 
-class _SlotMachineState extends State<SlotMachine> {
+class _SlotMachineState extends State<SlotMachine>
+    with TickerProviderStateMixin {
+  final buttonSound = AudioPlayer(); // Create a player
+  final slotMachineSound = AudioPlayer(); // Create a player
+  final winningSound = AudioPlayer();
+  bool blinkAll = false;
+  bool buttonTapDown = false;
+
+  late AnimationController _ballController;
+  late AnimationController _rainLottieCtlr;
+  late Animation<double> _animation;
+
   int rewardValue = 0;
   bool startSpinner = false;
   bool _disableButton = false;
   List items = [
-    'assets/banana.png',
-    'assets/cherry.png',
-    'assets/bell.png',
-    'assets/melon.png',
+    'assets/slotmachine/banana.png',
+    'assets/slotmachine/cherry.png',
+    'assets/slotmachine/bell.png',
+    'assets/slotmachine/melon.png',
   ];
 
   final List<CarouselController> _carouselController = [
@@ -37,130 +58,386 @@ class _SlotMachineState extends State<SlotMachine> {
 
   @override
   void initState() {
+    _ballController = AnimationController(vsync: this);
+    _rainLottieCtlr = AnimationController(vsync: this);
+    _animation = Tween(begin: 0.0, end: 1.0).animate(_ballController);
+    initiateSound();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _ballController.dispose();
+    _rainLottieCtlr.dispose();
+    slotMachineSound.dispose();
+    winningSound.dispose();
+    buttonSound.dispose();
+    super.dispose();
+  }
+
+  void resetSounds() {
+    slotMachineSound.stop();
+    winningSound.stop();
+    buttonSound.stop();
+    slotMachineSound.seek(null);
+    winningSound.seek(null);
+    buttonSound.seek(null);
+  }
+
+  void initiateSound() async {
+    await slotMachineSound.setAsset(
+      // Load a URL
+      'assets/slotmachine/machine_run.mp3',
+    );
+    await winningSound.setAsset(
+      // Load a URL
+      'assets/slotmachine/jackpot_sound.mp3',
+    );
+    await buttonSound.setAsset(
+      // Load a URL
+      'assets/slotmachine/stopping_sound.mp3',
+    );
+    setSoundVolumne();
+  }
+
+  setSoundVolumne({bool mute = false}) {
+    if (mute) {
+      slotMachineSound.setVolume(0);
+      winningSound.setVolume(0);
+      buttonSound.setVolume(0);
+    } else {
+      slotMachineSound.setVolume(0.1);
+      winningSound.setVolume(0.5);
+      buttonSound.setVolume(0.5);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         key: _slotScaffoldKey,
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(
-            automaticallyImplyLeading: false,
-            actions: const [
-            ],
-            title: const Text('Slot Machine')),
-        body: Padding(
-          padding: const EdgeInsets.all(8),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              slotMachine(context),
-              DisableButton(
-                disable: _disableButton,
-                child: ElevatedButton.icon(
-                    icon: const Icon(Icons.place_outlined),
-                    label: const Text('Run Slot'),
-                    onPressed: !_disableButton
-                        ? () async {
-                            if (!startSpinner) {
-                              setState(() {
-                                startSpinner = true;
-                                _disableButton = true;
-                              });
-                              await Future.delayed(
-                                  const Duration(milliseconds: 1000));
-                              stopSlotMachine();
-                            }
-                          }
-                        : null),
-              )
-            ],
-          ),
+        backgroundColor: Colors.grey[800],
+        extendBodyBehindAppBar: true,
+        appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(50),
+            child: Row(
+              children: [
+                IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(Icons.chevron_left))
+              ],
+            )),
+        body: Stack(
+          alignment: Alignment.center,
+          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          // crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Opacity(
+              opacity: 0.25,
+              child: Image.asset(
+                'assets/slotmachine/bg.png',
+                // height: 100.h,
+                width: 100.w,
+                fit: BoxFit.cover,
+              ),
+            ),
+            slotMachine(context),
+          ],
         ));
   }
 
-  Align slotMachine(BuildContext context) {
-    return Align(
-      alignment: Alignment.center,
-      child: SizedBox(
-        width: MediaQuery.of(context).size.width - 50,
+  slotMachine(BuildContext context) {
+    return Container(
+      decoration: const BoxDecoration(
+          boxShadow: [BoxShadow(spreadRadius: 10, blurRadius: 100)]),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20.0),
         child: Stack(
+          clipBehavior: Clip.none,
           alignment: Alignment.center,
           children: [
-            slotRowTab(Colors.white10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ...List.generate(
-                  3,
-                  (index) => SizedBox(
-                      height: 175,
-                      width: 80,
-                      child: CarouselSlider(
-                        carouselController: _carouselController[index],
-                        options: CarouselOptions(
-                            onPageChanged: (index, _) {
-                              //? yess works
-                              // developer.log('current index $index');
-                            },
-                            enlargeCenterPage: true,
-                            autoPlay: startSpinner,
-                            aspectRatio: 1,
-                            viewportFraction: 0.3,
-                            scrollDirection: Axis.vertical,
-                            enableInfiniteScroll: true),
-                        items: List.generate(
-                            items.length,
-                            (index) => Image.asset(
-                                  items[index],
-                                  fit: BoxFit.contain,
-                                  height: 60,
-                                  width: 60,
-                                )),
-                      )),
-                )
-              ],
-            ),
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                slotRowTab(
-                  Theme.of(context).backgroundColor.withOpacity(0.4),
-                ),
-                slotRowTab(Colors.transparent),
-                slotRowTab(
-                  Theme.of(context).backgroundColor.withOpacity(0.4),
-                )
-              ],
-            ),
-            // Image.asset('assets/images/slot_machine/frame.png'),
+            machine(),
+            jackpot(),
+            handle(),
+            ball(),
+            // if (_rainCoins)
+            Lottie.asset('assets/slotmachine/coin_animation.json',
+                controller: _rainLottieCtlr),
+            button(),
           ],
         ),
       ),
     );
   }
 
-  void stopSlotMachine() {
+  Positioned button() {
+    return Positioned(
+      bottom: 64,
+      child: DisableButton(
+        disable: _disableButton,
+        child: GestureDetector(
+          onTapDown: (_) => setState(() {
+            buttonSound.play();
+            buttonTapDown = true;
+          }),
+          onTapCancel: () => setState(() {
+            buttonTapDown = false;
+          }),
+          onTapUp: (details) => setState(() {
+            buttonTapDown = false;
+          }),
+          child: AnimatedScale(
+            scale: buttonTapDown ? 0.9 : 1,
+            duration: const Duration(milliseconds: 250),
+            child: Image.asset(
+              'assets/slotmachine/button.png',
+              width: 100,
+            ),
+          ),
+          onTap: !_disableButton
+              ? () async {
+                  const cur = Curves.easeInOut;
+                  _ballController
+                      .animateTo(1,
+                          duration: const Duration(milliseconds: 400),
+                          curve: cur)
+                      .then((_) {
+                    _ballController.animateBack(0,
+                        duration: const Duration(milliseconds: 400),
+                        curve: cur);
+                  });
+                  if (!startSpinner) {
+                    setState(() {
+                      slotMachineSound.play();
+
+                      startSpinner = true;
+                      _disableButton = true;
+                    });
+                    await Future.delayed(const Duration(milliseconds: 1000));
+                    stopSlotMachine(true);
+                  }
+                }
+              : null,
+        ),
+      ),
+    );
+  }
+
+  Image machine() {
+    return Image.asset(
+      'assets/slotmachine/slot.png',
+      height: 100.h,
+    );
+  }
+
+  Positioned jackpot() {
+    const rollerHeight = 210.0;
+    return Positioned(
+      //change
+      top: 336,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          bulbColumn(
+            secondColumnDelay: 0,
+            length: 4,
+            reverseStrip: 0,
+            notblinkAll: blinkAll ? 0 : 1,
+          ),
+          const SizedBox(
+            width: defaultPadding / 2,
+          ),
+          ...List.generate(
+            3,
+            (index) => Container(
+              margin:
+                  const EdgeInsets.symmetric(horizontal: defaultPadding / 4),
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                    Colors.white.withOpacity(0),
+                    Colors.white,
+                    Colors.white,
+                    Colors.white.withOpacity(0),
+                  ])),
+              child: Stack(
+                children: [
+                  SizedBox(
+                    height: rollerHeight,
+                    width: 80,
+                    child: CarouselSlider(
+                      carouselController: _carouselController[index],
+                      options: CarouselOptions(
+                          onPageChanged: (index, _) {
+                            //? yess works
+                            // developer.log('current index $index');
+                          },
+                          enlargeCenterPage: true,
+                          autoPlay: startSpinner,
+                          aspectRatio: 1,
+                          viewportFraction: 0.3,
+                          scrollDirection: Axis.vertical,
+                          enableInfiniteScroll: true),
+                      items: List.generate(
+                          items.length,
+                          (index) => Image.asset(
+                                items[index],
+                                fit: BoxFit.contain,
+                                height: 60,
+                                width: 60,
+                              )),
+                    ),
+                  ),
+                  Container(
+                    height: rollerHeight,
+                    width: 80,
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                          Colors.black.withOpacity(0.2),
+                          Colors.black.withOpacity(0),
+                          Colors.black.withOpacity(0),
+                          Colors.black.withOpacity(0.2),
+                        ])),
+                  )
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(
+            width: defaultPadding / 2,
+          ),
+          bulbColumn(
+            secondColumnDelay: 240,
+            length: 4,
+            reverseStrip: 4,
+            notblinkAll: blinkAll ? 0 : 1,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Positioned handle() {
+    return Positioned(
+      right: 56,
+      top: 0,
+      bottom: 10,
+      child: AnimatedBuilder(
+        builder: (BuildContext context, Widget? child) {
+          return Transform(
+              //this changes the center to correct position
+              origin: const Offset(0, 40),
+              alignment: Alignment.center, // Rotate around the center
+              transform: Matrix4.identity()
+                ..rotateX((_animation.value * 180) * pi / 180),
+              child: Image.asset(
+                'assets/slotmachine/handle.png',
+                height: -100,
+                width: 30,
+              ));
+        },
+        animation: _ballController,
+      ),
+    );
+  }
+
+  AnimatedBuilder ball() {
+    return AnimatedBuilder(
+      animation: _ballController,
+      builder: (BuildContext context, Widget? child) {
+        return Positioned(
+            right: 56 - 8,
+            top: 0,
+            bottom: 80 - (300 * _animation.value),
+            child: SizedBox(
+              height: 33,
+              width: 33,
+              child: Image.asset(
+                'assets/slotmachine/ball.png',
+              ),
+            ));
+      },
+    );
+  }
+
+  void stopSlotMachine(bool jackpot) {
     setState(() {
       startSpinner = false;
     });
     Future.wait([
       ...List.generate(_carouselController.length, (index) {
         return _carouselController[index]
-            .animateToPage(Random().nextInt(7) + 150,
+            .animateToPage(jackpot ? 150 : Random().nextInt(7) + 150,
                 curve: Curves.easeOutExpo,
                 duration: Duration(
                   seconds: Random().nextInt(7) + 5,
                 )); //TODO_sound here
       })
     ]).then((_) {
-      showDialog(context: context, builder: (context) => data());
+      // showDialog(context: context, builder: (context) => data());
+      if (jackpot) {
+        _rainLottieCtlr
+            .animateTo(1, duration: const Duration(milliseconds: 3500))
+            .then((value) => _rainLottieCtlr.reset());
+        Future.delayed(const Duration(milliseconds: 100), () {
+          winningSound.play();
+        });
+      }
       setState(() {
         _disableButton = false;
+        blinkAll = true;
+      });
+      resetSounds();
+      Future.delayed(const Duration(seconds: 5), () {
+        if (mounted) {
+          setState(() {
+            blinkAll = false;
+          });
+        }
       });
     });
+  }
+
+  Widget bulbColumn({
+    required int secondColumnDelay,
+    required int length,
+    required int reverseStrip,
+    int notblinkAll = 1,
+  }) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        ...List.generate(
+          length,
+          (index) => Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: 8,
+            ),
+            child: BulbWidget(
+              bulbOn: _disableButton,
+              size: 24,
+              delay: Duration(
+                milliseconds: (secondColumnDelay +
+                    (40 * (reverseStrip - index * notblinkAll).abs())),
+              ),
+            ),
+          ),
+        ),
+        // SizedBox(
+        //   height: 3.5.h,
+        //   width: 4.h,
+        // ),
+      ],
+    );
   }
 
   Container slotRowTab(Color color) {
@@ -194,7 +471,7 @@ class _SlotMachineState extends State<SlotMachine> {
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.2,
                 ),
-               const Text(
+                const Text(
                   'Won',
                 ),
                 Text(

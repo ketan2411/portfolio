@@ -29,14 +29,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  google_fonts: 2.2.0
   font_awesome_flutter: ^9.2.0
   scrollable_positioned_list: ^0.2.3
   logger: ^1.1.0
   carousel_slider: ^4.0.0
   url_launcher: ^6.0.20
   markdown_widget: ^1.2.7
-  parallax_rain: ^1.1.0
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
@@ -49,6 +47,9 @@ dependencies:
     git:
       url: https://github.com/ketan2411/parallax_example.git
       ref: 4d321dcbc3d86e0db23ade046f19b8d37abcbe29 # commit hash
+  responsive_sizer: ^3.3.1
+  lottie: ^3.1.2
+  just_audio: ^0.9.38
 
 
 dev_dependencies:
@@ -83,7 +84,7 @@ flutter:
     - assets/images/armenu/thumbnail/
     - assets/images/TRP/
     - assets/images/TRP/thumbnail/
-    - assets/
+    - assets/slotmachine/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

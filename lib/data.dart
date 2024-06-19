@@ -65,8 +65,8 @@ final List<Map> projectsDATA = [
     "year": "2020"
   },
   {
-    "title": "AR Menu",
-    "subtitle": "Food Orddering App with AR features",
+    "title": "Illustro-AI",
+    "subtitle": "Convert portrait images into vector art",
     "screenshots": [
       "assets/images/armenu/1.png",
       "assets/images/armenu/2.png",
@@ -81,10 +81,11 @@ final List<Map> projectsDATA = [
       "assets/images/ARMenu/thumbnail/4_small.png",
       "assets/images/ARMenu/thumbnail/5_small.png"
     ],
-    "tags": ["Flutter", "Unity", "ARCore", "Python", "Blender"],
-    "description":
-        "AR Menu is a concept application for mobile devices. Users can interact with a 3D model of their food before ordering, the functionality also as AR for supported devices. 3D models are generated at backend through a pipeline. Pipeline consists of model generation using photogrammetry methods and later optimising for mobile devices.\n**Key Responsibilities:**\n+ Model generating pipelines setup using python.\n+ Displaying 3d model in flutter app.\n+ AR Viewer and Interaction with unity.",
-    "year": "2020"
+    "tags": ["Flutter"],
+    "link":
+        "https://play.google.com/store/apps/details?id=com.rattler.illustro&hl=en",
+    "description": "",
+    "year": "2023"
   }
 ];
 
@@ -95,8 +96,6 @@ final List<Map> showcaseLeftDATA = [
     "routeName": "/parallax",
     "image": "/parallax_logo.png"
   },
-];
-final List<Map> showcaseRightDATA = [
   {
     "title": "Slot Machine",
     "subtitle": "The Parallax effect",

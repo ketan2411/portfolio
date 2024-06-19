@@ -4,7 +4,6 @@ import 'dart:async';
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:parallax_rain/parallax_rain.dart';
 import 'package:portfolio_flutter/constants.dart';
 import 'package:portfolio_flutter/screens/pages/projects.dart';
 import 'package:portfolio_flutter/screens/pages/showcase.dart';
@@ -96,32 +95,6 @@ class _HomeState extends State<Home> {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            ParallaxRain(
-              trail: true,
-              numberOfLayers: MediaQuery.of(context).size.width < 800 ? 1 : 2,
-              numberOfDrops: MediaQuery.of(context).size.width < 800 ? 20 : 30,
-              dropFallSpeed: MediaQuery.of(context).size.width < 800 ? 2 : 3,
-              dropColors: const [
-                // Colors.red,
-                Colors.green,
-                Colors.blue,
-                // Colors.yellow,
-                // Colors.brown,
-                Colors.blueGrey
-              ],
-            ),
-            // Positioned(
-            //     bottom: 0,
-            //     child: Container(
-            //       height: MediaQuery.of(context).size.height,
-            //       width: MediaQuery.of(context).size.width,
-            //       decoration: BoxDecoration(
-            //           gradient: LinearGradient(
-            //               // stops: [0, 0.8],
-            //               begin: Alignment.topCenter,
-            //               end: Alignment.bottomCenter,
-            //               colors: [Colors.transparent, darkBackground])),
-            //     )),
             SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.min,

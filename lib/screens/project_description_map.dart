@@ -44,7 +44,10 @@ class ProjectDescriptionMAP extends StatelessWidget {
             children: [
               Text(
                 project['title'],
-                style: Theme.of(context).textTheme.headline6,
+                style: Theme.of(context)
+                    .textTheme
+                    .displaySmall!
+                    .copyWith(fontWeight: FontWeight.bold),
               ),
               const SizedBox(
                 height: defaultPadding / 2,
@@ -63,7 +66,7 @@ class ProjectDescriptionMAP extends StatelessWidget {
                   const Spacer(),
                   Visibility(
                       visible: project['link'] != null,
-                      child: TextButton.icon(
+                      child: ElevatedButton.icon(
                         onPressed: () async {
                           // Text(project.link ?? ""),
                           await launch(project['link']);
@@ -111,39 +114,20 @@ class ProjectDescriptionMAP extends StatelessWidget {
           ),
         ),
         ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 400),
-          child: CarouselSlider(
-              items: List.generate(project['thumbnail'].length, (index) {
-                log(project['thumbnail'][index].toString(), name: 'thumbnail');
-                return Container(
-                  //         width: 200,
-                  margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage(project['thumbnail'][index]),
-                          scale: 0.5,
-                          onError: (error, stacktrace) {
-                            // Logger().e(error);
-                          })),
-                  child: InkWell(onTap: () => openImage(context, index)),
-                );
-              }),
-              options: CarouselOptions(
-                height: 300,
-                aspectRatio: 0.2,
-                viewportFraction: 0.4,
-                initialPage: project['thumbnail'].length ~/ 2,
-                enableInfiniteScroll: true,
-                reverse: false,
-                autoPlay: true,
-                autoPlayInterval: Duration(seconds: ([3, 5]..shuffle()).first),
-                autoPlayAnimationDuration: const Duration(milliseconds: 800),
-                autoPlayCurve: Curves.fastOutSlowIn,
-                enlargeCenterPage: true,
-                onPageChanged: (index, reason) {},
-                scrollDirection: Axis.horizontal,
-              )),
-        ),
+            constraints: const BoxConstraints(maxWidth: 400),
+            child: Container(
+              height: 200,
+              width: 200,
+              margin: const EdgeInsets.symmetric(horizontal: 5.0),
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage(project['thumbnail'][0]),
+                      scale: 0.5,
+                      onError: (error, stacktrace) {
+                        // Logger().e(error);
+                      })),
+              child: InkWell(onTap: () => openImage(context, 0)),
+            )),
       ];
       if (reverse) {
         return data.reversed.toList();

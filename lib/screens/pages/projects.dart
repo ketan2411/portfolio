@@ -27,50 +27,19 @@ class Projects extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Projects'),
       ),
-      body: SingleChildScrollView(
-        child: Column(children: [
-          // const SizedBox(
-          //   height: defaultPadding * 2,
-          // ),
-          // Padding(
-          //   padding: const EdgeInsets.all(defaultPadding * 2),
-          //   child: Column(
-          //     mainAxisSize: MainAxisSize.min,
-          //     children: [
-          //       Text('PROJECTS',
-          //           style: Theme.of(context)
-          //               .textTheme
-          //               .headline5!
-          //               .copyWith(color: Colors.black)),
-          //       const Divider(),
-          //     ],
-          //   ),
-          // ),
-          // const SizedBox(
-          //   height: defaultPadding,
-          // ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              ...List.generate(
-                  projectsDATA.length,
-                  (index) => Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: defaultPadding, vertical: 50),
-                        child: ProjectDescriptionMAP(
-                          reverse: MediaQuery.of(context).size.width < 800
-                              ? false
-                              : index % 2 == 1
-                                  ? true
-                                  : false,
-                          project: projectsDATA[index],
-                        ),
-                      ),
-                  growable: false),
-            ],
-          )
-        ]),
+      extendBodyBehindAppBar: true,
+      body: PageView.builder(
+        itemCount: projectsDATA.length,
+        itemBuilder: (context, index) {
+          return ProjectDescriptionMAP(
+            reverse: MediaQuery.of(context).size.width < 800
+                ? false
+                : index % 2 == 1
+                    ? true
+                    : false,
+            project: projectsDATA[index],
+          );
+        },
       ),
     );
   }
