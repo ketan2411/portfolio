@@ -33,12 +33,6 @@ class _QuizEndScreenState extends State<QuizEndScreen> {
       setState(() {
         _currentPage = controller.page?.toInt() ?? 0;
       });
-      appLog(name: 'offset', log: controller.offset.toString());
-      iconScrollController.animateTo(
-        (controller.offset * 0.099),
-        duration: const Duration(milliseconds: 200),
-        curve: Curves.ease,
-      );
     });
     super.initState();
   }

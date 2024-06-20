@@ -36,6 +36,10 @@ class _OptionsQuizState extends State<OptionsQuiz>
   void initState() {
     super.initState();
     isCorrect = widget.thisOption.compareTo(widget.question.answer) == 0;
+    if (widget.endScreen &&
+        widget.thisOption.compareTo(widget.question.tappedOption!) == 0) {
+      tapped = true;
+    }
     bgFadeController = AnimationController(
       duration: const Duration(milliseconds: 750),
       vsync: this,
@@ -55,7 +59,8 @@ class _OptionsQuizState extends State<OptionsQuiz>
       }
     });
     animation.animate(iconVisibilityController);
-    if (widget.endScreen && isCorrect) {
+    if (widget.endScreen &&
+        widget.thisOption.compareTo(widget.question.tappedOption!) == 0) {
       iconVisibilityController.animateTo(1).whenComplete(() {
         iconSwingController.animateTo(1).whenComplete(() {
           // iconSwingController.reset();
@@ -116,9 +121,8 @@ class _OptionsQuizState extends State<OptionsQuiz>
                         .playQlanQuiz(
                       context,
                       questionId: widget.question.questionID,
-                      answer: widget.thisOption,
-                      question: widget.question.question,
                       isCorrect: isCorrect,
+                      tappedOption: widget.thisOption,
                     );
                   }
                 },

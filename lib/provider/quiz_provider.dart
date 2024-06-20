@@ -31,7 +31,7 @@ class QuizProvider extends ChangeNotifier {
       oneSec,
       (Timer timer) {
         if (start == 0) {
-          cta(context, quesId: quesId, timer: timer);
+          cta(context,tappedOption:null, quesId: quesId, timer: timer);
 
           notifyListeners();
         } else {
@@ -50,6 +50,8 @@ class QuizProvider extends ChangeNotifier {
     required int quesId,
     bool isCorrect = false,
     required Timer timer,
+    required String? tappedOption,
+
   }) {
     tapped = true;
     appLog(name: 'quizTimes', log: "timer ends");
@@ -59,6 +61,7 @@ class QuizProvider extends ChangeNotifier {
         element.timeTaken = isCorrect ? timeIntoMiliS(start) : 0;
         element.score = isCorrect ? makeScore(start) : 0;
         element.isPlayedCorrect = isCorrect;
+        element.tappedOption = tappedOption;
       }
     }
     Future.delayed(const Duration(seconds: 3), () {
@@ -97,12 +100,11 @@ class QuizProvider extends ChangeNotifier {
   Future playQlanQuiz(
     BuildContext context, {
     required int questionId,
-    required String answer,
-    required String question,
     required bool isCorrect,
+    required String? tappedOption,
   }) async {
     try {
-      cta(context, quesId: questionId, isCorrect: isCorrect, timer: timer!);
+      cta(context,tappedOption:tappedOption, quesId: questionId, isCorrect: isCorrect, timer: timer!);
       notifyListeners();
     } catch (error) {
       appLog(

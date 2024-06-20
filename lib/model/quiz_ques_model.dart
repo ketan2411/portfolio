@@ -9,7 +9,8 @@ class ArcQuizQuesModel {
   final String answer;
    int timeTaken;
    int score;
-   bool isPlayedCorrect;
+   bool  isPlayedCorrect;
+   String? tappedOption;
   ArcQuizQuesModel({
     required this.questionID,
     required this.question,
@@ -20,7 +21,8 @@ class ArcQuizQuesModel {
     required this.answer,
      this.timeTaken=0,
      this.score=0,
-     this.isPlayedCorrect=false,
+     this.tappedOption,
+this.isPlayedCorrect = false,
   });
 
   ArcQuizQuesModel copyWith({
@@ -33,7 +35,7 @@ class ArcQuizQuesModel {
     String? answer,
     int? timeTaken,
     int? score,
-    bool? isPlayedCorrect,
+    String? tappedOption,
   }) {
     return ArcQuizQuesModel(
       questionID: questionID ?? this.questionID,
@@ -45,7 +47,7 @@ class ArcQuizQuesModel {
       answer: answer ?? this.answer,
       timeTaken: timeTaken ?? this.timeTaken,
       score: score ?? this.score,
-      isPlayedCorrect: isPlayedCorrect ?? this.isPlayedCorrect,
+      tappedOption: tappedOption ?? this.tappedOption,
     );
   }
   factory ArcQuizQuesModel.fromMap(Map<String, dynamic> map) {
@@ -61,7 +63,7 @@ class ArcQuizQuesModel {
   }
   @override
   String toString() {
-    return 'ArcQuizQuesModel(questionID: $questionID, question: $question, optA: $optA, optB: $optB, optC: $optC, optD: $optD, answer: $answer, timeTaken: $timeTaken, score: $score, isPlayedCorrect: $isPlayedCorrect)';
+    return 'ArcQuizQuesModel(questionID: $questionID, question: $question, optA: $optA, optB: $optB, optC: $optC, optD: $optD, answer: $answer, timeTaken: $timeTaken, score: $score, tappedOption: $tappedOption)';
   }
 
   @override
@@ -77,7 +79,7 @@ class ArcQuizQuesModel {
       other.optD == optD &&
       other.timeTaken == timeTaken &&
       other.score == score &&
-      other.isPlayedCorrect == isPlayedCorrect &&
+      other.tappedOption == tappedOption &&
       other.answer == answer;
   }
 
@@ -89,7 +91,7 @@ class ArcQuizQuesModel {
       optB.hashCode ^
       optC.hashCode ^
       optD.hashCode ^
-      isPlayedCorrect.hashCode ^
+      tappedOption.hashCode ^
       timeTaken.hashCode ^
       score.hashCode ^
       answer.hashCode;
