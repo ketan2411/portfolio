@@ -4,6 +4,7 @@ import 'dart:math';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:lottie/lottie.dart';
 import 'package:portfolio_flutter/constants.dart';
@@ -30,6 +31,8 @@ class _SlotMachineState extends State<SlotMachine>
   final winningSound = AudioPlayer();
   bool blinkAll = false;
   bool buttonTapDown = false;
+  final height = 800.0;
+  final width = 400.0;
 
   late AnimationController _ballController;
   late AnimationController _rainLottieCtlr;
@@ -138,28 +141,38 @@ class _SlotMachineState extends State<SlotMachine>
                 fit: BoxFit.cover,
               ),
             ),
-            slotMachine(context),
+            Transform.scale(
+              scale: Device.height > 599 ? 1.2 : 1,
+              child: SizedBox(
+                height: height,
+                width: width,
+                child: slotMachine(context),
+              ),
+            )
           ],
         ));
   }
 
   slotMachine(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-          boxShadow: [BoxShadow(spreadRadius: 10, blurRadius: 100)]),
+      decoration: const BoxDecoration(boxShadow: [
+        BoxShadow(offset: Offset(0, 0), spreadRadius: 5, blurRadius: 100)
+      ]),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20.0),
         child: Stack(
           clipBehavior: Clip.none,
-          alignment: Alignment.center,
+          alignment: Alignment.topCenter,
           children: [
             machine(),
             jackpot(),
             handle(),
             ball(),
-            // if (_rainCoins)
-            Lottie.asset('assets/slotmachine/coin_animation.json',
-                controller: _rainLottieCtlr),
+            Lottie.asset(
+              'assets/slotmachine/coin_animation.json',
+              controller: _rainLottieCtlr,
+              width: width,
+            ),
             button(),
           ],
         ),
@@ -169,7 +182,7 @@ class _SlotMachineState extends State<SlotMachine>
 
   Positioned button() {
     return Positioned(
-      bottom: 64,
+      top: height * 0.65,
       child: DisableButton(
         disable: _disableButton,
         child: GestureDetector(
@@ -223,119 +236,125 @@ class _SlotMachineState extends State<SlotMachine>
   Image machine() {
     return Image.asset(
       'assets/slotmachine/slot.png',
-      height: 100.h,
+      fit: BoxFit.fitHeight,
+      // height: 800,
+      // width: 300,
     );
   }
 
   Positioned jackpot() {
-    const rollerHeight = 210.0;
+    final rollerHeight = height / 4.5;
     return Positioned(
       //change
-      top: 336,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          bulbColumn(
-            secondColumnDelay: 0,
-            length: 4,
-            reverseStrip: 0,
-            notblinkAll: blinkAll ? 0 : 1,
-          ),
-          const SizedBox(
-            width: defaultPadding / 2,
-          ),
-          ...List.generate(
-            3,
-            (index) => Container(
-              margin:
-                  const EdgeInsets.symmetric(horizontal: defaultPadding / 4),
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                    Colors.white.withOpacity(0),
-                    Colors.white,
-                    Colors.white,
-                    Colors.white.withOpacity(0),
-                  ])),
-              child: Stack(
-                children: [
-                  SizedBox(
-                    height: rollerHeight,
-                    width: 80,
-                    child: CarouselSlider(
-                      carouselController: _carouselController[index],
-                      options: CarouselOptions(
-                          onPageChanged: (index, _) {
-                            //? yess works
-                            // developer.log('current index $index');
-                          },
-                          enlargeCenterPage: true,
-                          autoPlay: startSpinner,
-                          aspectRatio: 1,
-                          viewportFraction: 0.3,
-                          scrollDirection: Axis.vertical,
-                          enableInfiniteScroll: true),
-                      items: List.generate(
-                          items.length,
-                          (index) => Image.asset(
-                                items[index],
-                                fit: BoxFit.contain,
-                                height: 60,
-                                width: 60,
-                              )),
-                    ),
-                  ),
-                  Container(
-                    height: rollerHeight,
-                    width: 80,
-                    decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                          Colors.black.withOpacity(0.2),
-                          Colors.black.withOpacity(0),
-                          Colors.black.withOpacity(0),
-                          Colors.black.withOpacity(0.2),
-                        ])),
-                  )
-                ],
+      top: height * 0.25,
+      child: SizedBox(
+        height: height / 4.5,
+        width: height * 0.27,
+        child: FittedBox(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              bulbColumn(
+                secondColumnDelay: 0,
+                length: 4,
+                reverseStrip: 0,
+                notblinkAll: blinkAll ? 0 : 1,
               ),
-            ),
+              const SizedBox(
+                width: defaultPadding / 2,
+              ),
+              ...List.generate(
+                3,
+                (index) => Container(
+                  margin: const EdgeInsets.symmetric(
+                      horizontal: defaultPadding / 4),
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                        Colors.white.withOpacity(0),
+                        Colors.white,
+                        Colors.white,
+                        Colors.white.withOpacity(0),
+                      ])),
+                  child: Stack(
+                    children: [
+                      SizedBox(
+                        height: rollerHeight,
+                        width: 80,
+                        child: CarouselSlider(
+                          carouselController: _carouselController[index],
+                          options: CarouselOptions(
+                              onPageChanged: (index, _) {
+                                //? yess works
+                                // developer.log('current index $index');
+                              },
+                              enlargeCenterPage: true,
+                              autoPlay: startSpinner,
+                              aspectRatio: 1,
+                              viewportFraction: 0.3,
+                              scrollDirection: Axis.vertical,
+                              enableInfiniteScroll: true),
+                          items: List.generate(
+                              items.length,
+                              (index) => Image.asset(
+                                    items[index],
+                                    fit: BoxFit.contain,
+                                    height: 60,
+                                    width: 60,
+                                  )),
+                        ),
+                      ),
+                      Container(
+                        height: rollerHeight,
+                        width: 80,
+                        decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                              Colors.black.withOpacity(0.2),
+                              Colors.black.withOpacity(0),
+                              Colors.black.withOpacity(0),
+                              Colors.black.withOpacity(0.2),
+                            ])),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(
+                width: defaultPadding / 2,
+              ),
+              bulbColumn(
+                secondColumnDelay: 240,
+                length: 4,
+                reverseStrip: 4,
+                notblinkAll: blinkAll ? 0 : 1,
+              ),
+            ],
           ),
-          const SizedBox(
-            width: defaultPadding / 2,
-          ),
-          bulbColumn(
-            secondColumnDelay: 240,
-            length: 4,
-            reverseStrip: 4,
-            notblinkAll: blinkAll ? 0 : 1,
-          ),
-        ],
+        ),
       ),
     );
   }
 
   Positioned handle() {
     return Positioned(
-      right: 56,
-      top: 0,
-      bottom: 10,
+      right: height * 0.05,
+      top: height * 0.37,
       child: AnimatedBuilder(
         builder: (BuildContext context, Widget? child) {
           return Transform(
               //this changes the center to correct position
-              origin: const Offset(0, 40),
+              origin: const Offset(0, 20),
               alignment: Alignment.center, // Rotate around the center
               transform: Matrix4.identity()
                 ..rotateX((_animation.value * 180) * pi / 180),
               child: Image.asset(
                 'assets/slotmachine/handle.png',
-                height: -100,
-                width: 30,
+                width: height * 0.02,
               ));
         },
         animation: _ballController,
@@ -348,14 +367,24 @@ class _SlotMachineState extends State<SlotMachine>
       animation: _ballController,
       builder: (BuildContext context, Widget? child) {
         return Positioned(
-            right: 56 - 8,
-            top: 0,
-            bottom: 80 - (300 * _animation.value),
+            right: height * 0.045,
+            top: height * 0.36 + ((height * 0.1) * _animation.value),
             child: SizedBox(
-              height: 33,
-              width: 33,
-              child: Image.asset(
-                'assets/slotmachine/ball.png',
+              width: height * 0.02,
+              child: GestureDetector(
+                onTapDown: (_) => setState(() {
+                  buttonSound.play();
+                  buttonTapDown = true;
+                }),
+                onTapCancel: () => setState(() {
+                  buttonTapDown = false;
+                }),
+                onTapUp: (details) => setState(() {
+                  buttonTapDown = false;
+                }),
+                child: Image.asset(
+                  'assets/slotmachine/ball.png',
+                ),
               ),
             ));
       },
