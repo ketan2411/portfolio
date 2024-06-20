@@ -40,12 +40,12 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
                 ),
                 Expanded(
                   child: Container(
-                    color: Color.fromARGB(255, 66, 68, 92),
+                    color: const Color.fromARGB(255, 66, 68, 92),
                     child: Column(
                       children: [
                         Container(
                           height: 50,
-                          color: Color(0xff2b2d42),
+                          color: const Color(0xff2b2d42),
                           padding: const EdgeInsets.symmetric(
                             horizontal: defaultPadding,
                             vertical: defaultPadding / 2,
@@ -93,7 +93,7 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
                             shrinkWrap: true,
                             itemCount: scoreList.length,
                             separatorBuilder: (context, index) {
-                              return SizedBox();
+                              return const SizedBox();
                               // return const Divider(
                               //   height: 2,
                               //   color: Colors.white12,

@@ -1,12 +1,7 @@
-import 'dart:developer';
-import 'dart:math';
-import 'dart:ui';
 import 'package:portfolio_flutter/constants.dart';
 
 import 'profile.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
-import 'package:portfolio_flutter/screens/routes/leaderboard/components/profile.dart';
 import 'package:svg_flutter/svg_flutter.dart';
 
 class TopLeaderBoardAnimation extends StatefulWidget {
@@ -59,7 +54,7 @@ class _TopLeaderBoardAnimationState extends State<TopLeaderBoardAnimation>
         alignment: Alignment.center,
         children: [
           Container(
-            color: Color(0xffedf2f4),
+            color: const Color(0xffedf2f4),
             height: MediaQuery.of(context).size.width,
             child: ClipRect(
               clipBehavior: Clip.antiAlias,
