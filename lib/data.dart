@@ -1,3 +1,8 @@
+import 'package:portfolio_flutter/screens/routes/leaderboard/leaderboard_screen.dart';
+import 'package:portfolio_flutter/screens/routes/parallax.dart';
+import 'package:portfolio_flutter/screens/routes/quiz/quiz_play_screen.dart';
+import 'package:portfolio_flutter/screens/routes/slot_machine.dart';
+
 final List<Map> projectsDATA = [
   {
     "title": "Qlan",
@@ -93,23 +98,29 @@ final List<Map> showcaseLeftDATA = [
   {
     "title": "Landscape Parallax",
     "subtitle": "The Parallax effect from package: parallax",
-    "routeName": "/parallax",
+    "routeName": Parallax.routeName,
     "image": "/parallax_logo.png"
   },
   {
     "title": "Slot Machine",
     "subtitle": "The Parallax effect",
-    "routeName": "/slotMachine",
+    "routeName": SlotMachine.routeName,
     "image": null
   },
   {
     "title": "Arcade Quiz",
     "subtitle": "Quiz",
-    "routeName": "/quiz",
+    "routeName": QuizPlayScreen.routeName,
+    "image": null
+  },
+  {
+    "title": "Leaderboard",
+    "subtitle": "leaderboard",
+    "routeName": LeaderBoardScreen.routeName,
     "image": null
   },
 ];
-final List<Map<String,dynamic>> quizQuesstion = [
+final List<Map<String, dynamic>> quizQuesstion = [
   {
     "Question_id": 0,
     "Question": "Which of the following is not an OOPS concept?",
@@ -137,5 +148,44 @@ final List<Map<String,dynamic>> quizQuesstion = [
     "C": "if (func1 (x)){}",
     "D": "if (if (x == 1)){}",
     "ANS": "if (if (x == 1)){}"
+  },
+];
+
+List scoreList = [
+  {
+    "name": "Vidya Chaudhry",
+    "score": 23532,
+  },
+  {
+    "name": "Kalpana Loke",
+    "score": 22444,
+  },
+  {
+    "name": "Anup Murthy",
+    "score": 20235,
+  },
+  {
+    "name": "Gautam Sridhar",
+    "score": 15023,
+  },
+  {
+    "name": "Gautam Sridhar",
+    "score": 15023,
+  },
+  {
+    "name": "Ishani Prakash",
+    "score": 14566,
+  },
+  {
+    "name": "Nilima Khanna",
+    "score": 14256,
+  },
+  {
+    "name": "Vishi Agrawal",
+    "score": 14000,
+  },
+  {
+    "name": "Nikhil Saxena",
+    "score": 12435,
   },
 ];
