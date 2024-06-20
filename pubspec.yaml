@@ -50,6 +50,9 @@ dependencies:
   responsive_sizer: ^3.3.1
   lottie: ^3.1.2
   just_audio: ^0.9.38
+  svg_flutter: ^0.0.1
+  provider: ^6.1.2
+  animate_do: ^3.3.4
 
 
 dev_dependencies:
@@ -81,6 +84,7 @@ flutter:
     - assets/images/infoflight/
     - assets/images/infoflight/thumbnail/
     - assets/images/armenu/
+    - assets/images/arcade/
     - assets/images/armenu/thumbnail/
     - assets/images/TRP/
     - assets/images/TRP/thumbnail/

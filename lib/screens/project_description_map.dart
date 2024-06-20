@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:markdown_widget/markdown_widget.dart';
 import 'package:portfolio_flutter/constants.dart';
@@ -53,7 +52,7 @@ class ProjectDescriptionMAP extends StatelessWidget {
                 height: defaultPadding / 2,
               ),
               Text(project['subtitle'] ?? "",
-                  style: Theme.of(context).textTheme.caption),
+                  style: Theme.of(context).textTheme.bodySmall),
               const SizedBox(
                 height: defaultPadding,
               ),
@@ -61,7 +60,7 @@ class ProjectDescriptionMAP extends StatelessWidget {
                 children: [
                   Text(
                     "Year " + project['year'],
-                    style: Theme.of(context).textTheme.subtitle1,
+                    style: Theme.of(context).textTheme.titleMedium,
                   ),
                   const Spacer(),
                   Visibility(
@@ -94,7 +93,7 @@ class ProjectDescriptionMAP extends StatelessWidget {
                               horizontal: defaultPadding / 2),
                           child: Chip(
                               label: Text(e,
-                                  style: Theme.of(context).textTheme.caption)),
+                                  style: Theme.of(context).textTheme.bodySmall)),
                         ))
                     .toList(),
               ),

@@ -5,9 +5,11 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:portfolio_flutter/constants.dart';
+import 'package:portfolio_flutter/provider/quiz_provider.dart';
 import 'package:portfolio_flutter/screens/pages/projects.dart';
 import 'package:portfolio_flutter/screens/pages/showcase.dart';
 import 'package:portfolio_flutter/theme.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Home extends StatefulWidget {
@@ -23,6 +25,7 @@ class _HomeState extends State<Home> {
 
   @override
   void initState() {
+    Provider.of<QuizProvider>(context, listen: false).setLiveQuiz();
     Timer.periodic(const Duration(seconds: 2), (timer) {
       if (mounted) {
         setState(() {
@@ -122,14 +125,14 @@ class _HomeState extends State<Home> {
                               'Hi I\'m',
                               style: Theme.of(context)
                                   .textTheme
-                                  .headline6!
+                                  .titleLarge!
                                   .copyWith(color: Colors.white),
                             ),
                             Text(
                               'Ketan Sharma',
                               style: Theme.of(context)
                                   .textTheme
-                                  .headline4!
+                                  .headlineMedium!
                                   .copyWith(
                                       fontWeight: FontWeight.bold,
                                       color: darkPrimary),
@@ -138,7 +141,7 @@ class _HomeState extends State<Home> {
                               'Flutter Developer',
                               style: Theme.of(context)
                                   .textTheme
-                                  .headline3!
+                                  .displaySmall!
                                   .copyWith(
                                     foreground: Paint()
                                       ..style = PaintingStyle.stroke
@@ -268,7 +271,7 @@ class _HomeState extends State<Home> {
             text,
             style: Theme.of(context)
                 .textTheme
-                .headline6!
+                .titleLarge!
                 .copyWith(color: darkPrimary),
           ),
         ),

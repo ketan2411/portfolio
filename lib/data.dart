@@ -102,4 +102,40 @@ final List<Map> showcaseLeftDATA = [
     "routeName": "/slotMachine",
     "image": null
   },
+  {
+    "title": "Arcade Quiz",
+    "subtitle": "Quiz",
+    "routeName": "/quiz",
+    "image": null
+  },
+];
+final List<Map<String,dynamic>> quizQuesstion = [
+  {
+    "Question_id": 0,
+    "Question": "Which of the following is not an OOPS concept?",
+    "A": "Encapsulation",
+    "B": "Polymorphism",
+    "C": "Exception",
+    "D": "Abstraction",
+    "ANS": "Exception"
+  },
+  {
+    "Question_id": 1,
+    "Question": "Which of these is NOT a relational or logical operator?",
+    "A": "=",
+    "B": "||",
+    "C": "==",
+    "D": "!=",
+    "ANS": "="
+  },
+  {
+    "Question_id": 2,
+    "Question":
+        "Out of the following, which one is not valid as an if-else statement?",
+    "A": "if ((char) x){}",
+    "B": "if (x){}",
+    "C": "if (func1 (x)){}",
+    "D": "if (if (x == 1)){}",
+    "ANS": "if (if (x == 1)){}"
+  },
 ];

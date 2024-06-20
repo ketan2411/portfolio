@@ -50,7 +50,7 @@ class PostCard extends StatelessWidget {
                   Text(showcase['title'],
                       style: Theme.of(context)
                           .textTheme
-                          .headline6!
+                          .titleLarge!
                           .copyWith(color: lightPrimary)),
                   const Spacer(),
                   Icon(
@@ -65,7 +65,7 @@ class PostCard extends StatelessWidget {
                   showcase['subtitle'],
                   style: Theme.of(context)
                       .textTheme
-                      .caption!
+                      .bodySmall!
                       .copyWith(color: lightPrimary.withOpacity(0.6)),
                 ),
               ),

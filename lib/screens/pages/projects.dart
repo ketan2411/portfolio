@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
-import 'package:portfolio_flutter/constants.dart';
 import 'package:portfolio_flutter/data.dart';
 import 'package:portfolio_flutter/screens/project_description_map.dart';
 import 'package:portfolio_flutter/theme.dart';
