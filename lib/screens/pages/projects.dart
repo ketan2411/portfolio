@@ -31,11 +31,6 @@ class Projects extends StatelessWidget {
         itemCount: projectsDATA.length,
         itemBuilder: (context, index) {
           return ProjectDescriptionMAP(
-            reverse: MediaQuery.of(context).size.width < 800
-                ? false
-                : index % 2 == 1
-                    ? true
-                    : false,
             project: projectsDATA[index],
           );
         },

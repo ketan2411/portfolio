@@ -117,7 +117,9 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
                                     const SizedBox(
                                       width: defaultPadding * 2,
                                     ),
-                                    const ProfileCard(),
+                                    ProfileCard(
+                                      scoreList[index]['pictureUrl'],
+                                    ),
                                     Text(
                                       scoreList[index]['name'],
                                       style: Theme.of(context)

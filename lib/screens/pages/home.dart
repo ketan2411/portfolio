@@ -238,20 +238,20 @@ class _HomeState extends State<Home> {
                 color: Theme.of(context).primaryColor,
               ),
             ),
-            const SizedBox(
-              width: 30,
-            ),
-            IconButton(
-              onPressed: () async {
-                await launch(
-                    'https://www.linkedin.com/in/ketan-sharma-602134170/');
-              },
-              icon: FaIcon(
-                FontAwesomeIcons.codepen,
-                size: 30,
-                color: Theme.of(context).primaryColor,
-              ),
-            ),
+            // const SizedBox(
+            //   width: 30,
+            // ),
+            // IconButton(
+            //   onPressed: () async {
+            //     await launch(
+            //         'https://www.linkedin.com/in/ketan-sharma-602134170/');
+            //   },
+            //   icon: FaIcon(
+            //     FontAwesomeIcons.codepen,
+            //     size: 30,
+            //     color: Theme.of(context).primaryColor,
+            //   ),
+            // ),
           ]),
     );
   }

@@ -54,7 +54,8 @@ class _TopLeaderBoardAnimationState extends State<TopLeaderBoardAnimation>
         alignment: Alignment.center,
         children: [
           Container(
-            color: const Color(0xffedf2f4),
+            color: const Color.fromARGB(255, 143, 145, 172),
+            // color: const Color(0xffedf2f4),
             height: MediaQuery.of(context).size.width,
             child: ClipRect(
               clipBehavior: Clip.antiAlias,
@@ -92,14 +93,17 @@ class _TopLeaderBoardAnimationState extends State<TopLeaderBoardAnimation>
                   rankBlock(
                     rank: 3,
                     name: 'Vijaya Mishra',
+                    imgThumbnail: "assets/images/leaderboard/2F.jpeg",
                   ),
                   rankBlock(
                     rank: 1,
                     name: 'Shweta Chowdhury',
+                    imgThumbnail: "assets/images/leaderboard/4F.jpeg",
                   ),
                   rankBlock(
                     rank: 2,
                     name: "Apurva Deol",
+                    imgThumbnail: "assets/images/leaderboard/6.jpeg",
                   )
                 ],
               ),
@@ -124,16 +128,16 @@ class _TopLeaderBoardAnimationState extends State<TopLeaderBoardAnimation>
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Stack(
+              Stack(
                 alignment: Alignment.center,
                 clipBehavior: Clip.none,
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.star,
                     size: 92,
                     color: Colors.amber,
                   ),
-                  ProfileCard(),
+                  ProfileCard(imgThumbnail!),
                 ],
               ),
               Text(

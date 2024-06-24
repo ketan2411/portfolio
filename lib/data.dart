@@ -27,6 +27,29 @@ final List<Map> projectsDATA = [
         "Qlan is a social networking and chat communication app dedicated to gamers. It is suited for everyone who is looking to collaborate or network with other gamers through chat. Users can create custom profiles, sync their in-game statistics, access AI based matchmaking, build squads, share gaming content and much more.\n**Key Responsibilities:**\n\n - Full application setup.\n - Mentorship over the duration of development.",
     "year": "2022"
   },
+   {
+    "title": "ThinkRight",
+    "subtitle": "Meditation & Sleep",
+    "screenshots": [
+      "assets/images/qlan/4.jpg",
+      "assets/images/qlan/5.jpg",
+      "assets/images/qlan/6.jpg",
+      "assets/images/qlan/7.jpg",
+      "assets/images/qlan/8.jpg"
+    ],
+    "thumbnail": [
+      "assets/images/qlan/thumbnail/4_small.jpg",
+      "assets/images/qlan/thumbnail/5_small.jpg",
+      "assets/images/qlan/thumbnail/6_small.jpg",
+      "assets/images/qlan/thumbnail/7_small.jpg",
+      "assets/images/qlan/thumbnail/8_small.jpg"
+    ],
+    "tags": ["Flutter"],
+    "link": "https://play.google.com/store/apps/details?id=in.publicam.thinkrightme&hl=en_IN",
+    "description":
+        "Qlan is a social networking and chat communication app dedicated to gamers. It is suited for everyone who is looking to collaborate or network with other gamers through chat. Users can create custom profiles, sync their in-game statistics, access AI based matchmaking, build squads, share gaming content and much more.\n**Key Responsibilities:**\n\n - Full application setup.\n - Mentorship over the duration of development.",
+    "year": "2022"
+  },
   {
     "title": "Infoflight",
     "subtitle": "Resource Management and Resume Builder Web App",
@@ -73,18 +96,10 @@ final List<Map> projectsDATA = [
     "title": "Illustro-AI",
     "subtitle": "Convert portrait images into vector art",
     "screenshots": [
-      "assets/images/armenu/1.png",
-      "assets/images/armenu/2.png",
-      "assets/images/armenu/3.png",
-      "assets/images/armenu/4.png",
-      "assets/images/armenu/5.png"
+     
     ],
     "thumbnail": [
-      "assets/images/ARMenu/thumbnail/1_small.png",
-      "assets/images/ARMenu/thumbnail/2_small.png",
-      "assets/images/ARMenu/thumbnail/3_small.png",
-      "assets/images/ARMenu/thumbnail/4_small.png",
-      "assets/images/ARMenu/thumbnail/5_small.png"
+    
     ],
     "tags": ["Flutter"],
     "link":
@@ -99,25 +114,25 @@ final List<Map> showcaseLeftDATA = [
     "title": "Landscape Parallax",
     "subtitle": "The Parallax effect from package: parallax",
     "routeName": Parallax.routeName,
-    "image": "/parallax_logo.png"
+    "image": "/images/showcase_banner/parallax_logo.png"
   },
   {
     "title": "Slot Machine",
     "subtitle": "The Parallax effect",
     "routeName": SlotMachine.routeName,
-    "image": null
+    "image": "/images/showcase_banner/slotmachine.png"
   },
   {
     "title": "Arcade Quiz",
     "subtitle": "Quiz",
     "routeName": QuizPlayScreen.routeName,
-    "image": null
+    "image": "/images/showcase_banner/quiz.png"
   },
   {
     "title": "Leaderboard",
     "subtitle": "leaderboard",
     "routeName": LeaderBoardScreen.routeName,
-    "image": null
+    "image": "/images/showcase_banner/leaderboard.png"
   },
 ];
 final List<Map<String, dynamic>> quizQuesstion = [
@@ -155,37 +170,46 @@ List scoreList = [
   {
     "name": "Vidya Chaudhry",
     "score": 23532,
+    "pictureUrl": "assets/images/leaderboard/2F.jpeg",
   },
   {
     "name": "Kalpana Loke",
     "score": 22444,
+    "pictureUrl": "assets/images/leaderboard/3F.jpeg",
   },
   {
     "name": "Anup Murthy",
     "score": 20235,
+    "pictureUrl": "assets/images/leaderboard/1.jpeg",
   },
   {
     "name": "Gautam Sridhar",
     "score": 15023,
+    "pictureUrl": "assets/images/leaderboard/5.jpeg",
   },
   {
     "name": "Gautam Sridhar",
     "score": 15023,
+    "pictureUrl": "assets/images/leaderboard/6.jpeg",
   },
   {
     "name": "Ishani Prakash",
     "score": 14566,
+    "pictureUrl": "assets/images/leaderboard/4F.jpeg",
   },
   {
     "name": "Nilima Khanna",
     "score": 14256,
+    "pictureUrl": "assets/images/leaderboard/3F.jpeg",
   },
   {
     "name": "Vishi Agrawal",
     "score": 14000,
+    "pictureUrl": "assets/images/leaderboard/2F.jpeg",
   },
   {
     "name": "Nikhil Saxena",
     "score": 12435,
+    "pictureUrl": "assets/images/leaderboard/1.jpeg",
   },
 ];
