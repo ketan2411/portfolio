@@ -1,6 +1,5 @@
 // ignore_for_file: file_names
 
-import 'dart:async';
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -22,18 +21,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  bool _switch = false;
-
   @override
   void initState() {
     Provider.of<QuizProvider>(context, listen: false).setLiveQuiz();
-    Timer.periodic(const Duration(seconds: 2), (timer) {
-      if (mounted) {
-        setState(() {
-          _switch = !_switch;
-        });
-      }
-    });
     super.initState();
   }
 
@@ -79,117 +69,92 @@ class _HomeState extends State<Home> {
                 'Made with ',
                 style: TextStyle(color: darkPrimary),
               ),
-              AnimatedSwitcher(
-                duration: const Duration(milliseconds: 700),
-                child: _switch
-                    ? const Padding(
-                        padding: EdgeInsets.only(right: 42, left: 6),
-                        child: FaIcon(
-                          FontAwesomeIcons.solidHeart,
-                          color: Colors.redAccent,
-                        ),
-                      )
-                    : const FlutterLogo(
-                        size: 72,
-                        style: FlutterLogoStyle.horizontal,
-                      ),
+              const Padding(
+                padding: EdgeInsets.only(right: 42, left: 6),
+                child: FaIcon(
+                  FontAwesomeIcons.solidHeart,
+                  color: Colors.redAccent,
+                ),
               )
             ],
           ),
         ),
       ),
-      body: Container(
-        // alignment: Alignment.center,
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        color: darkBackground,
-        child: Stack(
-          alignment: Alignment.center,
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // Spacer(),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.2,
-                  ),
-                  Wrap(
-                    runAlignment: WrapAlignment.center,
-                    alignment: WrapAlignment.center,
+            // Spacer(),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.2,
+            ),
+            Wrap(
+              runAlignment: WrapAlignment.center,
+              alignment: WrapAlignment.center,
+              children: [
+                const FlutterLogo(
+                  style: FlutterLogoStyle.markOnly,
+                  size: 200,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const FlutterLogo(
-                        style: FlutterLogoStyle.markOnly,
-                        size: 200,
+                      Text(
+                        'Hi I\'m',
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleLarge!
+                            .copyWith(color: Colors.white),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Hi I\'m',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleLarge!
-                                  .copyWith(color: Colors.white),
-                            ),
-                            Text(
-                              'Ketan Sharma',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headlineMedium!
-                                  .copyWith(
-                                      fontWeight: FontWeight.bold,
-                                      color: darkPrimary),
-                            ),
-                            Text(
-                              'Flutter Developer',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .displaySmall!
-                                  .copyWith(
-                                    foreground: Paint()
-                                      ..style = PaintingStyle.stroke
-                                      ..strokeWidth = 1
-                                      ..color = Colors.white,
-                                  ),
-                            )
-                          ],
-                        ),
+                      Text(
+                        'Ketan Sharma',
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium!
+                            .copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: darkPrimary),
                       ),
+                      Text(
+                        'Flutter Developer',
+                        style:
+                            Theme.of(context).textTheme.displaySmall!.copyWith(
+                                  foreground: Paint()
+                                    ..style = PaintingStyle.stroke
+                                    ..strokeWidth = 1
+                                    ..color = Colors.white,
+                                ),
+                      )
                     ],
                   ),
-                  const SizedBox(
-                    height: 100,
-                  ),
-                  Wrap(
-                    runAlignment: WrapAlignment.spaceEvenly,
-                    alignment: WrapAlignment.spaceEvenly,
-                    crossAxisAlignment: WrapCrossAlignment.center,
-                    children: [
-                      panel('Projects', () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Projects()));
-                      }),
-                      contactPanel(context),
-                      panel('Showcase', () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Showcase()));
-                      }),
-                    ],
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.1,
-                  ),
-                ],
-              ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 100,
+            ),
+            Wrap(
+              runAlignment: WrapAlignment.spaceEvenly,
+              alignment: WrapAlignment.spaceEvenly,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              children: [
+                panel('Projects', () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Projects()));
+                }),
+                contactPanel(context),
+                panel('Showcase', () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Showcase()));
+                }),
+              ],
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.1,
             ),
           ],
         ),

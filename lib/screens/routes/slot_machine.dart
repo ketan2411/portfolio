@@ -4,7 +4,6 @@ import 'dart:math';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:lottie/lottie.dart';
 import 'package:portfolio_flutter/constants.dart';
@@ -171,11 +170,12 @@ class _SlotMachineState extends State<SlotMachine>
             jackpot(),
             handle(),
             ball(),
-            Lottie.asset(
-              'assets/slotmachine/coin_animation.json',
-              controller: _rainLottieCtlr,
-              width: width,
-            ),
+            if (_rainLottieCtlr.status==AnimationStatus.forward)
+              Lottie.asset(
+                'assets/slotmachine/coin_animation.json',
+                controller: _rainLottieCtlr,
+                width: width,
+              ),
             button(),
           ],
         ),
@@ -203,7 +203,7 @@ class _SlotMachineState extends State<SlotMachine>
             scale: buttonTapDown ? 0.9 : 1,
             duration: const Duration(milliseconds: 250),
             child: Image.asset(
-             slotMachinPlayButton,
+              slotMachinPlayButton,
               filterQuality: filterQuality,
               width: 100,
             ),
@@ -239,7 +239,7 @@ class _SlotMachineState extends State<SlotMachine>
 
   Image machine() {
     return Image.asset(
-     slotMachineImage,
+      slotMachineImage,
       filterQuality: filterQuality,
       fit: BoxFit.fitHeight,
       // height: 800,
@@ -390,7 +390,7 @@ class _SlotMachineState extends State<SlotMachine>
                   buttonTapDown = false;
                 }),
                 child: Image.asset(
-                 slotMachineBall,
+                  slotMachineBall,
                   filterQuality: filterQuality,
                 ),
               ),
@@ -416,7 +416,7 @@ class _SlotMachineState extends State<SlotMachine>
       // showDialog(context: context, builder: (context) => data());
       if (jackpot) {
         _rainLottieCtlr
-            .animateTo(1, duration: const Duration(milliseconds: 3500))
+            .animateTo(1, duration: const Duration(milliseconds: 1500))
             .then((value) => _rainLottieCtlr.reset());
         Future.delayed(const Duration(milliseconds: 100), () {
           winningSound.play();
