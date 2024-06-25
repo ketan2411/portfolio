@@ -177,6 +177,7 @@ class ProjectDescriptionMAP extends StatelessWidget {
                       ),
                       child: Image.asset(
                         project['screenshots'][localIndex],
+                           filterQuality: filterQuality,
                       ),
                     ),
                     const SizedBox(
@@ -215,6 +216,7 @@ class ProjectDescriptionMAP extends StatelessWidget {
                         itemBuilder: (context, localIndex) => InteractiveViewer(
                               child: Image.asset(
                                 project['screenshots'][localIndex],
+                                   filterQuality: filterQuality,
                               ),
                             )),
                   ))));

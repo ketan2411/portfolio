@@ -9,6 +9,7 @@ import 'package:just_audio/just_audio.dart';
 import 'package:lottie/lottie.dart';
 import 'package:portfolio_flutter/constants.dart';
 import 'package:portfolio_flutter/screens/routes/components/bulb_widget.dart';
+import 'package:portfolio_flutter/theme.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 // import 'package:lottie/lottie.dart';
 
@@ -138,6 +139,7 @@ class _SlotMachineState extends State<SlotMachine>
                 'assets/slotmachine/bg.png',
                 // height: 100.h,
                 width: 100.w,
+                filterQuality: filterQuality,
                 fit: BoxFit.cover,
               ),
             ),
@@ -201,6 +203,7 @@ class _SlotMachineState extends State<SlotMachine>
             duration: const Duration(milliseconds: 250),
             child: Image.asset(
               'assets/slotmachine/button.png',
+              filterQuality: filterQuality,
               width: 100,
             ),
           ),
@@ -236,6 +239,7 @@ class _SlotMachineState extends State<SlotMachine>
   Image machine() {
     return Image.asset(
       'assets/slotmachine/slot.png',
+      filterQuality: filterQuality,
       fit: BoxFit.fitHeight,
       // height: 800,
       // width: 300,
@@ -300,6 +304,7 @@ class _SlotMachineState extends State<SlotMachine>
                               items.length,
                               (index) => Image.asset(
                                     items[index],
+                                    filterQuality: filterQuality,
                                     fit: BoxFit.contain,
                                     height: 60,
                                     width: 60,
@@ -354,6 +359,7 @@ class _SlotMachineState extends State<SlotMachine>
                 ..rotateX((_animation.value * 180) * pi / 180),
               child: Image.asset(
                 'assets/slotmachine/handle.png',
+                filterQuality: filterQuality,
                 width: height * 0.02,
               ));
         },
@@ -384,6 +390,7 @@ class _SlotMachineState extends State<SlotMachine>
                 }),
                 child: Image.asset(
                   'assets/slotmachine/ball.png',
+                  filterQuality: filterQuality,
                 ),
               ),
             ));

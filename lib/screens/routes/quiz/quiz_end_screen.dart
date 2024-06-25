@@ -6,6 +6,7 @@ import 'package:portfolio_flutter/screens/routes/quiz/components/option_check_bo
 import 'package:portfolio_flutter/screens/routes/quiz/components/options_quiz.dart';
 import 'package:portfolio_flutter/screens/routes/quiz/components/ques_widget.dart';
 import 'package:portfolio_flutter/screens/routes/quiz/quiz_bg.dart';
+import 'package:portfolio_flutter/theme.dart';
 import 'package:portfolio_flutter/utils/logger.dart';
 import 'package:provider/provider.dart';
 
@@ -46,6 +47,7 @@ class _QuizEndScreenState extends State<QuizEndScreen> {
             Image.asset(
               'assets/images/arcade/bg_end.jpg',
               width: double.infinity,
+                 filterQuality: filterQuality,
               fit: BoxFit.cover,
             ),
             SingleChildScrollView(

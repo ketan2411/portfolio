@@ -6,6 +6,7 @@ import 'package:portfolio_flutter/screens/routes/quiz/components/options_quiz.da
 import 'package:portfolio_flutter/screens/routes/quiz/components/ques_number.dart';
 import 'package:portfolio_flutter/screens/routes/quiz/components/ques_widget.dart';
 import 'package:portfolio_flutter/screens/routes/quiz/components/quiz_timer.dart';
+import 'package:portfolio_flutter/theme.dart';
 import 'package:portfolio_flutter/utils/logger.dart';
 import 'package:provider/provider.dart';
 
@@ -36,6 +37,7 @@ class _OptionsBoxState extends State<OptionsBox> {
       children: [
         Image.asset(
           'assets/images/arcade/quiz_gradient_bg.png',
+             filterQuality: filterQuality,
           fit: BoxFit.cover,
         ),
          Positioned(

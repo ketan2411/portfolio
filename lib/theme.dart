@@ -9,6 +9,7 @@ Color lightBackground = Colors.white;
 Color colorAmber = Colors.amberAccent;
 Color colorBlue = const Color(0xff0063B2);
 Color colorMossGreen = const Color(0xff97BC62);
+const filterQuality = FilterQuality.low;
 
 ThemeData darkThemeData = ThemeData(
   primaryColor: colorMossGreen,
