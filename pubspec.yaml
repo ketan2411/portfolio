@@ -86,12 +86,12 @@ flutter:
     - assets/images/infoflight/thumbnail/
     - assets/images/armenu/
     - assets/images/arcade/
-    - assets/images/showcase_banner/
     - assets/images/armenu/thumbnail/
     - assets/images/TRP/
     - assets/images/TRP/thumbnail/
     - assets/images/leaderboard/
     - assets/slotmachine/
+    - assets/showcase_banner/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

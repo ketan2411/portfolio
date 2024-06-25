@@ -41,6 +41,7 @@ class PostCard extends StatelessWidget {
                     image: showcase['image'] != null
                         ? DecorationImage(
                             image: AssetImage(showcase['image']),
+                            filterQuality: filterQuality,
                             fit: BoxFit.cover)
                         : null),
               ),
