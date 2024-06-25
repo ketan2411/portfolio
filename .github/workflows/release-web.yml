@@ -30,7 +30,7 @@ jobs:
       - name: Move assets folder (if required)
         run: |
              mv build/web/assets/assets/* build/web/assets/
-             rm -rf build/web/assets/assets
+             # rm -rf build/web/assets/assets
       # change version
       # Set Base Ref from "/" to "./"
       - run:   sed -i -e '101a<script src="main.dart.js?version=${{ github.run_number }}" type="application/javascript"></script>' build/web/index.html
