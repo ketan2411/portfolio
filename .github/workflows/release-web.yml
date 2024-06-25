@@ -26,7 +26,11 @@ jobs:
           channel: 'stable'
       - run: flutter config --enable-web
       - run: flutter pub get
-      - run: flutter build web --release
+      - run: flutter build web --release --web-renderer canvaskit
+      - name: Move assets folder (if required)
+        run: |
+             mv -rf build/web/assets/assets/* build/web/assets/
+             rm -rf build/web/assets/assets
       # change version
       # Set Base Ref from "/" to "./"
       - run:   sed -i -e '101a<script src="main.dart.js?version=${{ github.run_number }}" type="application/javascript"></script>' build/web/index.html
