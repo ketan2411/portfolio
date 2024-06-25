@@ -8,13 +8,15 @@ import 'package:portfolio_flutter/screens/routes/quiz/components/ques_widget.dar
 import 'package:portfolio_flutter/screens/routes/quiz/components/quiz_timer.dart';
 import 'package:portfolio_flutter/theme.dart';
 import 'package:portfolio_flutter/utils/logger.dart';
+import 'package:portfolio_flutter/utils/strings.dart';
 import 'package:provider/provider.dart';
 
 class OptionsBox extends StatefulWidget {
   final int totalQ;
   final int curQ;
   final ArcQuizQuesModel question;
-  const OptionsBox({Key? key, 
+  const OptionsBox({
+    Key? key,
     required this.question,
     required this.totalQ,
     required this.curQ,
@@ -36,15 +38,18 @@ class _OptionsBoxState extends State<OptionsBox> {
       clipBehavior: Clip.none,
       children: [
         Image.asset(
-          'assets/images/arcade/quiz_gradient_bg.png',
-             filterQuality: filterQuality,
+          quizBg,
+          filterQuality: filterQuality,
           fit: BoxFit.cover,
         ),
-         Positioned(
+        Positioned(
           top: -24,
           right: 24,
           child: IconButton(
-            icon:const Icon(Icons.clear, color: Colors.red,),
+            icon: const Icon(
+              Icons.clear,
+              color: Colors.red,
+            ),
             onPressed: () => Navigator.pop(context),
           ),
         ),

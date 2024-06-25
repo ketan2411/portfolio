@@ -70,19 +70,6 @@ class _QuizTimerState extends State<QuizTimer> {
                     ),
                 ],
               ),
-              // ColorFiltered(
-              //   colorFilter:
-              //       ColorFilter.mode(primaryDarkColor, BlendMode.modulate),
-              //   child: Opacity(
-              //     opacity: 0.2,
-              //     child: Image.asset(
-              //       'assets/images/arcade/secondoverlaytexture.png',
-              //       // colorBlendMode: BlendMode.screen,
-              //       fit: BoxFit.cover,
-              //       width: 190,
-              //     ),
-              //   ),
-              // )
             ],
           ),
         );

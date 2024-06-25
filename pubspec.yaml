@@ -53,6 +53,7 @@ dependencies:
   svg_flutter: ^0.0.1
   provider: ^6.1.2
   animate_do: ^3.3.4
+  shimmer: ^3.0.0
 
 
 dev_dependencies:

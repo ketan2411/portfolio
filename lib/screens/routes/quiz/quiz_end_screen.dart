@@ -8,6 +8,7 @@ import 'package:portfolio_flutter/screens/routes/quiz/components/ques_widget.dar
 import 'package:portfolio_flutter/screens/routes/quiz/quiz_bg.dart';
 import 'package:portfolio_flutter/theme.dart';
 import 'package:portfolio_flutter/utils/logger.dart';
+import 'package:portfolio_flutter/utils/strings.dart';
 import 'package:provider/provider.dart';
 
 class QuizEndScreen extends StatefulWidget {
@@ -45,9 +46,9 @@ class _QuizEndScreenState extends State<QuizEndScreen> {
         child: Stack(
           children: [
             Image.asset(
-              'assets/images/arcade/bg_end.jpg',
+              quizBgBlur,
               width: double.infinity,
-                 filterQuality: filterQuality,
+              filterQuality: filterQuality,
               fit: BoxFit.cover,
             ),
             SingleChildScrollView(

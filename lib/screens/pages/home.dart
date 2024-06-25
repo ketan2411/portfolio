@@ -9,6 +9,7 @@ import 'package:portfolio_flutter/provider/quiz_provider.dart';
 import 'package:portfolio_flutter/screens/pages/projects.dart';
 import 'package:portfolio_flutter/screens/pages/showcase.dart';
 import 'package:portfolio_flutter/theme.dart';
+import 'package:portfolio_flutter/utils/strings.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -46,6 +47,13 @@ class _HomeState extends State<Home> {
       '/attribute.png',
       '/parallax_logo.png',
       '/glow.png',
+      slotMachinBG,
+      slotMachinPlayButton,
+      slotMachineImage,
+      slotMachineHandle,
+      slotMachineBall,
+      quizBgBlur,
+      quizBg,
     ]) {
       precacheImage(
         AssetImage(e),
@@ -238,20 +246,6 @@ class _HomeState extends State<Home> {
                 color: Theme.of(context).primaryColor,
               ),
             ),
-            // const SizedBox(
-            //   width: 30,
-            // ),
-            // IconButton(
-            //   onPressed: () async {
-            //     await launch(
-            //         'https://www.linkedin.com/in/ketan-sharma-602134170/');
-            //   },
-            //   icon: FaIcon(
-            //     FontAwesomeIcons.codepen,
-            //     size: 30,
-            //     color: Theme.of(context).primaryColor,
-            //   ),
-            // ),
           ]),
     );
   }

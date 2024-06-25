@@ -10,6 +10,7 @@ import 'package:lottie/lottie.dart';
 import 'package:portfolio_flutter/constants.dart';
 import 'package:portfolio_flutter/screens/routes/components/bulb_widget.dart';
 import 'package:portfolio_flutter/theme.dart';
+import 'package:portfolio_flutter/utils/strings.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 // import 'package:lottie/lottie.dart';
 
@@ -136,7 +137,7 @@ class _SlotMachineState extends State<SlotMachine>
             Opacity(
               opacity: 0.25,
               child: Image.asset(
-                'assets/slotmachine/bg.png',
+                slotMachinBG,
                 // height: 100.h,
                 width: 100.w,
                 filterQuality: filterQuality,
@@ -202,7 +203,7 @@ class _SlotMachineState extends State<SlotMachine>
             scale: buttonTapDown ? 0.9 : 1,
             duration: const Duration(milliseconds: 250),
             child: Image.asset(
-              'assets/slotmachine/button.png',
+             slotMachinPlayButton,
               filterQuality: filterQuality,
               width: 100,
             ),
@@ -238,7 +239,7 @@ class _SlotMachineState extends State<SlotMachine>
 
   Image machine() {
     return Image.asset(
-      'assets/slotmachine/slot.png',
+     slotMachineImage,
       filterQuality: filterQuality,
       fit: BoxFit.fitHeight,
       // height: 800,
@@ -358,7 +359,7 @@ class _SlotMachineState extends State<SlotMachine>
               transform: Matrix4.identity()
                 ..rotateX((_animation.value * 180) * pi / 180),
               child: Image.asset(
-                'assets/slotmachine/handle.png',
+                slotMachineHandle,
                 filterQuality: filterQuality,
                 width: height * 0.02,
               ));
@@ -389,7 +390,7 @@ class _SlotMachineState extends State<SlotMachine>
                   buttonTapDown = false;
                 }),
                 child: Image.asset(
-                  'assets/slotmachine/ball.png',
+                 slotMachineBall,
                   filterQuality: filterQuality,
                 ),
               ),
