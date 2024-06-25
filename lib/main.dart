@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio_flutter/provider/quiz_provider.dart';
 import 'package:portfolio_flutter/screens/pages/home.dart';
+import 'package:portfolio_flutter/screens/routes/projects.dart';
+import 'package:portfolio_flutter/screens/routes/showcase.dart';
 import 'package:portfolio_flutter/screens/routes/leaderboard/leaderboard_screen.dart';
 import 'package:portfolio_flutter/screens/routes/parallax.dart';
 import 'package:portfolio_flutter/screens/routes/quiz/quiz_play_screen.dart';
@@ -26,6 +28,8 @@ class MyApp extends StatelessWidget {
           child: MaterialApp(
             routes: {
               Parallax.routeName: (context) => const Parallax(),
+              Projects.routeName: (context) => const Projects(),
+              Showcase.routeName: (context) => const Showcase(),
               SlotMachine.routeName: (context) => const SlotMachine(),
               QuizPlayScreen.routeName: (context) => const QuizPlayScreen(),
               LeaderBoardScreen.routeName: (context) =>

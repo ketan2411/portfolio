@@ -2,11 +2,12 @@
 
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:portfolio_flutter/constants.dart';
 import 'package:portfolio_flutter/provider/quiz_provider.dart';
-import 'package:portfolio_flutter/screens/pages/projects.dart';
-import 'package:portfolio_flutter/screens/pages/showcase.dart';
+import 'package:portfolio_flutter/screens/routes/projects.dart';
+import 'package:portfolio_flutter/screens/routes/showcase.dart';
 import 'package:portfolio_flutter/theme.dart';
 import 'package:portfolio_flutter/utils/strings.dart';
 import 'package:provider/provider.dart';
@@ -24,33 +25,36 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     Provider.of<QuizProvider>(context, listen: false).setLiveQuiz();
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      for (var e in [
+        '/1.png',
+        '/2.png',
+        '/3.png',
+        '/4.png',
+        '/attribute.png',
+        '/parallax_logo.png',
+        '/glow.png',
+        slotMachinBG,
+        slotMachinPlayButton,
+        slotMachineImage,
+        slotMachineHandle,
+        slotMachineBall,
+        quizBgBlur,
+        quizBg,
+      ]) {
+        precacheImage(
+          AssetImage(e),
+          context,
+          onError: (exception, stackTrace) => log('chache failed'),
+        ).then((value) => log('cached in parallax $e'));
+      }
+    });
+
     super.initState();
   }
 
   @override
   void didChangeDependencies() {
-    for (var e in [
-      '/1.png',
-      '/2.png',
-      '/3.png',
-      '/4.png',
-      '/attribute.png',
-      '/parallax_logo.png',
-      '/glow.png',
-      slotMachinBG,
-      slotMachinPlayButton,
-      slotMachineImage,
-      slotMachineHandle,
-      slotMachineBall,
-      quizBgBlur,
-      quizBg,
-    ]) {
-      precacheImage(
-        AssetImage(e),
-        context,
-        onError: (exception, stackTrace) => log('chache failed'),
-      ).then((value) => log('cached in parallax $e'));
-    }
     super.didChangeDependencies();
   }
 
@@ -81,83 +85,85 @@ class _HomeState extends State<Home> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Spacer(),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.2,
-            ),
-            Wrap(
-              runAlignment: WrapAlignment.center,
-              alignment: WrapAlignment.center,
-              children: [
-                const FlutterLogo(
-                  style: FlutterLogoStyle.markOnly,
-                  size: 200,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Hi I\'m',
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleLarge!
-                            .copyWith(color: Colors.white),
-                      ),
-                      Text(
-                        'Ketan Sharma',
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineMedium!
-                            .copyWith(
-                                fontWeight: FontWeight.bold,
-                                color: darkPrimary),
-                      ),
-                      Text(
-                        'Flutter Developer',
-                        style:
-                            Theme.of(context).textTheme.displaySmall!.copyWith(
-                                  foreground: Paint()
-                                    ..style = PaintingStyle.stroke
-                                    ..strokeWidth = 1
-                                    ..color = Colors.white,
-                                ),
-                      )
-                    ],
+      body: Center(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Spacer(),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.2,
+              ),
+              Wrap(
+                runAlignment: WrapAlignment.center,
+                alignment: WrapAlignment.center,
+                children: [
+                  const FlutterLogo(
+                    style: FlutterLogoStyle.markOnly,
+                    size: 200,
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 100,
-            ),
-            Wrap(
-              runAlignment: WrapAlignment.spaceEvenly,
-              alignment: WrapAlignment.spaceEvenly,
-              crossAxisAlignment: WrapCrossAlignment.center,
-              children: [
-                panel('Projects', () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Projects()));
-                }),
-                contactPanel(context),
-                panel('Showcase', () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Showcase()));
-                }),
-              ],
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.1,
-            ),
-          ],
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Hi I\'m',
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleLarge!
+                              .copyWith(color: Colors.white),
+                        ),
+                        Text(
+                          'Ketan Sharma',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineMedium!
+                              .copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: darkPrimary),
+                        ),
+                        Text(
+                          'Flutter Developer',
+                          style: Theme.of(context)
+                              .textTheme
+                              .displaySmall!
+                              .copyWith(
+                                foreground: Paint()
+                                  ..style = PaintingStyle.stroke
+                                  ..strokeWidth = 1
+                                  ..color = Colors.white,
+                              ),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 100,
+              ),
+              Wrap(
+                runAlignment: WrapAlignment.spaceEvenly,
+                alignment: WrapAlignment.spaceEvenly,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: [
+                  panel('Projects', () {
+                    Navigator.pushNamed(context, Projects.routeName);
+                  }),
+                  contactPanel(context),
+                  panel('Showcase', () {
+                    Navigator.pushNamed(context, Showcase.routeName);
+                  }),
+                ],
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.1,
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio_flutter/constants.dart';
 
 Color scaffoldBackground = const Color.fromARGB(255, 245, 245, 245);
@@ -12,8 +13,9 @@ Color colorMossGreen = const Color(0xff97BC62);
 const filterQuality = FilterQuality.low;
 
 ThemeData darkThemeData = ThemeData(
+  fontFamily: 'Roboto',
   primaryColor: colorMossGreen,
-  appBarTheme:const AppBarTheme(backgroundColor: Colors.transparent),
+  appBarTheme: const AppBarTheme(backgroundColor: Colors.transparent),
   dividerTheme: const DividerThemeData(
       endIndent: defaultPadding * 4,
       thickness: 2,

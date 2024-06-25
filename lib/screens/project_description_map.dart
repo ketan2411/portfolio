@@ -1,143 +1,230 @@
 import 'dart:developer';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:markdown_widget/markdown_widget.dart';
 import 'package:portfolio_flutter/constants.dart';
 import 'package:portfolio_flutter/theme.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProjectDescriptionMAP extends StatelessWidget {
   final Map project;
+  final int index;
   final bool reverse;
   const ProjectDescriptionMAP({
     Key? key,
     required this.project,
     this.reverse = false,
+    this.index = 0,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    for (String element in project['screenshots']) {
-      precacheImage(
-        AssetImage(element),
-        context,
-        onError: (exception, stackTrace) => log('chache failed'),
-      ).then((value) => log('cached $element'));
-    }
-    return SizedBox(
-      // height: 500,
-      width: MediaQuery.of(context).size.width - 100,
-      child: Wrap(
-          runAlignment: WrapAlignment.spaceEvenly,
-          alignment: WrapAlignment.spaceEvenly,
-          children: data(context)),
+    // for (String element in project['screenshots']) {
+    //   precacheImage(
+    //     AssetImage(element),
+    //     context,
+    //     onError: (exception, stackTrace) => log('chache failed'),
+    //   ).then((value) => log('cached $element'));
+    // }
+    return SingleChildScrollView(
+      child: Column(children: data(context)),
     );
   }
 
   List<Widget> data(context) {
     try {
       List<Widget> data = [
+        const SizedBox(
+          height: defaultPadding,
+        ),
         ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 700),
+          constraints: BoxConstraints(maxWidth: 80.w),
           child: Column(
             children: [
-              Text(
-                project['title'],
-                style: Theme.of(context)
-                    .textTheme
-                    .displaySmall!
-                    .copyWith(fontWeight: FontWeight.bold),
-              ),
+              projectTitle(),
               const SizedBox(
                 height: defaultPadding / 2,
               ),
-              Text(project['subtitle'] ?? "",
-                  style: Theme.of(context).textTheme.bodySmall),
+              subtitle(context),
               const SizedBox(
                 height: defaultPadding,
               ),
-              Row(
-                children: [
-                  Text(
-                    "Year " + project['year'],
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                  const Spacer(),
-                  Visibility(
-                      visible: project['link'] != null,
-                      child: ElevatedButton.icon(
-                        onPressed: () async {
-                          // Text(project.link ?? ""),
-                          await launch(project['link']);
-                        },
-                        label: Text(
-                          'OPEN LINK',
-                          style: Theme.of(context)
-                              .textTheme
-                              .labelSmall!
-                              .copyWith(
-                                  fontWeight: FontWeight.bold,
-                                  color: lightPrimary),
-                        ),
-                        icon: Icon(Icons.link, color: lightPrimary),
-                      ))
-                ],
-              ),
+              yearAndLinks(context),
+              const SizedBox(height: defaultPadding),
+              mockupsSection(),
+              tags(context),
               const SizedBox(height: defaultPadding / 2),
-              Wrap(
-                children: project['tags']
-                    //! solved Expected a value of type 'List<Widget>', but got one of type 'List<dynamic>'
-                    //! by setting <Widsget>
-                    .map<Widget>((e) => Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: defaultPadding / 2),
-                          child: Chip(
-                              label: Text(e,
-                                  style: Theme.of(context).textTheme.bodySmall)),
-                        ))
-                    .toList(),
-              ),
-              const SizedBox(height: defaultPadding / 2),
-              SizedBox(
-                // height: 300,
-                child: MarkdownWidget(
-                    padding: EdgeInsets.zero,
-                    data: project['description'],
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics()),
-              ),
+              description(context),
               const SizedBox(
                 height: defaultPadding,
               ),
             ],
           ),
         ),
-        ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 400),
-            child: Container(
-              height: 200,
-              width: 200,
-              margin: const EdgeInsets.symmetric(horizontal: 5.0),
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage(project['thumbnail'][0]),
-                      scale: 0.5,
-                      onError: (error, stacktrace) {
-                        // Logger().e(error);
-                      })),
-              child: InkWell(onTap: () => openImage(context, 0)),
-            )),
       ];
-      if (reverse) {
-        return data.reversed.toList();
-      } else {
-        return data;
-      }
+      return data;
     } catch (e, s) {
       log(e.toString(), stackTrace: s);
       log(s.toString(), stackTrace: s);
       return [];
     }
+  }
+
+  SizedBox description(context) {
+    return SizedBox(
+      // height: 300,
+      child: MarkdownWidget(
+          styleConfig: StyleConfig(
+              pConfig:
+                  PConfig(textStyle: Theme.of(context).textTheme.titleLarge)),
+          padding: EdgeInsets.zero,
+          data: project['description'],
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics()),
+    );
+  }
+
+  Wrap tags(context) {
+    return Wrap(
+      children: project['tags']
+          //! solved Expected a value of type 'List<Widget>', but got one of type 'List<dynamic>'
+          //! by setting <Widsget>
+          .map<Widget>((e) => Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
+                child: Chip(
+                    label:
+                        Text(e, style: Theme.of(context).textTheme.bodySmall)),
+              ))
+          .toList(),
+    );
+  }
+
+  Wrap mockupsSection() {
+    return Wrap(
+      runAlignment: WrapAlignment.spaceEvenly,
+      alignment: WrapAlignment.center,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(defaultPadding),
+          child: Image.asset(
+            '/mockups/phone.png',
+            height: 50.h,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(defaultPadding),
+          child: Image.asset(
+            '/mockups/laptop.png',
+            height: 50.h,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Row yearAndLinks(context) {
+    return Row(
+      children: [
+        Text(
+          "Year " + project['year'],
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+        const Spacer(),
+        Visibility(
+            visible: project['link'] != null,
+            child: ElevatedButton.icon(
+              onPressed: () async {
+                // Text(project.link ?? ""),
+                await launch(project['link']);
+              },
+              label: Text(
+                'OPEN LINK',
+                style: Theme.of(context)
+                    .textTheme
+                    .labelSmall!
+                    .copyWith(fontWeight: FontWeight.bold, color: lightPrimary),
+              ),
+              icon: Icon(Icons.link, color: lightPrimary),
+            ))
+      ],
+    );
+  }
+
+  Text subtitle(context) {
+    return Text(project['subtitle'] ?? "",
+        style: Theme.of(context).textTheme.bodySmall);
+  }
+
+  Stack projectTitle() {
+    return Stack(
+      alignment: Alignment.center,
+      clipBehavior: Clip.none,
+      children: [
+        Transform.translate(
+          // alignment: Alignment(5, 5),
+          offset: const Offset(6, 3),
+          child: Text(
+            project['title'],
+            style: TextStyle(
+              fontWeight: FontWeight.w900,
+              fontSize: 62,
+              letterSpacing: 4,
+              foreground: Paint()
+                ..style = PaintingStyle.stroke
+                ..strokeWidth = 1
+                ..color = Colors.black,
+            ),
+            // style: Theme.of(context)
+            //     .textTheme
+            //     .displayMedium!
+            //     .copyWith(fontWeight: FontWeight.bold),
+          ),
+        ),
+        Transform.translate(
+          // alignment: Alignment(5, 5),
+          offset: const Offset(0, 0),
+          child: Text(
+            project['title'],
+            style: const TextStyle(
+              fontWeight: FontWeight.w900,
+              fontFamily: 'Roboto',
+              fontSize: 62,
+              letterSpacing: 4,
+              color: Color.fromARGB(255, 255, 139, 15),
+              // fontFamily: 'serif'
+              // foreground: Paint()
+              //   ..style = PaintingStyle.stroke
+              //   ..strokeWidth = 0.2
+              //   ..color = Colors.black,
+            ),
+          ),
+        ),
+        Transform.translate(
+          // alignment: Alignment(5, 5),
+          offset: const Offset(0, 0),
+          child: Text(
+            project['title'],
+            style: TextStyle(
+              fontWeight: FontWeight.w900,
+              fontSize: 62,
+              letterSpacing: 4,
+              foreground: Paint()
+                ..style = PaintingStyle.stroke
+                ..strokeWidth = 1
+                ..color = Colors.black,
+            ),
+            // style: Theme.of(context)
+            //     .textTheme
+            //     .displayMedium!
+            //     .copyWith(fontWeight: FontWeight.bold),
+          ),
+        ),
+      ],
+    );
   }
 
   Future<dynamic> openImage(context, int index) {
@@ -177,7 +264,7 @@ class ProjectDescriptionMAP extends StatelessWidget {
                       ),
                       child: Image.asset(
                         project['screenshots'][localIndex],
-                           filterQuality: filterQuality,
+                        filterQuality: filterQuality,
                       ),
                     ),
                     const SizedBox(
@@ -216,7 +303,7 @@ class ProjectDescriptionMAP extends StatelessWidget {
                         itemBuilder: (context, localIndex) => InteractiveViewer(
                               child: Image.asset(
                                 project['screenshots'][localIndex],
-                                   filterQuality: filterQuality,
+                                filterQuality: filterQuality,
                               ),
                             )),
                   ))));

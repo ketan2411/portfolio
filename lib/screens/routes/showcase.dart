@@ -5,9 +5,15 @@ import 'package:portfolio_flutter/data.dart';
 import 'package:portfolio_flutter/theme.dart';
 import 'package:portfolio_flutter/widgets/post_card.dart';
 
-class Showcase extends StatelessWidget {
-  Showcase({Key? key}) : super(key: key);
+class Showcase extends StatefulWidget {
+  static const routeName = '/showcase';
+  const Showcase({Key? key}) : super(key: key);
 
+  @override
+  State<Showcase> createState() => _ShowcaseState();
+}
+
+class _ShowcaseState extends State<Showcase> {
   final logger = Logger(
     printer: PrettyPrinter(
       methodCount: 2, // number of method calls to be displayed
@@ -19,6 +25,7 @@ class Showcase extends StatelessWidget {
       // noBoxingByDefault: true
     ),
   );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
