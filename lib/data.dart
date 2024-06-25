@@ -114,25 +114,25 @@ final List<Map> showcaseLeftDATA = [
     "title": "Landscape Parallax",
     "subtitle": "The Parallax effect from package: parallax",
     "routeName": Parallax.routeName,
-    "image": "/images/showcase_banner/parallax_logo.png"
+    "image": "images/showcase_banner/parallax_logo.png"
   },
   {
     "title": "Slot Machine",
     "subtitle": "The Parallax effect",
     "routeName": SlotMachine.routeName,
-    "image": "/images/showcase_banner/slotmachine.png"
+    "image": "images/showcase_banner/slotmachine.png"
   },
   {
     "title": "Arcade Quiz",
     "subtitle": "Quiz",
     "routeName": QuizPlayScreen.routeName,
-    "image": "/images/showcase_banner/quiz.png"
+    "image": "images/showcase_banner/quiz.png"
   },
   {
     "title": "Leaderboard",
     "subtitle": "leaderboard",
     "routeName": LeaderBoardScreen.routeName,
-    "image": "/images/showcase_banner/leaderboard.png"
+    "image": "images/showcase_banner/leaderboard.png"
   },
 ];
 final List<Map<String, dynamic>> quizQuesstion = [
