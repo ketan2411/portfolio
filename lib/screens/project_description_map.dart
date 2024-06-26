@@ -144,7 +144,7 @@ class ProjectDescriptionMAP extends StatelessWidget {
                   height: 50.h,
                 ),
                 Image.asset(
-                  '/mockups/phone.png',
+                  'mockups/phone.png',
                   height: 50.h,
                 ),
               ],
@@ -163,7 +163,7 @@ class ProjectDescriptionMAP extends StatelessWidget {
                     height: size.height,
                   ),
                   Image.asset(
-                    '/mockups/laptop.png',
+                    '/asset/mockups/laptop.png',
                     height: size.height,
                   ),
                 ],
