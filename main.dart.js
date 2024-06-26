@@ -97937,7 +97937,7 @@ return A.dw(new A.DP(s.i(0,"description"),q,B.k6,!0,B.aU,null),300,r)},
 a0p(a){var s=this.c.i(0,"tags"),r=A.Y(s).h("W<1,h>")
 return A.Wn(B.i_,A.a_(new A.W(s,new A.al5(a),r),!0,r.h("aa.E")),B.dE,B.i_)},
 awx(a){var s=this,r="thumbnail",q=null,p=t.p,o=A.b([],p),n=s.c
-if(n.i(0,r)!=null)o.push(new A.c4(B.cw,A.eo(B.v,A.b([A.fo(n.i(0,r),B.T,q,50*$.r6.aQ()/100,q),A.fo("/mockups/phone.png",B.T,q,50*$.r6.aQ()/100,q)],p),B.K,B.ad),q))
+if(n.i(0,r)!=null)o.push(new A.c4(B.cw,A.eo(B.v,A.b([A.fo(n.i(0,r),B.T,q,50*$.r6.aQ()/100,q),A.fo("mockups/phone.png",B.T,q,50*$.r6.aQ()/100,q)],p),B.K,B.ad),q))
 if(n.i(0,"thumbnail_web")!=null)o.push(new A.c4(B.cw,new A.eN(new A.al4(s),q),q))
 else o.push(A.e5(A.b([s.a0p(a),B.hP,s.XZ(0,a)],p),B.F,B.B,B.aj))
 return A.Wn(B.ls,o,B.dE,B.lt)},
@@ -97955,7 +97955,7 @@ A.al4.prototype={
 $1(a){var s,r=null
 $.r6.aQ()
 s=30*$.iH.aQ()/100
-return A.eo(B.v,A.b([A.fo(this.a.c.i(0,"thumbnail_web"),B.T,r,s,r),A.fo("/mockups/laptop.png",B.T,r,s,r)],t.p),B.K,B.ad)},
+return A.eo(B.v,A.b([A.fo(this.a.c.i(0,"thumbnail_web"),B.T,r,s,r),A.fo("/asset/mockups/laptop.png",B.T,r,s,r)],t.p),B.K,B.ad)},
 $S:584}
 A.al6.prototype={
 $0(){var s=0,r=A.B(t.H),q=this
