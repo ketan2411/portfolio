@@ -55,7 +55,8 @@ class _ProjectsState extends State<Projects> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      bottomNavigationBar: buttonNav(),
+      floatingActionButton: buttonNav(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       backgroundColor: scaffoldBackground,
       appBar: AppBar(
           // title: const Text('Projects'),
@@ -78,12 +79,16 @@ class _ProjectsState extends State<Projects> {
     );
   }
 
-  Padding buttonNav() {
-    return Padding(
-      padding: const EdgeInsets.all(defaultPadding),
+  Widget buttonNav() {
+    return Container(
+      // padding: const EdgeInsets.all(defaultPadding),
+      margin: const EdgeInsets.all(defaultPadding),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(defaultBorderRadius)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        // mainAxisSize: MainAxisSize.min,
+        mainAxisSize: MainAxisSize.min,
         children: [
           IconButton(
               onPressed: () {
@@ -93,6 +98,13 @@ class _ProjectsState extends State<Projects> {
                     .then((value) => setPage());
               },
               icon: const Icon(Icons.arrow_circle_left_outlined)),
+          Text(
+            (_currentPage + 1).toString(),
+            style: Theme.of(context)
+                .textTheme
+                .bodyMedium!
+                .copyWith(fontWeight: FontWeight.bold),
+          ),
           IconButton(
               onPressed: () {
                 controller

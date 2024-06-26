@@ -53,11 +53,35 @@ class ProjectDescriptionMAP extends StatelessWidget {
                 height: defaultPadding,
               ),
               yearAndLinks(context),
-              const SizedBox(height: defaultPadding),
-              mockupsSection(),
-              tags(context),
-              const SizedBox(height: defaultPadding / 2),
-              description(context),
+              SizedBox(
+                  height:
+                      Device.width > 599 ? defaultPadding * 4 : defaultPadding),
+              mockupsSection(context),
+              // Wrap(
+              //   runAlignment: WrapAlignment.center,
+              //   alignment: WrapAlignment.center,
+              //   children: [
+              //     mockupsSection(context),
+              //     Column(
+              //       mainAxisSize: MainAxisSize.min,
+              //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //       crossAxisAlignment: CrossAxisAlignment.center,
+              //       children: [
+              //         tags(context),
+              //         const SizedBox(
+              //             height: defaultPadding / 2,
+              //             width: defaultPadding / 2),
+              //         description(context),
+              //       ],
+              //     ),
+              //   ],
+              // ),
+              // mockupsSection(context),
+              if (project['thumbnail_web'] != null) ...[
+                tags(context),
+                const SizedBox(height: defaultPadding / 2),
+                description(context),
+              ],
               const SizedBox(
                 height: defaultPadding,
               ),
@@ -75,7 +99,8 @@ class ProjectDescriptionMAP extends StatelessWidget {
 
   SizedBox description(context) {
     return SizedBox(
-      // height: 300,
+      height: 300,
+      width: project['thumbnail_web'] != null ? 80.w : 50.w,
       child: MarkdownWidget(
           styleConfig: StyleConfig(
               pConfig:
@@ -103,25 +128,57 @@ class ProjectDescriptionMAP extends StatelessWidget {
     );
   }
 
-  Wrap mockupsSection() {
+  Wrap mockupsSection(context) {
     return Wrap(
       runAlignment: WrapAlignment.spaceEvenly,
       alignment: WrapAlignment.center,
       children: [
-        Padding(
-          padding: const EdgeInsets.all(defaultPadding),
-          child: Image.asset(
-            '/mockups/phone.png',
-            height: 50.h,
+        if (project['thumbnail'] != null)
+          Padding(
+            padding: const EdgeInsets.all(defaultPadding),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Image.asset(
+                  project['thumbnail'],
+                  height: 50.h,
+                ),
+                Image.asset(
+                  '/mockups/phone.png',
+                  height: 50.h,
+                ),
+              ],
+            ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(defaultPadding),
-          child: Image.asset(
-            '/mockups/laptop.png',
-            height: 50.h,
-          ),
-        ),
+        if (project['thumbnail_web'] != null)
+          Padding(
+            padding: const EdgeInsets.all(defaultPadding),
+            child: Builder(builder: (context) {
+              final size = Size(50.h, 30.w);
+              return Stack(
+                alignment: Alignment.center,
+                children: [
+                  Image.asset(
+                    project['thumbnail_web'],
+                    height: size.height,
+                  ),
+                  Image.asset(
+                    '/mockups/laptop.png',
+                    height: size.height,
+                  ),
+                ],
+              );
+            }),
+          )
+        else
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              tags(context),
+              const SizedBox(height: defaultPadding / 2),
+              description(context),
+            ],
+          )
       ],
     );
   }
