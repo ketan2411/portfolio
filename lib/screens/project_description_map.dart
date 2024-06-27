@@ -159,15 +159,14 @@ class ProjectDescriptionMAP extends StatelessWidget {
               child: Stack(
                 alignment: Alignment.center,
                 children: [
+                  
                   Image.asset(
                     project['thumbnail'],
                     height: 50.h,
                   ),
                   Image(
-                    image: const AssetImage(
-                      'mockups/phone.png',
-                    ),
-                    height: 50.h,
+                    image:const AssetImage( 'assets/mockups/phone.png',),
+                     height: 50.h,
                   ),
                 ],
               ),
@@ -190,12 +189,11 @@ class ProjectDescriptionMAP extends StatelessWidget {
                       project['thumbnail_web'],
                       height: 50.h,
                     ),
-                    Image(
-                      image: const AssetImage(
-                        'mockups/laptop.png',
-                      ),
-                      height: 50.h,
-                    ),
+                     Image(
+                    image:const AssetImage( 'assets/mockups/laptop.png',),
+                     height: 50.h,
+                  ),
+                    
                   ],
                 );
               }),
