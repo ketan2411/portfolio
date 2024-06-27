@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -53,9 +54,12 @@ class ProjectDescriptionMAP extends StatelessWidget {
                 height: defaultPadding,
               ),
               yearAndLinks(context),
-              SizedBox(
-                  height:
-                      Device.width > 599 ? defaultPadding * 4 : defaultPadding),
+              const SizedBox(
+                height: defaultPadding,
+              ),
+              // SizedBox(
+              //     height:
+              //         Device.width > 599 ? defaultPadding * 4 : defaultPadding),
               mockupsSection(context),
               // Wrap(
               //   runAlignment: WrapAlignment.center,
@@ -97,14 +101,15 @@ class ProjectDescriptionMAP extends StatelessWidget {
     }
   }
 
-  SizedBox description(context) {
-    return SizedBox(
-      height: 300,
-      width: project['thumbnail_web'] != null ? 80.w : 50.w,
+  Widget description(context) {
+    return ConstrainedBox(
+      constraints: BoxConstraints(maxWidth: 80.w, minWidth: 60.w),
+      // height: 300,
+      // width: project['thumbnail_web'] != null ? 80.w : 70.w,
       child: MarkdownWidget(
           styleConfig: StyleConfig(
               pConfig:
-                  PConfig(textStyle: Theme.of(context).textTheme.titleLarge)),
+                  PConfig(textStyle: Theme.of(context).textTheme.bodyLarge)),
           padding: EdgeInsets.zero,
           data: project['description'],
           shrinkWrap: true,
@@ -129,46 +134,68 @@ class ProjectDescriptionMAP extends StatelessWidget {
   }
 
   Wrap mockupsSection(context) {
+    double from = 100;
+    const duration = Durations.medium4;
+    const curve = Curves.easeOut;
+    List<Duration> delay = [
+      Durations.medium2,
+      Durations.medium2,
+    ];
+    if (project['thumbnail'] != null && project['thumbnail_web'] != null) {
+      delay[1] = delay[1] + Durations.short3;
+    }
     return Wrap(
       runAlignment: WrapAlignment.spaceEvenly,
       alignment: WrapAlignment.center,
       children: [
         if (project['thumbnail'] != null)
-          Padding(
-            padding: const EdgeInsets.all(defaultPadding),
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                Image.asset(
-                  project['thumbnail'],
-                  height: 50.h,
-                ),
-                Image.asset(
-                  'mockups/phone.png',
-                  height: 50.h,
-                ),
-              ],
-            ),
-          ),
-        if (project['thumbnail_web'] != null)
-          Padding(
-            padding: const EdgeInsets.all(defaultPadding),
-            child: Builder(builder: (context) {
-              final size = Size(50.h, 30.w);
-              return Stack(
+          FadeInUpBig(
+            duration: duration,
+            curve: curve,
+            from: from,
+            delay: delay[0],
+            child: Padding(
+              padding: const EdgeInsets.all(defaultPadding),
+              child: Stack(
                 alignment: Alignment.center,
                 children: [
                   Image.asset(
-                    project['thumbnail_web'],
-                    height: size.height,
+                    project['thumbnail'],
+                    height: 50.h,
                   ),
                   Image.asset(
-                    'mockups/laptop.png',
-                    height: size.height,
+                    'mockups/phone.png',
+                    height: 50.h,
                   ),
                 ],
-              );
-            }),
+              ),
+            ),
+          ),
+        if (project['thumbnail_web'] != null)
+          FadeInUpBig(
+            duration: duration,
+            curve: curve,
+            delay: delay[1],
+            from: from,
+            child: Padding(
+              padding: const EdgeInsets.all(defaultPadding),
+              child: Builder(builder: (context) {
+                final size = Size(50.h, 30.w);
+                return Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Image.asset(
+                      project['thumbnail_web'],
+                      height: 50.h,
+                    ),
+                    Image.asset(
+                      'mockups/laptop.png',
+                      height: 50.h,
+                    ),
+                  ],
+                );
+              }),
+            ),
           )
         else
           Column(
@@ -216,71 +243,73 @@ class ProjectDescriptionMAP extends StatelessWidget {
         style: Theme.of(context).textTheme.bodySmall);
   }
 
-  Stack projectTitle() {
-    return Stack(
-      alignment: Alignment.center,
-      clipBehavior: Clip.none,
-      children: [
-        Transform.translate(
-          // alignment: Alignment(5, 5),
-          offset: const Offset(6, 3),
-          child: Text(
-            project['title'],
-            style: TextStyle(
-              fontWeight: FontWeight.w900,
-              fontSize: 62,
-              letterSpacing: 4,
-              foreground: Paint()
-                ..style = PaintingStyle.stroke
-                ..strokeWidth = 1
-                ..color = Colors.black,
-            ),
-            // style: Theme.of(context)
-            //     .textTheme
-            //     .displayMedium!
-            //     .copyWith(fontWeight: FontWeight.bold),
-          ),
-        ),
-        Transform.translate(
-          // alignment: Alignment(5, 5),
-          offset: const Offset(0, 0),
-          child: Text(
-            project['title'],
-            style: const TextStyle(
-              fontWeight: FontWeight.w900,
-              fontFamily: 'Roboto',
-              fontSize: 62,
-              letterSpacing: 4,
-              color: Color.fromARGB(255, 255, 139, 15),
-              // fontFamily: 'serif'
-              // foreground: Paint()
-              //   ..style = PaintingStyle.stroke
-              //   ..strokeWidth = 0.2
-              //   ..color = Colors.black,
+  Widget projectTitle() {
+    return FittedBox(
+      child: Stack(
+        alignment: Alignment.center,
+        clipBehavior: Clip.none,
+        children: [
+          Transform.translate(
+            // alignment: Alignment(5, 5),
+            offset: const Offset(6, 3),
+            child: Text(
+              project['title'],
+              style: TextStyle(
+                fontWeight: FontWeight.w900,
+                fontSize: 62,
+                letterSpacing: 4,
+                foreground: Paint()
+                  ..style = PaintingStyle.stroke
+                  ..strokeWidth = 1
+                  ..color = Colors.black,
+              ),
+              // style: Theme.of(context)
+              //     .textTheme
+              //     .displayMedium!
+              //     .copyWith(fontWeight: FontWeight.bold),
             ),
           ),
-        ),
-        Transform.translate(
-          // alignment: Alignment(5, 5),
-          offset: const Offset(0, 0),
-          child: Text(
-            project['title'],
-            style: TextStyle(
-              fontWeight: FontWeight.w900,
-              fontSize: 62,
-              letterSpacing: 4,
-              foreground: Paint()
-                ..style = PaintingStyle.stroke
-                ..strokeWidth = 1
-                ..color = Colors.black,
+          Transform.translate(
+            // alignment: Alignment(5, 5),
+            offset: const Offset(0, 0),
+            child: Text(
+              project['title'],
+              style: const TextStyle(
+                fontWeight: FontWeight.w900,
+                fontFamily: 'Roboto',
+                fontSize: 62,
+                letterSpacing: 4,
+                color: Color.fromARGB(255, 255, 139, 15),
+                // fontFamily: 'serif'
+                // foreground: Paint()
+                //   ..style = PaintingStyle.stroke
+                //   ..strokeWidth = 0.2
+                //   ..color = Colors.black,
+              ),
             ),
-            // style: Theme.of(context)
-            //     .textTheme
-            //     .displayMedium!
-            //     .copyWith(fontWeight: FontWeight.bold),
           ),
-        ),
-      ],
+          Transform.translate(
+            // alignment: Alignment(5, 5),
+            offset: const Offset(0, 0),
+            child: Text(
+              project['title'],
+              style: TextStyle(
+                fontWeight: FontWeight.w900,
+                fontSize: 62,
+                letterSpacing: 4,
+                foreground: Paint()
+                  ..style = PaintingStyle.stroke
+                  ..strokeWidth = 1
+                  ..color = Colors.black,
+              ),
+              // style: Theme.of(context)
+              //     .textTheme
+              //     .displayMedium!
+              //     .copyWith(fontWeight: FontWeight.bold),
+            ),
+          ),
+        ],
+      ),
     );
   }
 

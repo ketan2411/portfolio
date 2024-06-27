@@ -30,16 +30,24 @@ class _ProjectsState extends State<Projects> {
     ),
   );
   final List<Color> colors = [
-    Colors.blueAccent,
-    Colors.orangeAccent,
-    Colors.greenAccent,
-    Colors.purpleAccent,
     Colors.indigoAccent,
+    Colors.lightGreenAccent,
+    Colors.pinkAccent,
+    Colors.greenAccent,
+    Colors.limeAccent,
   ];
   int _currentPage = 0;
 
   @override
   void initState() {
+    controller.addListener(() {
+      final data =
+          List.generate(projectsDATA.length, (index) => index.toDouble());
+      if (data.contains(controller.page!)) {
+        appLog(name: 'data', log: controller.page!.toString());
+        setPage();
+      }
+    });
     super.initState();
   }
 
@@ -84,6 +92,10 @@ class _ProjectsState extends State<Projects> {
       // padding: const EdgeInsets.all(defaultPadding),
       margin: const EdgeInsets.all(defaultPadding),
       decoration: BoxDecoration(
+          boxShadow: const [
+            BoxShadow(
+                offset: Offset(3, 5), blurRadius: 15, color: Colors.black54)
+          ],
           color: Colors.white,
           borderRadius: BorderRadius.circular(defaultBorderRadius)),
       child: Row(
@@ -91,12 +103,15 @@ class _ProjectsState extends State<Projects> {
         mainAxisSize: MainAxisSize.min,
         children: [
           IconButton(
-              onPressed: () {
-                controller
-                    .previousPage(
-                        duration: Durations.medium4, curve: Curves.easeOut)
-                    .then((value) => setPage());
-              },
+              onPressed: _currentPage == 0
+                  ? null
+                  : () {
+                      controller
+                          .previousPage(
+                              duration: Durations.medium4,
+                              curve: Curves.easeOut)
+                          .then((value) => setPage());
+                    },
               icon: const Icon(Icons.arrow_circle_left_outlined)),
           Text(
             (_currentPage + 1).toString(),
@@ -106,12 +121,15 @@ class _ProjectsState extends State<Projects> {
                 .copyWith(fontWeight: FontWeight.bold),
           ),
           IconButton(
-              onPressed: () {
-                controller
-                    .nextPage(
-                        duration: Durations.medium4, curve: Curves.easeOut)
-                    .then((value) => setPage());
-              },
+              onPressed: _currentPage == projectsDATA.length - 1
+                  ? null
+                  : () {
+                      controller
+                          .nextPage(
+                              duration: Durations.medium4,
+                              curve: Curves.easeOut)
+                          .then((value) => setPage());
+                    },
               icon: const Icon(Icons.arrow_circle_right_outlined))
         ],
       ),
