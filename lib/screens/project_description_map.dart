@@ -163,8 +163,10 @@ class ProjectDescriptionMAP extends StatelessWidget {
                     project['thumbnail'],
                     height: 50.h,
                   ),
-                  Image.asset(
-                    'mockups/phone.png',
+                  Image(
+                    image: const AssetImage(
+                      'mockups/phone.png',
+                    ),
                     height: 50.h,
                   ),
                 ],
@@ -188,8 +190,10 @@ class ProjectDescriptionMAP extends StatelessWidget {
                       project['thumbnail_web'],
                       height: 50.h,
                     ),
-                    Image.asset(
-                      'mockups/laptop.png',
+                    Image(
+                      image: const AssetImage(
+                        'mockups/laptop.png',
+                      ),
                       height: 50.h,
                     ),
                   ],
