@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:portfolio_flutter/constants.dart';
 import 'package:portfolio_flutter/data.dart';
+import 'package:portfolio_flutter/provider/quiz_provider.dart';
 import 'package:portfolio_flutter/screens/routes/components/project_description_map.dart';
 import 'package:portfolio_flutter/theme.dart';
 import 'package:portfolio_flutter/utils/logger.dart';
+import 'package:provider/provider.dart';
 
 class Projects extends StatefulWidget {
   static const routeName = '/projects';
@@ -73,15 +75,21 @@ class _ProjectsState extends State<Projects> {
       body: AnimatedContainer(
         duration: Durations.medium4,
         color: colors[(_currentPage)],
-        child: PageView.builder(
-          controller: controller,
-          itemCount: projectsDATA.length,
-          itemBuilder: (context, index) {
-            return ProjectDescriptionMAP(
-              project: projectsDATA[index],
-              index: index,
-            );
-          },
+        child: Selector<DataProvider,bool>(
+          selector: (p0, p1) => p1.scrollOffAndTiltOn,
+          builder: (BuildContext context, bool value, Widget? child) { 
+          return  PageView.builder(
+              physics: value ? const  NeverScrollableScrollPhysics():const BouncingScrollPhysics(),
+            controller: controller,
+            itemCount: projectsDATA.length,
+            itemBuilder: (context, index) {
+              return ProjectDescriptionMAP(
+                project: projectsDATA[index],
+                index: index,
+              );
+            },
+          );
+           },
         ),
       ),
     );

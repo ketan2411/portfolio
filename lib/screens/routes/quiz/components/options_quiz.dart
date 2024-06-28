@@ -117,7 +117,7 @@ class _OptionsQuizState extends State<OptionsQuiz>
                         });
                       });
                     });
-                    Provider.of<QuizProvider>(context, listen: false)
+                    Provider.of<DataProvider>(context, listen: false)
                         .playQlanQuiz(
                       context,
                       questionId: widget.question.questionID,

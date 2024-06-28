@@ -7,8 +7,10 @@ import 'package:flutter/widgets.dart';
 import 'package:markdown_widget/markdown_helper.dart';
 import 'package:markdown_widget/markdown_widget.dart';
 import 'package:portfolio_flutter/constants.dart';
+import 'package:portfolio_flutter/provider/quiz_provider.dart';
 import 'package:portfolio_flutter/screens/routes/components/mockup_card.dart';
 import 'package:portfolio_flutter/theme.dart';
+import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -32,9 +34,16 @@ class ProjectDescriptionMAP extends StatelessWidget {
     //     onError: (exception, stackTrace) => log('chache failed'),
     //   ).then((value) => log('cached $element'));
     // }
-    return SingleChildScrollView(
-      child: Column(children: data(context)),
-    );
+    return Selector<DataProvider, bool>(
+        selector: (p0, p1) => p1.scrollOffAndTiltOn,
+        builder: (context, value, _) {
+          return SingleChildScrollView(
+            physics: value
+                ? const NeverScrollableScrollPhysics()
+                : const BouncingScrollPhysics(),
+            child: Column(children: data(context)),
+          );
+        });
   }
 
   List<Widget> data(context) {

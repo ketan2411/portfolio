@@ -6,7 +6,13 @@ import 'package:portfolio_flutter/model/quiz_ques_model.dart';
 import 'package:portfolio_flutter/screens/routes/quiz/quiz_end_screen.dart';
 import 'package:portfolio_flutter/utils/logger.dart';
 
-class QuizProvider extends ChangeNotifier {
+class DataProvider extends ChangeNotifier {
+  bool scrollOffAndTiltOn = false;
+  set updatesSrollOffAndTiltOn(value){
+    scrollOffAndTiltOn=value;
+    notifyListeners();
+  }
+
   List<ArcQuizQuesModel>? liveQuiz;
   PageController quizPageController = PageController();
   Timer? timer;
@@ -31,7 +37,7 @@ class QuizProvider extends ChangeNotifier {
       oneSec,
       (Timer timer) {
         if (start == 0) {
-          cta(context,tappedOption:null, quesId: quesId, timer: timer);
+          cta(context, tappedOption: null, quesId: quesId, timer: timer);
 
           notifyListeners();
         } else {
@@ -51,7 +57,6 @@ class QuizProvider extends ChangeNotifier {
     bool isCorrect = false,
     required Timer timer,
     required String? tappedOption,
-
   }) {
     tapped = true;
     appLog(name: 'quizTimes', log: "timer ends");
@@ -104,7 +109,11 @@ class QuizProvider extends ChangeNotifier {
     required String? tappedOption,
   }) async {
     try {
-      cta(context,tappedOption:tappedOption, quesId: questionId, isCorrect: isCorrect, timer: timer!);
+      cta(context,
+          tappedOption: tappedOption,
+          quesId: questionId,
+          isCorrect: isCorrect,
+          timer: timer!);
       notifyListeners();
     } catch (error) {
       appLog(

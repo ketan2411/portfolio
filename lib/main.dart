@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       builder: (context, orient, _) {
         return MultiProvider(
           providers: [
-            ChangeNotifierProvider<QuizProvider>(create: (_) => QuizProvider()),
+            ChangeNotifierProvider<DataProvider>(create: (_) => DataProvider()),
           ],
           child: MaterialApp(
             routes: {

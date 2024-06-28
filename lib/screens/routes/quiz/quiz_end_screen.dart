@@ -52,7 +52,7 @@ class _QuizEndScreenState extends State<QuizEndScreen> {
               fit: BoxFit.cover,
             ),
             SingleChildScrollView(
-              child: Consumer<QuizProvider>(
+              child: Consumer<DataProvider>(
                 builder: (context, provider, _) {
                   return Column(
                     //risky
@@ -89,7 +89,7 @@ class _QuizEndScreenState extends State<QuizEndScreen> {
     );
   }
 
-  Row header(BuildContext context, QuizProvider provider) {
+  Row header(BuildContext context, DataProvider provider) {
     return Row(
       // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -201,7 +201,7 @@ class _QuizEndScreenState extends State<QuizEndScreen> {
     );
   }
 
-  Widget quesBox(QuizProvider provider) {
+  Widget quesBox(DataProvider provider) {
     return Container(
       clipBehavior: Clip.none,
       child: Column(

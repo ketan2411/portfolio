@@ -18,7 +18,7 @@ class _QuizPlayScreenState extends State<QuizPlayScreen> {
     return QuizBg(
       child: Scaffold(
         backgroundColor: const Color.fromARGB(255, 17, 17, 17),
-        body: Consumer<QuizProvider>(
+        body: Consumer<DataProvider>(
           builder: (context, quizProvider, child) {
             return PageView.builder(
               physics: const NeverScrollableScrollPhysics(),

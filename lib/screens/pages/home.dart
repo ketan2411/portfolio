@@ -24,7 +24,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   void initState() {
-    Provider.of<QuizProvider>(context, listen: false).setLiveQuiz();
+    Provider.of<DataProvider>(context, listen: false).setLiveQuiz();
     SchedulerBinding.instance.addPostFrameCallback((_) {
       for (var e in [
         '/1.png',

@@ -18,7 +18,8 @@ class QuizTimer extends StatefulWidget {
 class _QuizTimerState extends State<QuizTimer> {
   @override
   void initState() {
-    Provider.of<QuizProvider>(context, listen: false).startTimer(context,widget.quesId);
+    Provider.of<DataProvider>(context, listen: false)
+        .startTimer(context, widget.quesId);
     super.initState();
   }
 
@@ -30,7 +31,7 @@ class _QuizTimerState extends State<QuizTimer> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<QuizProvider>(
+    return Consumer<DataProvider>(
       builder: (context, provider, _) {
         return SizedBox(
           width: 195,
@@ -65,7 +66,7 @@ class _QuizTimerState extends State<QuizTimer> {
                       '${provider.start ~/ 10}s',
                       style: Theme.of(context).textTheme.bodySmall!.copyWith(
                             fontWeight: FontWeight.bold,
-                            color:  Colors.amber,
+                            color: Colors.amber,
                           ),
                     ),
                 ],

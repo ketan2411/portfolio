@@ -5,6 +5,8 @@ import 'dart:math' as math;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:portfolio_flutter/provider/quiz_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 
@@ -65,18 +67,17 @@ class _MockupCardState extends State<MockupCard> {
     super.dispose();
     _streamSubscription?.cancel(); // Cancel subscription when done
   }
-bool scrollOffAndTiltOn=false;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onLongPressStart: (details) {
         setState(() {
-          scrollOffAndTiltOn=true;
+         Provider.of<DataProvider>(context,listen:false).updatesSrollOffAndTiltOn=true;
         });
       },
        onLongPressEnd: (details) {
         setState(() {
-          scrollOffAndTiltOn=false;
+          Provider.of<DataProvider>(context,listen:false).updatesSrollOffAndTiltOn=false;
         });
       },
       onLongPressMoveUpdate: (details) {
@@ -86,15 +87,14 @@ bool scrollOffAndTiltOn=false;
         final widgetWidth = box.size.width;
         final widgetHeight = box.size.height;
         final localPosition = box.globalToLocal(details.localPosition);
-
         setState(() {
           // my idea of using cos for this eqution
           final normalizedX = localPosition.dx / widgetWidth;
           final normalizedY = localPosition.dy / widgetHeight;
           final value =
-              math.cos(normalizedX * math.pi); // Adjust PI for desired curve
+              -math.cos(normalizedX * math.pi); // Adjust PI for desired curve
           final value1 =
-              -math.cos(normalizedY * math.pi); // Adjust PI for desired curve
+              math.cos(normalizedY * math.pi); // Adjust PI for desired curve
           tiltX = value * hoverSensitivity; // Adjust tilt based on value
           tiltY = (value1 * hoverSensitivity); // Adjust tilt based on value
           data = " y:$tiltY";

@@ -59,7 +59,7 @@ class _OptionsBoxState extends State<OptionsBox> {
             child: QuizTimer(
               quesId: widget.question.questionID,
             )),
-        Selector<QuizProvider, bool>(
+        Selector<DataProvider, bool>(
           selector: (p0, p1) => p1.tapped,
           shouldRebuild: (previous, next) => true,
           builder: (context, tapped, _) {
