@@ -14,7 +14,7 @@ final List<Map> projectsDATA = [
       "assets/images/qlan/7.jpg",
       "assets/images/qlan/8.jpg"
     ],
-    "thumbnail": "assets/images/qlan/thumbnail/4_small.jpg",
+    "thumbnail": "assets/images/qlan/thumbnail/4_small.png",
     "thumbnail_web": "assets/images/qlan/thumbnail/qlan_web_thumb.png",
     "tags": ["Flutter"],
     "link": "https://play.google.com/store/apps/details?id=com.qlan",

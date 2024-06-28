@@ -4,8 +4,10 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:markdown_widget/markdown_helper.dart';
 import 'package:markdown_widget/markdown_widget.dart';
 import 'package:portfolio_flutter/constants.dart';
+import 'package:portfolio_flutter/screens/routes/components/mockup_card.dart';
 import 'package:portfolio_flutter/theme.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -146,30 +148,19 @@ class ProjectDescriptionMAP extends StatelessWidget {
     }
     return Wrap(
       runAlignment: WrapAlignment.spaceEvenly,
-      alignment: WrapAlignment.center,
+      alignment: WrapAlignment.spaceEvenly,
       children: [
         if (project['thumbnail'] != null)
-          FadeInUpBig(
-            duration: duration,
-            curve: curve,
-            from: from,
-            delay: delay[0],
-            child: Padding(
-              padding: const EdgeInsets.all(defaultPadding),
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  
-                  Image.asset(
-                    project['thumbnail'],
-                    height: 50.h,
-                  ),
-                  Image(
-                    image:const AssetImage( 'assets/mockups/phone.png',),
-                     height: 50.h,
-                  ),
-                ],
-              ),
+          SizedBox(
+            width: 300,
+            child: FadeInUpBig(
+              duration: duration,
+              curve: curve,
+              from: from,
+              delay: delay[0],
+              child: Padding(
+                  padding: const EdgeInsets.all(defaultPadding),
+                  child: MockupCard(url: project['thumbnail'])),
             ),
           ),
         if (project['thumbnail_web'] != null)
@@ -182,19 +173,9 @@ class ProjectDescriptionMAP extends StatelessWidget {
               padding: const EdgeInsets.all(defaultPadding),
               child: Builder(builder: (context) {
                 final size = Size(50.h, 30.w);
-                return Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Image.asset(
-                      project['thumbnail_web'],
-                      height: 50.h,
-                    ),
-                     Image(
-                    image:const AssetImage( 'assets/mockups/laptop.png',),
-                     height: 50.h,
-                  ),
-                    
-                  ],
+                return MockupCard(
+                  url: project['thumbnail_web'],
+                  isLaptop: true,
                 );
               }),
             ),
