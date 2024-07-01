@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:async';
-import 'dart:developer';
 import 'dart:math' as math;
 
 import 'package:flutter/foundation.dart';
@@ -29,8 +28,9 @@ class _MockupCardState extends State<MockupCard> {
 
   String data = '';
   double hoverSensitivity = 0.3;
+  // double hoverSensitivity = 0.3;
   Matrix4 calculateTiltMatrix() {
-    Matrix4 tiltMatrix = Matrix4.identity();
+    Matrix4 tiltMatrix = Matrix4.identity()..translate(0.0, 0.0, -1.0 / 0.2);
     tiltMatrix.rotateX(-tiltY);
     tiltMatrix.rotateY(-tiltX);
     tiltMatrix.rotateZ(tiltX * 0.1);
@@ -41,9 +41,10 @@ class _MockupCardState extends State<MockupCard> {
 
   StreamSubscription<GyroscopeEvent>? _streamSubscription;
 
+  @override
   void initState() {
     super.initState();
-    if (kIsWeb) {
+    if (!kIsWeb) {
       _streamSubscription = gyroscopeEvents.listen((event) {
         // Process gyroscope data (x, y, z values)
         setState(() {
@@ -67,17 +68,20 @@ class _MockupCardState extends State<MockupCard> {
     super.dispose();
     _streamSubscription?.cancel(); // Cancel subscription when done
   }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onLongPressStart: (details) {
         setState(() {
-         Provider.of<DataProvider>(context,listen:false).updatesSrollOffAndTiltOn=true;
+          Provider.of<DataProvider>(context, listen: false)
+              .updatesSrollOffAndTiltOn = true;
         });
       },
-       onLongPressEnd: (details) {
+      onLongPressEnd: (details) {
         setState(() {
-          Provider.of<DataProvider>(context,listen:false).updatesSrollOffAndTiltOn=false;
+          Provider.of<DataProvider>(context, listen: false)
+              .updatesSrollOffAndTiltOn = false;
         });
       },
       onLongPressMoveUpdate: (details) {
@@ -97,7 +101,7 @@ class _MockupCardState extends State<MockupCard> {
               math.cos(normalizedY * math.pi); // Adjust PI for desired curve
           tiltX = value * hoverSensitivity; // Adjust tilt based on value
           tiltY = (value1 * hoverSensitivity); // Adjust tilt based on value
-          data = " y:$tiltY";
+          data = " y:$tiltX";
         });
       },
       child: MouseRegion(
@@ -117,7 +121,7 @@ class _MockupCardState extends State<MockupCard> {
                 -math.cos(normalizedY * math.pi); // Adjust PI for desired curve
             tiltX = value * hoverSensitivity; // Adjust tilt based on value
             tiltY = (value1 * hoverSensitivity); // Adjust tilt based on value
-            data = " y:$tiltY";
+            data = " x:$tiltY";
           });
         },
         onExit: (event) {
@@ -145,6 +149,7 @@ class _MockupCardState extends State<MockupCard> {
                 ),
                 height: 50.h,
               ),
+              if (kDebugMode) Container(color: Colors.white, child: Text(data))
             ],
           ),
         ),

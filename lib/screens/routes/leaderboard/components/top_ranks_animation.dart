@@ -1,4 +1,5 @@
 import 'package:portfolio_flutter/constants.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'profile.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class _TopLeaderBoardAnimationState extends State<TopLeaderBoardAnimation>
   )..forward();
   Animation<Offset> anima(int rank) {
     return Tween<Offset>(
-      end: Offset(0, 0.3 + (rank / 10)),
+      end: Offset(0, 0.03.h + (rank / 10)),
       begin: const Offset(0, 1),
     ).animate(
       CurvedAnimation(

@@ -8,7 +8,7 @@ import 'package:portfolio_flutter/screens/routes/quiz/components/ques_widget.dar
 import 'package:portfolio_flutter/screens/routes/quiz/quiz_bg.dart';
 import 'package:portfolio_flutter/theme.dart';
 import 'package:portfolio_flutter/utils/logger.dart';
-import 'package:portfolio_flutter/utils/strings.dart';
+import 'package:portfolio_flutter/utils/assets.dart';
 import 'package:provider/provider.dart';
 
 class QuizEndScreen extends StatefulWidget {

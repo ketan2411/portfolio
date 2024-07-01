@@ -2,21 +2,15 @@ import 'package:portfolio_flutter/screens/routes/leaderboard/leaderboard_screen.
 import 'package:portfolio_flutter/screens/routes/parallax.dart';
 import 'package:portfolio_flutter/screens/routes/quiz/quiz_play_screen.dart';
 import 'package:portfolio_flutter/screens/routes/slot_machine.dart';
+import 'package:portfolio_flutter/utils/assets.dart';
 
 final List<Map> projectsDATA = [
   {
     "title": "Qlan",
     "subtitle": "The Gamer's Social Network",
-    "screenshots": [
-      "assets/images/qlan/4.jpg",
-      "assets/images/qlan/5.jpg",
-      "assets/images/qlan/6.jpg",
-      "assets/images/qlan/7.jpg",
-      "assets/images/qlan/8.jpg"
-    ],
-    "thumbnail": "assets/images/qlan/thumbnail/4_small.png",
-    "thumbnail_web": "assets/images/qlan/thumbnail/qlan_web_thumb.png",
-    "tags": ["Flutter"],
+    "thumbnail": qlanThumb,
+    "thumbnail_web": qlanThumbWeb,
+    "tags": ["Flutter,  Firebase, Admob"],
     "link": "https://play.google.com/store/apps/details?id=com.qlan",
     "description":
         "Qlan is a social networking and chat communication app dedicated to gamers. It is suited for everyone who is looking to collaborate or network with other gamers through chat. Users can create custom profiles, sync their in-game statistics, access AI based matchmaking, build squads, share gaming content and much more.\n**Key Responsibilities:**\n\n - Full application setup.\n - Mentorship over the duration of development.",
@@ -25,8 +19,7 @@ final List<Map> projectsDATA = [
   {
     "title": "ThinkRight",
     "subtitle": "Meditation & Sleep",
-    "screenshots": [],
-    "thumbnail": "assets/images/thinkright/thumbnail/phone.png",
+    "thumbnail": thinkRightThumb,
     "tags": ["Flutter"],
     "link":
         "https://play.google.com/store/apps/details?id=in.publicam.thinkrightme&hl=en_IN",
@@ -37,14 +30,7 @@ final List<Map> projectsDATA = [
   {
     "title": "Infoflight",
     "subtitle": "Resource Management and Resume Builder Web App",
-    "screenshots": [
-      "assets/images/infoflight/1.png",
-      "assets/images/infoflight/2.png",
-      "assets/images/infoflight/3.png",
-      "assets/images/infoflight/4.png",
-      "assets/images/infoflight/5.png"
-    ],
-    "thumbnail_web": "assets/images/infoflight/thumbnail/thumb.png",
+    "thumbnail_web": infoFlightThumbWeb,
     "tags": ["Flutter", "Firebase"],
     "description":
         "Infoflight is an In-house webapp for managing resources. It manages kinds of resource such as technology content and tutorials, Project documentation, Resume builder and employee project allocation.\nResumes can be sent to clients and can be modified at runtime.Content display is achieved using markdown.\n**Key Responsibilities:**\n\n- Full application setup with flutter and firebase.\n- UI creation.\n- Mentorship over the duration of development.\n",
@@ -53,61 +39,61 @@ final List<Map> projectsDATA = [
   {
     "title": "TRP ",
     "subtitle": "Inventory Management App",
-    // "screenshots": [
-    //   "assets/images/TRP/1.png",
-    //   "assets/images/TRP/2.png",
-    //   "assets/images/TRP/3.png",
-    //   "assets/images/TRP/4.png"
-    // ],
-    "thumbnail": "assets/images/TRP/thumbnail/phone.png",
+    "thumbnail": tRPThumb,
     "tags": ["Flutter", "Firebase", "CSV"],
     "description":
-        "Inventory management app for a clothing store.It Manages to store all the stock, calculate profit or loss, generate invoices and sales csv data.\n It also has a feature of custom billing calculator.",
+        "Inventory management app for a clothing store. It Manages to store all the stock, calculate profit or loss, generate invoices and sales csv data.\n It also has a feature of custom billing calculator.",
     "year": "2020"
   },
   {
     "title": "Illustro-AI",
     "subtitle": "Convert portrait images into vector art",
-    // "screenshots": [
-
-    // ],
-    // "thumbnail": [
-
-    // ],
-    "tags": ["Flutter"],
+    "thumbnail": illustroThumb,
+    "tags": ["Flutter, Flask, Leonardo AI, AWS, Firebase, Admob"],
     "link":
         "https://play.google.com/store/apps/details?id=com.rattler.illustro&hl=en",
-    "description": "",
+    "description":
+        """Illustro is creative app that uses third party image generation services.User's face is taken as input and processed through AI model to create stunning vector illustrations of given input.
+        \n**Key Responsibilities:**\n
+        \n - Front-End setup using flutter.
+        \n - Back-End setup using flask and Leonardo Api integration.
+        \n - Deployment on AWS ec2 using github actions.
+        """,
     "year": "2023"
   }
 ];
+
+// _______________________________________________________________________
 
 final List<Map> showcaseLeftDATA = [
   {
     "title": "Landscape Parallax",
     "subtitle": "The Parallax effect from package: parallax",
     "routeName": Parallax.routeName,
-    "image": "showcase_banner/parallax_logo.png"
+    "image": parallax
   },
   {
     "title": "Slot Machine",
     "subtitle": "The Parallax effect",
     "routeName": SlotMachine.routeName,
-    "image": "showcase_banner/slotmachine.png"
+    "image": slotmachine
   },
   {
     "title": "Arcade Quiz",
     "subtitle": "Quiz",
     "routeName": QuizPlayScreen.routeName,
-    "image": "showcase_banner/quiz.png"
+    "image": quiz
   },
   {
     "title": "Leaderboard",
     "subtitle": "leaderboard",
     "routeName": LeaderBoardScreen.routeName,
-    "image": "showcase_banner/leaderboard.png"
+    "image": leaderboard
   },
 ];
+
+// _______________________________________________________________________
+
 final List<Map<String, dynamic>> quizQuesstion = [
   {
     "Question_id": 0,
@@ -138,6 +124,8 @@ final List<Map<String, dynamic>> quizQuesstion = [
     "ANS": "if (if (x == 1)){}"
   },
 ];
+
+// _______________________________________________________________________
 
 List scoreList = [
   {

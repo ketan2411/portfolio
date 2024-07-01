@@ -1,10 +1,7 @@
 import 'dart:developer';
 
 import 'package:animate_do/animate_do.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:markdown_widget/markdown_helper.dart';
 import 'package:markdown_widget/markdown_widget.dart';
 import 'package:portfolio_flutter/constants.dart';
 import 'package:portfolio_flutter/provider/quiz_provider.dart';

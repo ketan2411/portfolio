@@ -9,7 +9,7 @@ import 'package:portfolio_flutter/provider/quiz_provider.dart';
 import 'package:portfolio_flutter/screens/routes/projects.dart';
 import 'package:portfolio_flutter/screens/routes/showcase.dart';
 import 'package:portfolio_flutter/theme.dart';
-import 'package:portfolio_flutter/utils/strings.dart';
+import 'package:portfolio_flutter/utils/assets.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -41,6 +41,12 @@ class _HomeState extends State<Home> {
         slotMachineBall,
         quizBgBlur,
         quizBg,
+        qlanThumb,
+        qlanThumbWeb,
+        thinkRightThumb,
+        infoFlightThumbWeb,
+        tRPThumb,
+        illustroThumb,
       ]) {
         precacheImage(
           AssetImage(e),

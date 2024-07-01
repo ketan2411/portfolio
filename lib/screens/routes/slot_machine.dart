@@ -9,7 +9,7 @@ import 'package:lottie/lottie.dart';
 import 'package:portfolio_flutter/constants.dart';
 import 'package:portfolio_flutter/screens/routes/components/bulb_widget.dart';
 import 'package:portfolio_flutter/theme.dart';
-import 'package:portfolio_flutter/utils/strings.dart';
+import 'package:portfolio_flutter/utils/assets.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 // import 'package:lottie/lottie.dart';
 
