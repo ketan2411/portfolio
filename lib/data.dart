@@ -49,7 +49,7 @@ final List<Map> projectsDATA = [
     "title": "Illustro-AI",
     "subtitle": "Convert portrait images into vector art",
     "thumbnail": illustroThumb,
-    "tags": ["Flutter, Flask, Leonardo AI, AWS, Firebase, Admob"],
+    "tags": ["Flutter", "Flask", "Leonardo AI", "AWS", "Firebase", "Admob"],
     "link":
         "https://play.google.com/store/apps/details?id=com.rattler.illustro&hl=en",
     "description":
