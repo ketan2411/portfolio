@@ -17,8 +17,8 @@ const tRPThumb = "assets/images/TRP/thumbnail/phone.png";
 
 const illustroThumb = "assets/images/illustro/phone.png";
 
-const parallax = "showcase_banner/parallax_logo.png";
-const slotmachine = "showcase_banner/slotmachine.png";
-const quiz = "showcase_banner/quiz.png";
-const leaderboard = "showcase_banner/leaderboard.png";
+const parallax = "assets/showcase_banner/parallax_logo.png";
+const slotmachine = "assets/showcase_banner/slotmachine.png";
+const quiz = "assets/showcase_banner/quiz.png";
+const leaderboard = "assets/showcase_banner/leaderboard.png";
 
