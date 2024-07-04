@@ -1,4 +1,6 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:portfolio_flutter/firebase_options.dart';
 import 'package:portfolio_flutter/provider/quiz_provider.dart';
 import 'package:portfolio_flutter/screens/pages/home.dart';
 import 'package:portfolio_flutter/screens/routes/projects.dart';
@@ -11,7 +13,11 @@ import 'package:portfolio_flutter/theme.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+  options: DefaultFirebaseOptions.currentPlatform,
+);
   runApp(const MyApp());
 }
 
@@ -37,7 +43,7 @@ class MyApp extends StatelessWidget {
             },
             // showPerformanceOverlay: true,
             themeMode: ThemeMode.dark,
-            title: 'Flutter Demo',
+            title: 'Ketan Sharma',
             theme: darkThemeData,
             home: const Home(),
           ),

@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:animate_do/animate_do.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:markdown_widget/markdown_widget.dart';
 import 'package:portfolio_flutter/constants.dart';
@@ -212,6 +213,12 @@ class ProjectDescriptionMAP extends StatelessWidget {
             child: ElevatedButton.icon(
               onPressed: () async {
                 // Text(project.link ?? ""),
+                await FirebaseAnalytics.instance.logEvent(
+                  name: "open_link",
+                  parameters: {
+                    "project_name": project['title'],
+                  },
+                ).then((_) => debugPrint('success '));
                 await launch(project['link']);
               },
               label: Text(

@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'dart:developer';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -156,11 +157,18 @@ class _HomeState extends State<Home> {
                 alignment: WrapAlignment.spaceEvenly,
                 crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
-                  panel('Projects', () {
+                  panel('Projects', () async {
+                    await FirebaseAnalytics.instance.logEvent(
+                      name: 'screen_view',
+                      parameters: {
+                        'firebase_screen': "Projects",
+                        'firebase_screen_class': "Projects",
+                      },
+                    );
                     Navigator.pushNamed(context, Projects.routeName);
                   }),
                   contactPanel(context),
-                  panel('Showcase', () {
+                  panel('Showcase', () async {
                     Navigator.pushNamed(context, Showcase.routeName);
                   }),
                 ],
@@ -232,7 +240,8 @@ class _HomeState extends State<Home> {
     return Padding(
       padding: const EdgeInsets.all(defaultPadding),
       child: InkWell(
-        onTap: () => onPressed(),
+        //bcs it is async now, and here it was trying to be sync
+        onTap: onPressed,
         child: Container(
           height: 100,
           width: MediaQuery.of(context).size.width < 800 ? 300 : 200,

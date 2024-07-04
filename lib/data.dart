@@ -10,7 +10,7 @@ final List<Map> projectsDATA = [
     "subtitle": "The Gamer's Social Network",
     "thumbnail": qlanThumb,
     "thumbnail_web": qlanThumbWeb,
-    "tags": ["Flutter,  Firebase, Admob"],
+    "tags": ["Flutter",  "Firebase", "Admob"],
     "link": "https://play.google.com/store/apps/details?id=com.qlan",
     "description":
         "Qlan is a social networking and chat communication app dedicated to gamers. It is suited for everyone who is looking to collaborate or network with other gamers through chat. Users can create custom profiles, sync their in-game statistics, access AI based matchmaking, build squads, share gaming content and much more.\n**Key Responsibilities:**\n\n - Full application setup.\n - Mentorship over the duration of development.",

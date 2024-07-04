@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 
 import 'package:portfolio_flutter/constants.dart';
@@ -22,7 +23,14 @@ class PostCard extends StatelessWidget {
       elevation: 4,
       color: lightBackground,
       child: InkWell(
-        onTap: () {
+        onTap: () async {
+          await FirebaseAnalytics.instance.logEvent(
+            name: 'screen_view',
+            parameters: {
+              'firebase_screen': showcase['routeName'],
+              'firebase_screen_class': "Showcase",
+            },
+          );
           Navigator.pushNamed(context, showcase['routeName']);
         },
         child: Container(
